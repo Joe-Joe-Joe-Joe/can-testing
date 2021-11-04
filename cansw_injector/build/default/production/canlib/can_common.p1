@@ -1,0 +1,2928 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"37 canlib/can.h
+[s S2 `ui 1 `uc 1 `uc -> 8 `i ]
+[n S2 . sid data_len data ]
+"29 canlib/can_common.c
+[c E44 0 .. ]
+[n E44 GEN_CMD BUS_DOWN_WARNING  ]
+"92
+[c E46 0 1 2 3 .. ]
+[n E46 VALVE_STATE VALVE_OPEN VALVE_CLOSED VALVE_UNK VALVE_ILLEGAL  ]
+"134
+[c E51 0 1 .. ]
+[n E51 ARM_STATE DISARMED ARMED  ]
+"180
+[c E54 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .. ]
+[n E54 BOARD_STATUS E_NOMINAL E_BUS_OVER_CURRENT E_BUS_UNDER_VOLTAGE E_BUS_OVER_VOLTAGE E_BATT_UNDER_VOLTAGE E_BATT_OVER_VOLTAGE E_BOARD_FEARED_DEAD E_NO_CAN_TRAFFIC E_MISSING_CRITICAL_BOARD E_RADIO_SIGNAL_LOST E_VALVE_STATE E_CANNOT_INIT_DACS E_VENT_POT_RANGE E_LOGGING E_GPS E_SENSOR E_ILLEGAL_CAN_MSG E_SEGFAULT E_UNHANDLED_INTERRUPT E_CODING_SCREWUP E_BATT_OVER_CURRENT  ]
+"238
+[c E76 0 1 2 3 4 5 6 7 8 9 10 11 12 13 .. ]
+[n E76 SENSOR_ID SENSOR_IMU1 SENSOR_IMU2 SENSOR_BARO SENSOR_PRESSURE_OX SENSOR_PRESSURE_CC SENSOR_VENT_BATT SENSOR_INJ_BATT SENSOR_ARM_BATT_1 SENSOR_ARM_BATT_2 SENSOR_BATT_CURR SENSOR_BUS_CURR SENSOR_VELOCITY SENSOR_MAG_1 SENSOR_MAG_2  ]
+"250 canlib/can_common.h
+[v _get_message_type `(ui ~T0 @X0 0 ef1`*CS2 ]
+"756 canlib/can_common.c
+[c E94 0 1 2 3 4 .. ]
+[n E94 . NONE ERROR WARN INFO DEBUGGING  ]
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef __int24 int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 52: typedef unsigned char uint8_t;
+[; ;stdint.h: 58: typedef unsigned int uint16_t;
+[; ;stdint.h: 65: typedef __uint24 uint24_t;
+[; ;stdint.h: 72: typedef unsigned long int uint32_t;
+[; ;stdint.h: 88: typedef signed char int_least8_t;
+[; ;stdint.h: 96: typedef signed int int_least16_t;
+[; ;stdint.h: 109: typedef __int24 int_least24_t;
+[; ;stdint.h: 118: typedef signed long int int_least32_t;
+[; ;stdint.h: 136: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 143: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 154: typedef __uint24 uint_least24_t;
+[; ;stdint.h: 162: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 181: typedef signed char int_fast8_t;
+[; ;stdint.h: 188: typedef signed int int_fast16_t;
+[; ;stdint.h: 200: typedef __int24 int_fast24_t;
+[; ;stdint.h: 208: typedef signed long int int_fast32_t;
+[; ;stdint.h: 224: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 230: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 240: typedef __uint24 uint_fast24_t;
+[; ;stdint.h: 247: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 268: typedef int32_t intmax_t;
+[; ;stdint.h: 282: typedef uint32_t uintmax_t;
+[; ;stdint.h: 289: typedef int16_t intptr_t;
+[; ;stdint.h: 294: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 15: typedef unsigned char bool;
+[; ;stdbool.h: 15: typedef unsigned char bool;
+[; ;can.h: 16: typedef struct {
+[; ;can.h: 18: uint8_t brp;
+[; ;can.h: 20: uint8_t sjw;
+[; ;can.h: 23: uint8_t sam;
+[; ;can.h: 25: uint8_t seg1ph;
+[; ;can.h: 27: uint8_t seg2ph;
+[; ;can.h: 29: uint8_t prseg;
+[; ;can.h: 33: bool btlmode;
+[; ;can.h: 34: } can_timing_t;
+[; ;can.h: 37: typedef struct {
+[; ;can.h: 39: uint16_t sid;
+[; ;can.h: 41: uint8_t data_len;
+[; ;can.h: 43: uint8_t data[8];
+[; ;can.h: 44: } can_msg_t;
+[; ;message_types.h: 124: enum GEN_CMD {
+[; ;message_types.h: 125: BUS_DOWN_WARNING = 0,
+[; ;message_types.h: 126: };
+[; ;message_types.h: 129: enum VALVE_STATE {
+[; ;message_types.h: 130: VALVE_OPEN = 0,
+[; ;message_types.h: 131: VALVE_CLOSED,
+[; ;message_types.h: 132: VALVE_UNK,
+[; ;message_types.h: 133: VALVE_ILLEGAL,
+[; ;message_types.h: 134: };
+[; ;message_types.h: 137: enum ARM_STATE {
+[; ;message_types.h: 138: DISARMED = 0,
+[; ;message_types.h: 139: ARMED,
+[; ;message_types.h: 140: };
+[; ;message_types.h: 144: enum BOARD_STATUS {
+[; ;message_types.h: 145: E_NOMINAL = 0,
+[; ;message_types.h: 147: E_BUS_OVER_CURRENT,
+[; ;message_types.h: 148: E_BUS_UNDER_VOLTAGE,
+[; ;message_types.h: 149: E_BUS_OVER_VOLTAGE,
+[; ;message_types.h: 151: E_BATT_UNDER_VOLTAGE,
+[; ;message_types.h: 152: E_BATT_OVER_VOLTAGE,
+[; ;message_types.h: 154: E_BOARD_FEARED_DEAD,
+[; ;message_types.h: 155: E_NO_CAN_TRAFFIC,
+[; ;message_types.h: 156: E_MISSING_CRITICAL_BOARD,
+[; ;message_types.h: 157: E_RADIO_SIGNAL_LOST,
+[; ;message_types.h: 159: E_VALVE_STATE,
+[; ;message_types.h: 160: E_CANNOT_INIT_DACS,
+[; ;message_types.h: 161: E_VENT_POT_RANGE,
+[; ;message_types.h: 163: E_LOGGING,
+[; ;message_types.h: 164: E_GPS,
+[; ;message_types.h: 165: E_SENSOR,
+[; ;message_types.h: 167: E_ILLEGAL_CAN_MSG,
+[; ;message_types.h: 168: E_SEGFAULT,
+[; ;message_types.h: 169: E_UNHANDLED_INTERRUPT,
+[; ;message_types.h: 170: E_CODING_SCREWUP,
+[; ;message_types.h: 172: E_BATT_OVER_CURRENT,
+[; ;message_types.h: 173: };
+[; ;message_types.h: 175: enum SENSOR_ID {
+[; ;message_types.h: 176: SENSOR_IMU1 = 0,
+[; ;message_types.h: 177: SENSOR_IMU2,
+[; ;message_types.h: 178: SENSOR_BARO,
+[; ;message_types.h: 179: SENSOR_PRESSURE_OX,
+[; ;message_types.h: 180: SENSOR_PRESSURE_CC,
+[; ;message_types.h: 181: SENSOR_VENT_BATT,
+[; ;message_types.h: 182: SENSOR_INJ_BATT,
+[; ;message_types.h: 183: SENSOR_ARM_BATT_1,
+[; ;message_types.h: 184: SENSOR_ARM_BATT_2,
+[; ;message_types.h: 185: SENSOR_BATT_CURR,
+[; ;message_types.h: 186: SENSOR_BUS_CURR,
+[; ;message_types.h: 187: SENSOR_VELOCITY,
+[; ;message_types.h: 188: SENSOR_MAG_1,
+[; ;message_types.h: 189: SENSOR_MAG_2,
+[; ;message_types.h: 190: };
+[; ;message_types.h: 192: enum FILL_DIRECTION {
+[; ;message_types.h: 193: FILLING = 0,
+[; ;message_types.h: 194: EMPTYING,
+[; ;message_types.h: 195: };
+[; ;can_common.h: 13: typedef enum {
+[; ;can_common.h: 14: NONE = 0,
+[; ;can_common.h: 15: ERROR = 1,
+[; ;can_common.h: 16: WARN = 2,
+[; ;can_common.h: 17: INFO = 3,
+[; ;can_common.h: 18: DEBUGGING = 4
+[; ;can_common.h: 19: } can_debug_level_t;
+[; ;can_common.h: 54: bool build_general_cmd_msg(uint32_t timestamp,
+[; ;can_common.h: 55: enum GEN_CMD cmd,
+[; ;can_common.h: 56: can_msg_t *output);
+[; ;can_common.h: 58: bool build_debug_msg(uint32_t timestamp,
+[; ;can_common.h: 59: uint8_t *debug_data,
+[; ;can_common.h: 60: can_msg_t *output);
+[; ;can_common.h: 62: bool build_debug_printf(uint8_t *data,
+[; ;can_common.h: 63: can_msg_t *output);
+[; ;can_common.h: 68: bool build_reset_msg(uint32_t timestamp,
+[; ;can_common.h: 69: uint8_t board_id,
+[; ;can_common.h: 70: can_msg_t *output);
+[; ;can_common.h: 75: bool build_valve_cmd_msg(uint32_t timestamp,
+[; ;can_common.h: 76: enum VALVE_STATE valve_cmd,
+[; ;can_common.h: 77: uint16_t message_type,
+[; ;can_common.h: 78: can_msg_t *output);
+[; ;can_common.h: 83: bool build_valve_stat_msg(uint32_t timestamp,
+[; ;can_common.h: 84: enum VALVE_STATE valve_state,
+[; ;can_common.h: 85: enum VALVE_STATE req_valve_state,
+[; ;can_common.h: 86: uint16_t message_type,
+[; ;can_common.h: 87: can_msg_t *output);
+[; ;can_common.h: 92: bool build_arm_cmd_msg(uint32_t timestamp,
+[; ;can_common.h: 93: uint8_t alt_num,
+[; ;can_common.h: 94: enum ARM_STATE arm_cmd,
+[; ;can_common.h: 95: can_msg_t *output);
+[; ;can_common.h: 100: bool build_arm_stat_msg(uint32_t timestamp,
+[; ;can_common.h: 101: uint8_t alt_num,
+[; ;can_common.h: 102: enum ARM_STATE arm_state,
+[; ;can_common.h: 103: uint16_t v_drogue,
+[; ;can_common.h: 104: uint16_t v_main,
+[; ;can_common.h: 105: can_msg_t *output);
+[; ;can_common.h: 113: bool build_board_stat_msg(uint32_t timestamp,
+[; ;can_common.h: 114: enum BOARD_STATUS error_code,
+[; ;can_common.h: 115: uint8_t *error_data,
+[; ;can_common.h: 116: uint8_t error_data_len,
+[; ;can_common.h: 117: can_msg_t *output);
+[; ;can_common.h: 123: bool build_imu_data_msg(uint16_t message_type,
+[; ;can_common.h: 124: uint32_t timestamp,
+[; ;can_common.h: 125: uint16_t *imu_data,
+[; ;can_common.h: 126: can_msg_t *output);
+[; ;can_common.h: 133: bool build_analog_data_msg(uint32_t timestamp,
+[; ;can_common.h: 134: enum SENSOR_ID sensor_id,
+[; ;can_common.h: 135: uint16_t sensor_data,
+[; ;can_common.h: 136: can_msg_t *output);
+[; ;can_common.h: 141: bool build_altitude_data_msg(uint32_t timestamp,
+[; ;can_common.h: 142: int32_t altitude,
+[; ;can_common.h: 143: can_msg_t *output);
+[; ;can_common.h: 149: bool build_gps_time_msg(uint32_t timestamp,
+[; ;can_common.h: 150: uint8_t utc_hours,
+[; ;can_common.h: 151: uint8_t utc_mins,
+[; ;can_common.h: 152: uint8_t utc_secs,
+[; ;can_common.h: 153: uint8_t utc_dsecs,
+[; ;can_common.h: 154: can_msg_t *output);
+[; ;can_common.h: 161: bool build_gps_lat_msg(uint32_t timestamp,
+[; ;can_common.h: 162: uint8_t degrees,
+[; ;can_common.h: 163: uint8_t minutes,
+[; ;can_common.h: 164: uint16_t dminutes,
+[; ;can_common.h: 165: uint8_t direction,
+[; ;can_common.h: 166: can_msg_t *output);
+[; ;can_common.h: 173: bool build_gps_lon_msg(uint32_t timestamp,
+[; ;can_common.h: 174: uint8_t degrees,
+[; ;can_common.h: 175: uint8_t minutes,
+[; ;can_common.h: 176: uint16_t dminutes,
+[; ;can_common.h: 177: uint8_t direction,
+[; ;can_common.h: 178: can_msg_t *output);
+[; ;can_common.h: 184: bool build_gps_alt_msg(uint32_t timestamp,
+[; ;can_common.h: 185: uint16_t altitude,
+[; ;can_common.h: 186: uint8_t daltitude,
+[; ;can_common.h: 187: uint8_t units,
+[; ;can_common.h: 188: can_msg_t *output);
+[; ;can_common.h: 194: bool build_gps_info_msg(uint32_t timestamp,
+[; ;can_common.h: 195: uint8_t num_sat,
+[; ;can_common.h: 196: uint8_t quality,
+[; ;can_common.h: 197: can_msg_t *output);
+[; ;can_common.h: 203: bool build_radi_info_msg(uint32_t timestamp,
+[; ;can_common.h: 204: uint8_t board_num,
+[; ;can_common.h: 205: uint16_t adc_value,
+[; ;can_common.h: 206: can_msg_t *output);
+[; ;can_common.h: 211: int get_general_cmd_type(const can_msg_t *msg);
+[; ;can_common.h: 217: int get_reset_board_id(const can_msg_t *msg);
+[; ;can_common.h: 223: int get_curr_valve_state(const can_msg_t *msg);
+[; ;can_common.h: 230: int get_req_valve_state(const can_msg_t *msg);
+[; ;can_common.h: 236: bool get_curr_arm_state(const can_msg_t *msg, uint8_t *alt_num, enum ARM_STATE *arm_state);
+[; ;can_common.h: 242: bool get_req_arm_state(const can_msg_t *msg, uint8_t *alt_num, enum ARM_STATE *arm_state);
+[; ;can_common.h: 250: uint16_t get_message_type(const can_msg_t *msg);
+[; ;can_common.h: 256: uint8_t get_board_unique_id(const can_msg_t *msg);
+[; ;can_common.h: 262: uint32_t get_timestamp(const can_msg_t *msg);
+[; ;can_common.h: 268: bool is_sensor_data(const can_msg_t *msg);
+[; ;can_common.h: 274: bool get_imu_data(const can_msg_t *msg,
+[; ;can_common.h: 275: uint16_t *output_x,
+[; ;can_common.h: 276: uint16_t *output_y,
+[; ;can_common.h: 277: uint16_t *output_z);
+[; ;can_common.h: 284: bool get_analog_data(const can_msg_t *msg,
+[; ;can_common.h: 285: enum SENSOR_ID *sensor_id,
+[; ;can_common.h: 286: uint16_t *output_data);
+[; ;can_common.h: 292: bool get_altitude_data(const can_msg_t *msg,
+[; ;can_common.h: 293: int32_t *altitude);
+[; ;can_common.h: 299: bool get_pyro_voltage_data(const can_msg_t *msg,
+[; ;can_common.h: 300: uint16_t *v_drogue,
+[; ;can_common.h: 301: uint16_t *v_main);
+[; ;can_common.h: 308: bool get_gps_time(const can_msg_t* msg,
+[; ;can_common.h: 309: uint8_t *utc_hours,
+[; ;can_common.h: 310: uint8_t *utc_mins,
+[; ;can_common.h: 311: uint8_t *utc_secs,
+[; ;can_common.h: 312: uint8_t *utc_dsecs);
+[; ;can_common.h: 319: bool get_gps_lat(const can_msg_t* msg,
+[; ;can_common.h: 320: uint8_t *degrees,
+[; ;can_common.h: 321: uint8_t *minutes,
+[; ;can_common.h: 322: uint16_t *dminutes,
+[; ;can_common.h: 323: uint8_t *direction);
+[; ;can_common.h: 330: bool get_gps_lon(const can_msg_t* msg,
+[; ;can_common.h: 331: uint8_t *degrees,
+[; ;can_common.h: 332: uint8_t *minutes,
+[; ;can_common.h: 333: uint16_t *dminutes,
+[; ;can_common.h: 334: uint8_t *direction);
+[; ;can_common.h: 341: bool get_gps_alt(const can_msg_t* msg,
+[; ;can_common.h: 342: uint16_t *altitude,
+[; ;can_common.h: 343: uint8_t *daltitude,
+[; ;can_common.h: 344: uint8_t *units);
+[; ;can_common.h: 350: bool get_gps_info(const can_msg_t* msg,
+[; ;can_common.h: 351: uint8_t *num_sat,
+[; ;can_common.h: 352: uint8_t *quality);
+[; ;can_common.h: 358: bool build_fill_msg(uint32_t timestamp,
+[; ;can_common.h: 359: uint8_t lvl,
+[; ;can_common.h: 360: uint8_t direction,
+[; ;can_common.h: 361: can_msg_t *output);
+[; ;can_common.h: 367: bool get_fill_info(const can_msg_t *msg,
+[; ;can_common.h: 368: uint8_t *lvl,
+[; ;can_common.h: 369: uint8_t *direction);
+[; ;can_common.h: 374: bool get_radi_info(const can_msg_t* msg,
+[; ;can_common.h: 375: uint8_t *board_num,
+[; ;can_common.h: 376: uint16_t *adc_value);
+[; ;can_common.h: 382: can_debug_level_t message_debug_level(const can_msg_t *msg);
+[; ;can_common.h: 401: const char *build_printf_can_message(const char *string, can_msg_t *output);
+[; ;can_common.h: 402: const char *build_radio_cmd_can_message(const char *string, can_msg_t *output);
+[; ;xc8\pic\include\__size_t.h: 4: typedef unsigned size_t;
+[; ;stddef.h: 6: typedef int ptrdiff_t;
+"13 canlib/can_common.c
+[v _write_timestamp_2bytes `(v ~T0 @X0 1 sf2`ui`*S2 ]
+"14
+{
+[; ;can_common.c: 13: static void write_timestamp_2bytes(uint16_t timestamp, can_msg_t *output)
+[; ;can_common.c: 14: {
+[e :U _write_timestamp_2bytes ]
+"13
+[v _timestamp `ui ~T0 @X0 1 r1 ]
+[v _output `*S2 ~T0 @X0 1 r2 ]
+"14
+[f ]
+[; ;can_common.c: 15: output->data[0] = (timestamp >> 8) & 0xff;
+"15
+[e = *U + &U . *U _output 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _timestamp -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 16: output->data[1] = (timestamp >> 0) & 0xff;
+"16
+[e = *U + &U . *U _output 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _timestamp -> 0 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 17: }
+"17
+[e :UE 3 ]
+}
+"19
+[v _write_timestamp_3bytes `(v ~T0 @X0 1 sf2`ul`*S2 ]
+"20
+{
+[; ;can_common.c: 19: static void write_timestamp_3bytes(uint32_t timestamp, can_msg_t *output)
+[; ;can_common.c: 20: {
+[e :U _write_timestamp_3bytes ]
+"19
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+[v _output `*S2 ~T0 @X0 1 r2 ]
+"20
+[f ]
+[; ;can_common.c: 21: output->data[0] = (timestamp >> 16) & 0xff;
+"21
+[e = *U + &U . *U _output 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _timestamp -> 16 `i -> -> -> 255 `i `l `ul `uc ]
+[; ;can_common.c: 22: output->data[1] = (timestamp >> 8) & 0xff;
+"22
+[e = *U + &U . *U _output 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _timestamp -> 8 `i -> -> -> 255 `i `l `ul `uc ]
+[; ;can_common.c: 23: output->data[2] = (timestamp >> 0) & 0xff;
+"23
+[e = *U + &U . *U _output 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _timestamp -> 0 `i -> -> -> 255 `i `l `ul `uc ]
+[; ;can_common.c: 24: }
+"24
+[e :UE 4 ]
+}
+"26
+[v _build_general_cmd_msg `(uc ~T0 @X0 1 ef3`ul`E44`*S2 ]
+"29
+{
+[; ;can_common.c: 26: bool build_general_cmd_msg(uint32_t timestamp,
+[; ;can_common.c: 27: enum GEN_CMD cmd,
+[; ;can_common.c: 28: can_msg_t *output)
+[; ;can_common.c: 29: {
+[e :U _build_general_cmd_msg ]
+"26
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"27
+[v _cmd `E44 ~T0 @X0 1 r2 ]
+"28
+[v _output `*S2 ~T0 @X0 1 r3 ]
+"29
+[f ]
+[; ;can_common.c: 30: if (!output) { return 0; }
+"30
+[e $ ! ! != _output -> -> 0 `i `*S2 6  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 5  ]
+}
+[e :U 6 ]
+[; ;can_common.c: 32: output->sid = 0x060 | 0X01;
+"32
+[e = . *U _output 0 -> | -> 96 `i -> 1 `i `ui ]
+[; ;can_common.c: 33: write_timestamp_3bytes(timestamp, output);
+"33
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 34: output->data[3] = (uint8_t) cmd;
+"34
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> _cmd `uc ]
+[; ;can_common.c: 35: output->data_len = 4;
+"35
+[e = . *U _output 1 -> -> 4 `i `uc ]
+[; ;can_common.c: 37: return 1;
+"37
+[e ) -> -> 1 `i `uc ]
+[e $UE 5  ]
+[; ;can_common.c: 38: }
+"38
+[e :UE 5 ]
+}
+"40
+[v _build_debug_msg `(uc ~T0 @X0 1 ef3`ul`*uc`*S2 ]
+"43
+{
+[; ;can_common.c: 40: bool build_debug_msg(uint32_t timestamp,
+[; ;can_common.c: 41: uint8_t *debug_data,
+[; ;can_common.c: 42: can_msg_t *output)
+[; ;can_common.c: 43: {
+[e :U _build_debug_msg ]
+"40
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"41
+[v _debug_data `*uc ~T0 @X0 1 r2 ]
+"42
+[v _output `*S2 ~T0 @X0 1 r3 ]
+"43
+[f ]
+[; ;can_common.c: 44: if (!output) { return 0; }
+"44
+[e $ ! ! != _output -> -> 0 `i `*S2 8  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 7  ]
+}
+[e :U 8 ]
+[; ;can_common.c: 45: if (!debug_data) { return 0; }
+"45
+[e $ ! ! != _debug_data -> -> 0 `i `*uc 9  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 7  ]
+}
+[e :U 9 ]
+[; ;can_common.c: 47: output->sid = 0x180 | 0X01;
+"47
+[e = . *U _output 0 -> | -> 384 `i -> 1 `i `ui ]
+[; ;can_common.c: 48: write_timestamp_3bytes(timestamp, output);
+"48
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 50: output->data[3] = debug_data[0];
+"50
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux *U + _debug_data * -> -> 0 `i `x -> -> # *U _debug_data `i `x ]
+[; ;can_common.c: 51: output->data[4] = debug_data[1];
+"51
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux *U + _debug_data * -> -> 1 `i `x -> -> # *U _debug_data `i `x ]
+[; ;can_common.c: 52: output->data[5] = debug_data[2];
+"52
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux *U + _debug_data * -> -> 2 `i `x -> -> # *U _debug_data `i `x ]
+[; ;can_common.c: 53: output->data[6] = debug_data[3];
+"53
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux *U + _debug_data * -> -> 3 `i `x -> -> # *U _debug_data `i `x ]
+[; ;can_common.c: 54: output->data[7] = debug_data[4];
+"54
+[e = *U + &U . *U _output 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux *U + _debug_data * -> -> 4 `i `x -> -> # *U _debug_data `i `x ]
+[; ;can_common.c: 56: output->data_len = 8;
+"56
+[e = . *U _output 1 -> -> 8 `i `uc ]
+[; ;can_common.c: 57: return 1;
+"57
+[e ) -> -> 1 `i `uc ]
+[e $UE 7  ]
+[; ;can_common.c: 58: }
+"58
+[e :UE 7 ]
+}
+"60
+[v _build_debug_printf `(uc ~T0 @X0 1 ef2`*uc`*S2 ]
+"62
+{
+[; ;can_common.c: 60: bool build_debug_printf(uint8_t *input_data,
+[; ;can_common.c: 61: can_msg_t *output)
+[; ;can_common.c: 62: {
+[e :U _build_debug_printf ]
+"60
+[v _input_data `*uc ~T0 @X0 1 r1 ]
+"61
+[v _output `*S2 ~T0 @X0 1 r2 ]
+"62
+[f ]
+[; ;can_common.c: 63: if (!output) { return 0; }
+"63
+[e $ ! ! != _output -> -> 0 `i `*S2 11  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 10  ]
+}
+[e :U 11 ]
+[; ;can_common.c: 64: if (!input_data) { return 0; }
+"64
+[e $ ! ! != _input_data -> -> 0 `i `*uc 12  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 10  ]
+}
+[e :U 12 ]
+[; ;can_common.c: 66: output->sid = 0x1E0 | 0X01;
+"66
+[e = . *U _output 0 -> | -> 480 `i -> 1 `i `ui ]
+[; ;can_common.c: 67: for (int i = 0; i < 8; ++i) {
+"67
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 13  ]
+[e $U 14  ]
+[e :U 13 ]
+{
+[; ;can_common.c: 68: output->data[i] = input_data[i];
+"68
+[e = *U + &U . *U _output 2 * -> -> _i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux *U + _input_data * -> _i `x -> -> # *U _input_data `i `x ]
+"69
+}
+"67
+[e =+ _i -> 1 `i ]
+[e $ < _i -> 8 `i 13  ]
+[e :U 14 ]
+"69
+}
+[; ;can_common.c: 69: }
+[; ;can_common.c: 70: output->data_len = 8;
+"70
+[e = . *U _output 1 -> -> 8 `i `uc ]
+[; ;can_common.c: 71: return 1;
+"71
+[e ) -> -> 1 `i `uc ]
+[e $UE 10  ]
+[; ;can_common.c: 72: }
+"72
+[e :UE 10 ]
+}
+"74
+[v _build_reset_msg `(uc ~T0 @X0 1 ef3`ul`uc`*S2 ]
+"77
+{
+[; ;can_common.c: 74: bool build_reset_msg(uint32_t timestamp,
+[; ;can_common.c: 75: uint8_t board_id,
+[; ;can_common.c: 76: can_msg_t *output)
+[; ;can_common.c: 77: {
+[e :U _build_reset_msg ]
+"74
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"75
+[v _board_id `uc ~T0 @X0 1 r2 ]
+"76
+[v _output `*S2 ~T0 @X0 1 r3 ]
+"77
+[f ]
+[; ;can_common.c: 78: if (!output) { return 0; }
+"78
+[e $ ! ! != _output -> -> 0 `i `*S2 17  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 16  ]
+}
+[e :U 17 ]
+[; ;can_common.c: 80: output->sid = 0x160 | 0X01;
+"80
+[e = . *U _output 0 -> | -> 352 `i -> 1 `i `ui ]
+[; ;can_common.c: 81: write_timestamp_3bytes(timestamp, output);
+"81
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 82: output->data[3] = board_id;
+"82
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _board_id ]
+[; ;can_common.c: 83: output->data_len = 4;
+"83
+[e = . *U _output 1 -> -> 4 `i `uc ]
+[; ;can_common.c: 85: return 1;
+"85
+[e ) -> -> 1 `i `uc ]
+[e $UE 16  ]
+[; ;can_common.c: 86: }
+"86
+[e :UE 16 ]
+}
+"88
+[v _build_valve_cmd_msg `(uc ~T0 @X0 1 ef4`ul`E46`ui`*S2 ]
+"92
+{
+[; ;can_common.c: 88: bool build_valve_cmd_msg(uint32_t timestamp,
+[; ;can_common.c: 89: enum VALVE_STATE valve_cmd,
+[; ;can_common.c: 90: uint16_t message_type,
+[; ;can_common.c: 91: can_msg_t *output)
+[; ;can_common.c: 92: {
+[e :U _build_valve_cmd_msg ]
+"88
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"89
+[v _valve_cmd `E46 ~T0 @X0 1 r2 ]
+"90
+[v _message_type `ui ~T0 @X0 1 r3 ]
+"91
+[v _output `*S2 ~T0 @X0 1 r4 ]
+"92
+[f ]
+[; ;can_common.c: 93: if (!output) { return 0; }
+"93
+[e $ ! ! != _output -> -> 0 `i `*S2 19  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 18  ]
+}
+[e :U 19 ]
+[; ;can_common.c: 94: if (!(message_type == 0x0C0
+[; ;can_common.c: 95: || message_type == 0x120)) {
+"95
+[e $ ! ! || == _message_type -> -> 192 `i `ui == _message_type -> -> 288 `i `ui 20  ]
+{
+[; ;can_common.c: 96: return 0;
+"96
+[e ) -> -> 0 `i `uc ]
+[e $UE 18  ]
+"97
+}
+[e :U 20 ]
+[; ;can_common.c: 97: }
+[; ;can_common.c: 99: output->sid = message_type | 0X01;
+"99
+[e = . *U _output 0 | _message_type -> -> 1 `i `ui ]
+[; ;can_common.c: 100: write_timestamp_3bytes(timestamp, output);
+"100
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 102: output->data[3] = (uint8_t) valve_cmd;
+"102
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> _valve_cmd `uc ]
+[; ;can_common.c: 103: output->data_len = 4;
+"103
+[e = . *U _output 1 -> -> 4 `i `uc ]
+[; ;can_common.c: 105: return 1;
+"105
+[e ) -> -> 1 `i `uc ]
+[e $UE 18  ]
+[; ;can_common.c: 106: }
+"106
+[e :UE 18 ]
+}
+"108
+[v _build_valve_stat_msg `(uc ~T0 @X0 1 ef5`ul`E46`E46`ui`*S2 ]
+"113
+{
+[; ;can_common.c: 108: bool build_valve_stat_msg(uint32_t timestamp,
+[; ;can_common.c: 109: enum VALVE_STATE valve_state,
+[; ;can_common.c: 110: enum VALVE_STATE req_valve_state,
+[; ;can_common.c: 111: uint16_t message_type,
+[; ;can_common.c: 112: can_msg_t *output)
+[; ;can_common.c: 113: {
+[e :U _build_valve_stat_msg ]
+"108
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"109
+[v _valve_state `E46 ~T0 @X0 1 r2 ]
+"110
+[v _req_valve_state `E46 ~T0 @X0 1 r3 ]
+"111
+[v _message_type `ui ~T0 @X0 1 r4 ]
+"112
+[v _output `*S2 ~T0 @X0 1 r5 ]
+"113
+[f ]
+[; ;can_common.c: 114: if (!output) { return 0; }
+"114
+[e $ ! ! != _output -> -> 0 `i `*S2 22  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 21  ]
+}
+[e :U 22 ]
+[; ;can_common.c: 115: if (!(message_type == 0x460
+[; ;can_common.c: 116: || message_type == 0x4C0)) {
+"116
+[e $ ! ! || == _message_type -> -> 1120 `i `ui == _message_type -> -> 1216 `i `ui 23  ]
+{
+[; ;can_common.c: 117: return 0;
+"117
+[e ) -> -> 0 `i `uc ]
+[e $UE 21  ]
+"118
+}
+[e :U 23 ]
+[; ;can_common.c: 118: }
+[; ;can_common.c: 120: output->sid = message_type | 0X01;
+"120
+[e = . *U _output 0 | _message_type -> -> 1 `i `ui ]
+[; ;can_common.c: 121: write_timestamp_3bytes(timestamp, output);
+"121
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 123: output->data[3] = (uint8_t) valve_state;
+"123
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> _valve_state `uc ]
+[; ;can_common.c: 124: output->data[4] = (uint8_t) req_valve_state;
+"124
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> _req_valve_state `uc ]
+[; ;can_common.c: 125: output->data_len = 5;
+"125
+[e = . *U _output 1 -> -> 5 `i `uc ]
+[; ;can_common.c: 127: return 1;
+"127
+[e ) -> -> 1 `i `uc ]
+[e $UE 21  ]
+[; ;can_common.c: 128: }
+"128
+[e :UE 21 ]
+}
+"130
+[v _build_arm_cmd_msg `(uc ~T0 @X0 1 ef4`ul`uc`E51`*S2 ]
+"134
+{
+[; ;can_common.c: 130: bool build_arm_cmd_msg(uint32_t timestamp,
+[; ;can_common.c: 131: uint8_t alt_num,
+[; ;can_common.c: 132: enum ARM_STATE arm_cmd,
+[; ;can_common.c: 133: can_msg_t *output)
+[; ;can_common.c: 134: {
+[e :U _build_arm_cmd_msg ]
+"130
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"131
+[v _alt_num `uc ~T0 @X0 1 r2 ]
+"132
+[v _arm_cmd `E51 ~T0 @X0 1 r3 ]
+"133
+[v _output `*S2 ~T0 @X0 1 r4 ]
+"134
+[f ]
+[; ;can_common.c: 135: if (!output) { return 0; }
+"135
+[e $ ! ! != _output -> -> 0 `i `*S2 25  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 24  ]
+}
+[e :U 25 ]
+[; ;can_common.c: 137: output->sid = 0x140 | 0X01;
+"137
+[e = . *U _output 0 -> | -> 320 `i -> 1 `i `ui ]
+[; ;can_common.c: 138: write_timestamp_3bytes(timestamp, output);
+"138
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 141: output->data[3] = (arm_cmd << 4) | (alt_num & 0x0F);
+"141
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> | << -> _arm_cmd `i -> 4 `i & -> _alt_num `i -> 15 `i `uc ]
+[; ;can_common.c: 142: output->data_len = 4;
+"142
+[e = . *U _output 1 -> -> 4 `i `uc ]
+[; ;can_common.c: 144: return 1;
+"144
+[e ) -> -> 1 `i `uc ]
+[e $UE 24  ]
+[; ;can_common.c: 145: }
+"145
+[e :UE 24 ]
+}
+"147
+[v _build_arm_stat_msg `(uc ~T0 @X0 1 ef6`ul`uc`E51`ui`ui`*S2 ]
+"153
+{
+[; ;can_common.c: 147: bool build_arm_stat_msg(uint32_t timestamp,
+[; ;can_common.c: 148: uint8_t alt_num,
+[; ;can_common.c: 149: enum ARM_STATE arm_state,
+[; ;can_common.c: 150: uint16_t v_drogue,
+[; ;can_common.c: 151: uint16_t v_main,
+[; ;can_common.c: 152: can_msg_t *output)
+[; ;can_common.c: 153: {
+[e :U _build_arm_stat_msg ]
+"147
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"148
+[v _alt_num `uc ~T0 @X0 1 r2 ]
+"149
+[v _arm_state `E51 ~T0 @X0 1 r3 ]
+"150
+[v _v_drogue `ui ~T0 @X0 1 r4 ]
+"151
+[v _v_main `ui ~T0 @X0 1 r5 ]
+"152
+[v _output `*S2 ~T0 @X0 1 r6 ]
+"153
+[f ]
+[; ;can_common.c: 154: if (!output) { return 0; }
+"154
+[e $ ! ! != _output -> -> 0 `i `*S2 27  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 26  ]
+}
+[e :U 27 ]
+[; ;can_common.c: 156: output->sid = 0x440 | 0X01;
+"156
+[e = . *U _output 0 -> | -> 1088 `i -> 1 `i `ui ]
+[; ;can_common.c: 157: write_timestamp_3bytes(timestamp, output);
+"157
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 160: output->data[3] = (arm_state << 4) | (alt_num & 0x0F);
+"160
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> | << -> _arm_state `i -> 4 `i & -> _alt_num `i -> 15 `i `uc ]
+[; ;can_common.c: 162: output->data[4] = v_drogue >> 8;
+"162
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> >> _v_drogue -> 8 `i `uc ]
+[; ;can_common.c: 163: output->data[5] = v_drogue & 0x00FF;
+"163
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & _v_drogue -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 165: output->data[6] = v_main >> 8;
+"165
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> >> _v_main -> 8 `i `uc ]
+[; ;can_common.c: 166: output->data[7] = v_main & 0x00FF;
+"166
+[e = *U + &U . *U _output 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & _v_main -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 168: output->data_len = 8;
+"168
+[e = . *U _output 1 -> -> 8 `i `uc ]
+[; ;can_common.c: 170: return 1;
+"170
+[e ) -> -> 1 `i `uc ]
+[e $UE 26  ]
+[; ;can_common.c: 171: }
+"171
+[e :UE 26 ]
+}
+"175
+[v _build_board_stat_msg `(uc ~T0 @X0 1 ef5`ul`E54`*uc`uc`*S2 ]
+"180
+{
+[; ;can_common.c: 175: bool build_board_stat_msg(uint32_t timestamp,
+[; ;can_common.c: 176: enum BOARD_STATUS error_code,
+[; ;can_common.c: 177: uint8_t *error_data,
+[; ;can_common.c: 178: uint8_t error_data_len,
+[; ;can_common.c: 179: can_msg_t *output)
+[; ;can_common.c: 180: {
+[e :U _build_board_stat_msg ]
+"175
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"176
+[v _error_code `E54 ~T0 @X0 1 r2 ]
+"177
+[v _error_data `*uc ~T0 @X0 1 r3 ]
+"178
+[v _error_data_len `uc ~T0 @X0 1 r4 ]
+"179
+[v _output `*S2 ~T0 @X0 1 r5 ]
+"180
+[f ]
+[; ;can_common.c: 181: if (error_data_len > 0 && !error_data) { return 0; }
+"181
+[e $ ! && > -> _error_data_len `i -> 0 `i ! != _error_data -> -> 0 `i `*uc 29  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 28  ]
+}
+[e :U 29 ]
+[; ;can_common.c: 182: if (!output) { return 0; }
+"182
+[e $ ! ! != _output -> -> 0 `i `*S2 30  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 28  ]
+}
+[e :U 30 ]
+[; ;can_common.c: 183: if (error_data_len > 4) { return 0; }
+"183
+[e $ ! > -> _error_data_len `i -> 4 `i 31  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 28  ]
+}
+[e :U 31 ]
+[; ;can_common.c: 185: output->sid = 0x520 | 0X01;
+"185
+[e = . *U _output 0 -> | -> 1312 `i -> 1 `i `ui ]
+[; ;can_common.c: 186: write_timestamp_3bytes(timestamp, output);
+"186
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 188: output->data[3] = (uint8_t) error_code;
+"188
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> _error_code `uc ]
+[; ;can_common.c: 189: for (int i = 0; i < error_data_len; ++i) {
+"189
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 35  ]
+[e :U 32 ]
+{
+[; ;can_common.c: 191: output->data[4 + i] = error_data[i];
+"191
+[e = *U + &U . *U _output 2 * -> -> + -> 4 `i _i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux *U + _error_data * -> _i `x -> -> # *U _error_data `i `x ]
+"192
+}
+"189
+[e =+ _i -> 1 `i ]
+[e :U 35 ]
+[e $ < _i -> _error_data_len `i 32  ]
+[e :U 33 ]
+"192
+}
+[; ;can_common.c: 192: }
+[; ;can_common.c: 195: output->data_len = 4 + error_data_len;
+"195
+[e = . *U _output 1 -> + -> 4 `i -> _error_data_len `i `uc ]
+[; ;can_common.c: 197: return 1;
+"197
+[e ) -> -> 1 `i `uc ]
+[e $UE 28  ]
+[; ;can_common.c: 198: }
+"198
+[e :UE 28 ]
+}
+"200
+[v _build_imu_data_msg `(uc ~T0 @X0 1 ef4`ui`ul`*ui`*S2 ]
+"204
+{
+[; ;can_common.c: 200: bool build_imu_data_msg(uint16_t message_type,
+[; ;can_common.c: 201: uint32_t timestamp,
+[; ;can_common.c: 202: uint16_t *imu_data,
+[; ;can_common.c: 203: can_msg_t *output)
+[; ;can_common.c: 204: {
+[e :U _build_imu_data_msg ]
+"200
+[v _message_type `ui ~T0 @X0 1 r1 ]
+"201
+[v _timestamp `ul ~T0 @X0 1 r2 ]
+"202
+[v _imu_data `*ui ~T0 @X0 1 r3 ]
+"203
+[v _output `*S2 ~T0 @X0 1 r4 ]
+"204
+[f ]
+[; ;can_common.c: 205: if (!output) { return 0; }
+"205
+[e $ ! ! != _output -> -> 0 `i `*S2 37  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 36  ]
+}
+[e :U 37 ]
+[; ;can_common.c: 206: if (!imu_data) { return 0; }
+"206
+[e $ ! ! != _imu_data -> -> 0 `i `*ui 38  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 36  ]
+}
+[e :U 38 ]
+[; ;can_common.c: 207: if (!(message_type == 0x580
+[; ;can_common.c: 208: || message_type == 0x5E0
+[; ;can_common.c: 209: || message_type == 0x640)) {
+"209
+[e $ ! ! || || == _message_type -> -> 1408 `i `ui == _message_type -> -> 1504 `i `ui == _message_type -> -> 1600 `i `ui 39  ]
+{
+[; ;can_common.c: 210: return 0;
+"210
+[e ) -> -> 0 `i `uc ]
+[e $UE 36  ]
+"211
+}
+[e :U 39 ]
+[; ;can_common.c: 211: }
+[; ;can_common.c: 213: output->sid = message_type | 0X01;
+"213
+[e = . *U _output 0 | _message_type -> -> 1 `i `ui ]
+[; ;can_common.c: 214: write_timestamp_2bytes(timestamp, output);
+"214
+[e ( _write_timestamp_2bytes (2 , -> _timestamp `ui _output ]
+[; ;can_common.c: 217: output->data[2] = (imu_data[0] >> 8) & 0xff;
+"217
+[e = *U + &U . *U _output 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> *U + _imu_data * -> -> 0 `i `x -> -> # *U _imu_data `i `x -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 218: output->data[3] = (imu_data[0] >> 0) & 0xff;
+"218
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> *U + _imu_data * -> -> 0 `i `x -> -> # *U _imu_data `i `x -> 0 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 221: output->data[4] = (imu_data[1] >> 8) & 0xff;
+"221
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> *U + _imu_data * -> -> 1 `i `x -> -> # *U _imu_data `i `x -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 222: output->data[5] = (imu_data[1] >> 0) & 0xff;
+"222
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> *U + _imu_data * -> -> 1 `i `x -> -> # *U _imu_data `i `x -> 0 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 225: output->data[6] = (imu_data[2] >> 8) & 0xff;
+"225
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> *U + _imu_data * -> -> 2 `i `x -> -> # *U _imu_data `i `x -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 226: output->data[7] = (imu_data[2] >> 0) & 0xff;
+"226
+[e = *U + &U . *U _output 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> *U + _imu_data * -> -> 2 `i `x -> -> # *U _imu_data `i `x -> 0 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 229: output->data_len = 8;
+"229
+[e = . *U _output 1 -> -> 8 `i `uc ]
+[; ;can_common.c: 231: return 1;
+"231
+[e ) -> -> 1 `i `uc ]
+[e $UE 36  ]
+[; ;can_common.c: 232: }
+"232
+[e :UE 36 ]
+}
+"234
+[v _build_analog_data_msg `(uc ~T0 @X0 1 ef4`ul`E76`ui`*S2 ]
+"238
+{
+[; ;can_common.c: 234: bool build_analog_data_msg(uint32_t timestamp,
+[; ;can_common.c: 235: enum SENSOR_ID sensor_id,
+[; ;can_common.c: 236: uint16_t sensor_data,
+[; ;can_common.c: 237: can_msg_t *output)
+[; ;can_common.c: 238: {
+[e :U _build_analog_data_msg ]
+"234
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"235
+[v _sensor_id `E76 ~T0 @X0 1 r2 ]
+"236
+[v _sensor_data `ui ~T0 @X0 1 r3 ]
+"237
+[v _output `*S2 ~T0 @X0 1 r4 ]
+"238
+[f ]
+[; ;can_common.c: 239: if (!output) { return 0; }
+"239
+[e $ ! ! != _output -> -> 0 `i `*S2 41  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 40  ]
+}
+[e :U 41 ]
+[; ;can_common.c: 241: output->sid = 0x6A0 | 0X01;
+"241
+[e = . *U _output 0 -> | -> 1696 `i -> 1 `i `ui ]
+[; ;can_common.c: 242: write_timestamp_2bytes(timestamp, output);
+"242
+[e ( _write_timestamp_2bytes (2 , -> _timestamp `ui _output ]
+[; ;can_common.c: 244: output->data[2] = (uint8_t) sensor_id;
+"244
+[e = *U + &U . *U _output 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> _sensor_id `uc ]
+[; ;can_common.c: 245: output->data[3] = (sensor_data >> 8) & 0xff;
+"245
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _sensor_data -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 246: output->data[4] = (sensor_data >> 0) & 0xff;
+"246
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _sensor_data -> 0 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 248: output->data_len = 5;
+"248
+[e = . *U _output 1 -> -> 5 `i `uc ]
+[; ;can_common.c: 250: return 1;
+"250
+[e ) -> -> 1 `i `uc ]
+[e $UE 40  ]
+[; ;can_common.c: 251: }
+"251
+[e :UE 40 ]
+}
+"253
+[v _build_altitude_data_msg `(uc ~T0 @X0 1 ef3`ul`l`*S2 ]
+"256
+{
+[; ;can_common.c: 253: bool build_altitude_data_msg(uint32_t timestamp,
+[; ;can_common.c: 254: int32_t altitude,
+[; ;can_common.c: 255: can_msg_t *output)
+[; ;can_common.c: 256: {
+[e :U _build_altitude_data_msg ]
+"253
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"254
+[v _altitude `l ~T0 @X0 1 r2 ]
+"255
+[v _output `*S2 ~T0 @X0 1 r3 ]
+"256
+[f ]
+[; ;can_common.c: 257: if(!output) { return 0; }
+"257
+[e $ ! ! != _output -> -> 0 `i `*S2 43  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 42  ]
+}
+[e :U 43 ]
+[; ;can_common.c: 259: output->sid = 0x560 | 0X01;
+"259
+[e = . *U _output 0 -> | -> 1376 `i -> 1 `i `ui ]
+[; ;can_common.c: 260: write_timestamp_3bytes(timestamp, output);
+"260
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 262: output->data[3] = (altitude >> 24) & 0xFF;
+"262
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _altitude -> 24 `i -> -> 255 `i `l `uc ]
+[; ;can_common.c: 263: output->data[4] = (altitude >> 16) & 0xFF;
+"263
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _altitude -> 16 `i -> -> 255 `i `l `uc ]
+[; ;can_common.c: 264: output->data[5] = (altitude >> 8) & 0xFF;
+"264
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _altitude -> 8 `i -> -> 255 `i `l `uc ]
+[; ;can_common.c: 265: output->data[6] = altitude & 0xFF;
+"265
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & _altitude -> -> 255 `i `l `uc ]
+[; ;can_common.c: 266: output->data_len = 7;
+"266
+[e = . *U _output 1 -> -> 7 `i `uc ]
+[; ;can_common.c: 268: return 1;
+"268
+[e ) -> -> 1 `i `uc ]
+[e $UE 42  ]
+[; ;can_common.c: 269: }
+"269
+[e :UE 42 ]
+}
+"271
+[v _build_gps_time_msg `(uc ~T0 @X0 1 ef6`ul`uc`uc`uc`uc`*S2 ]
+"277
+{
+[; ;can_common.c: 271: bool build_gps_time_msg(uint32_t timestamp,
+[; ;can_common.c: 272: uint8_t utc_hours,
+[; ;can_common.c: 273: uint8_t utc_mins,
+[; ;can_common.c: 274: uint8_t utc_secs,
+[; ;can_common.c: 275: uint8_t utc_dsecs,
+[; ;can_common.c: 276: can_msg_t *output)
+[; ;can_common.c: 277: {
+[e :U _build_gps_time_msg ]
+"271
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"272
+[v _utc_hours `uc ~T0 @X0 1 r2 ]
+"273
+[v _utc_mins `uc ~T0 @X0 1 r3 ]
+"274
+[v _utc_secs `uc ~T0 @X0 1 r4 ]
+"275
+[v _utc_dsecs `uc ~T0 @X0 1 r5 ]
+"276
+[v _output `*S2 ~T0 @X0 1 r6 ]
+"277
+[f ]
+[; ;can_common.c: 278: if (!output) { return 0; }
+"278
+[e $ ! ! != _output -> -> 0 `i `*S2 45  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 44  ]
+}
+[e :U 45 ]
+[; ;can_common.c: 280: output->sid = 0x6C0 | 0X01;
+"280
+[e = . *U _output 0 -> | -> 1728 `i -> 1 `i `ui ]
+[; ;can_common.c: 281: write_timestamp_3bytes(timestamp, output);
+"281
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 283: output->data[3] = utc_hours;
+"283
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _utc_hours ]
+[; ;can_common.c: 284: output->data[4] = utc_mins;
+"284
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _utc_mins ]
+[; ;can_common.c: 285: output->data[5] = utc_secs;
+"285
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _utc_secs ]
+[; ;can_common.c: 286: output->data[6] = utc_dsecs;
+"286
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _utc_dsecs ]
+[; ;can_common.c: 288: output->data_len = 7;
+"288
+[e = . *U _output 1 -> -> 7 `i `uc ]
+[; ;can_common.c: 290: return 1;
+"290
+[e ) -> -> 1 `i `uc ]
+[e $UE 44  ]
+[; ;can_common.c: 291: }
+"291
+[e :UE 44 ]
+}
+"293
+[v _build_gps_lat_msg `(uc ~T0 @X0 1 ef6`ul`uc`uc`ui`uc`*S2 ]
+"299
+{
+[; ;can_common.c: 293: bool build_gps_lat_msg(uint32_t timestamp,
+[; ;can_common.c: 294: uint8_t degrees,
+[; ;can_common.c: 295: uint8_t minutes,
+[; ;can_common.c: 296: uint16_t dminutes,
+[; ;can_common.c: 297: uint8_t direction,
+[; ;can_common.c: 298: can_msg_t *output)
+[; ;can_common.c: 299: {
+[e :U _build_gps_lat_msg ]
+"293
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"294
+[v _degrees `uc ~T0 @X0 1 r2 ]
+"295
+[v _minutes `uc ~T0 @X0 1 r3 ]
+"296
+[v _dminutes `ui ~T0 @X0 1 r4 ]
+"297
+[v _direction `uc ~T0 @X0 1 r5 ]
+"298
+[v _output `*S2 ~T0 @X0 1 r6 ]
+"299
+[f ]
+[; ;can_common.c: 300: if (!output) { return 0; }
+"300
+[e $ ! ! != _output -> -> 0 `i `*S2 47  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 46  ]
+}
+[e :U 47 ]
+[; ;can_common.c: 302: output->sid = 0x6E0 | 0X01;
+"302
+[e = . *U _output 0 -> | -> 1760 `i -> 1 `i `ui ]
+[; ;can_common.c: 303: write_timestamp_3bytes(timestamp, output);
+"303
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 305: output->data[3] = degrees;
+"305
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _degrees ]
+[; ;can_common.c: 306: output->data[4] = minutes;
+"306
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _minutes ]
+[; ;can_common.c: 307: output->data[5] = dminutes >> 8;
+"307
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> >> _dminutes -> 8 `i `uc ]
+[; ;can_common.c: 308: output->data[6] = dminutes & 0xFF;
+"308
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & _dminutes -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 309: output->data[7] = direction;
+"309
+[e = *U + &U . *U _output 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _direction ]
+[; ;can_common.c: 311: output->data_len = 8;
+"311
+[e = . *U _output 1 -> -> 8 `i `uc ]
+[; ;can_common.c: 313: return 1;
+"313
+[e ) -> -> 1 `i `uc ]
+[e $UE 46  ]
+[; ;can_common.c: 314: }
+"314
+[e :UE 46 ]
+}
+"316
+[v _build_gps_lon_msg `(uc ~T0 @X0 1 ef6`ul`uc`uc`ui`uc`*S2 ]
+"322
+{
+[; ;can_common.c: 316: bool build_gps_lon_msg(uint32_t timestamp,
+[; ;can_common.c: 317: uint8_t degrees,
+[; ;can_common.c: 318: uint8_t minutes,
+[; ;can_common.c: 319: uint16_t dminutes,
+[; ;can_common.c: 320: uint8_t direction,
+[; ;can_common.c: 321: can_msg_t *output)
+[; ;can_common.c: 322: {
+[e :U _build_gps_lon_msg ]
+"316
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"317
+[v _degrees `uc ~T0 @X0 1 r2 ]
+"318
+[v _minutes `uc ~T0 @X0 1 r3 ]
+"319
+[v _dminutes `ui ~T0 @X0 1 r4 ]
+"320
+[v _direction `uc ~T0 @X0 1 r5 ]
+"321
+[v _output `*S2 ~T0 @X0 1 r6 ]
+"322
+[f ]
+[; ;can_common.c: 323: if (!output) { return 0; }
+"323
+[e $ ! ! != _output -> -> 0 `i `*S2 49  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 48  ]
+}
+[e :U 49 ]
+[; ;can_common.c: 325: output->sid = 0x700 | 0X01;
+"325
+[e = . *U _output 0 -> | -> 1792 `i -> 1 `i `ui ]
+[; ;can_common.c: 326: write_timestamp_3bytes(timestamp, output);
+"326
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 328: output->data[3] = degrees;
+"328
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _degrees ]
+[; ;can_common.c: 329: output->data[4] = minutes;
+"329
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _minutes ]
+[; ;can_common.c: 330: output->data[5] = dminutes >> 8;
+"330
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> >> _dminutes -> 8 `i `uc ]
+[; ;can_common.c: 331: output->data[6] = dminutes & 0xFF;
+"331
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & _dminutes -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 332: output->data[7] = direction;
+"332
+[e = *U + &U . *U _output 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _direction ]
+[; ;can_common.c: 334: output->data_len = 8;
+"334
+[e = . *U _output 1 -> -> 8 `i `uc ]
+[; ;can_common.c: 336: return 1;
+"336
+[e ) -> -> 1 `i `uc ]
+[e $UE 48  ]
+[; ;can_common.c: 337: }
+"337
+[e :UE 48 ]
+}
+"339
+[v _build_gps_alt_msg `(uc ~T0 @X0 1 ef5`ul`ui`uc`uc`*S2 ]
+"344
+{
+[; ;can_common.c: 339: bool build_gps_alt_msg(uint32_t timestamp,
+[; ;can_common.c: 340: uint16_t altitude,
+[; ;can_common.c: 341: uint8_t daltitude,
+[; ;can_common.c: 342: uint8_t units,
+[; ;can_common.c: 343: can_msg_t *output)
+[; ;can_common.c: 344: {
+[e :U _build_gps_alt_msg ]
+"339
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"340
+[v _altitude `ui ~T0 @X0 1 r2 ]
+"341
+[v _daltitude `uc ~T0 @X0 1 r3 ]
+"342
+[v _units `uc ~T0 @X0 1 r4 ]
+"343
+[v _output `*S2 ~T0 @X0 1 r5 ]
+"344
+[f ]
+[; ;can_common.c: 345: if (!output) { return 0; }
+"345
+[e $ ! ! != _output -> -> 0 `i `*S2 51  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 50  ]
+}
+[e :U 51 ]
+[; ;can_common.c: 347: output->sid = 0x720 | 0X01;
+"347
+[e = . *U _output 0 -> | -> 1824 `i -> 1 `i `ui ]
+[; ;can_common.c: 348: write_timestamp_3bytes(timestamp, output);
+"348
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 350: output->data[3] = (altitude >> 8) & 0xff;
+"350
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _altitude -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 351: output->data[4] = (altitude >> 0) & 0xff;
+"351
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _altitude -> 0 `i -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 352: output->data[5] = daltitude;
+"352
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _daltitude ]
+[; ;can_common.c: 353: output->data[6] = units;
+"353
+[e = *U + &U . *U _output 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _units ]
+[; ;can_common.c: 355: output->data_len = 7;
+"355
+[e = . *U _output 1 -> -> 7 `i `uc ]
+[; ;can_common.c: 357: return 1;
+"357
+[e ) -> -> 1 `i `uc ]
+[e $UE 50  ]
+[; ;can_common.c: 358: }
+"358
+[e :UE 50 ]
+}
+"360
+[v _build_gps_info_msg `(uc ~T0 @X0 1 ef4`ul`uc`uc`*S2 ]
+"364
+{
+[; ;can_common.c: 360: bool build_gps_info_msg(uint32_t timestamp,
+[; ;can_common.c: 361: uint8_t num_sat,
+[; ;can_common.c: 362: uint8_t quality,
+[; ;can_common.c: 363: can_msg_t *output)
+[; ;can_common.c: 364: {
+[e :U _build_gps_info_msg ]
+"360
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"361
+[v _num_sat `uc ~T0 @X0 1 r2 ]
+"362
+[v _quality `uc ~T0 @X0 1 r3 ]
+"363
+[v _output `*S2 ~T0 @X0 1 r4 ]
+"364
+[f ]
+[; ;can_common.c: 365: if (!output) { return 0; }
+"365
+[e $ ! ! != _output -> -> 0 `i `*S2 53  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 52  ]
+}
+[e :U 53 ]
+[; ;can_common.c: 367: output->sid = 0x740 | 0X01;
+"367
+[e = . *U _output 0 -> | -> 1856 `i -> 1 `i `ui ]
+[; ;can_common.c: 368: write_timestamp_3bytes(timestamp, output);
+"368
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 370: output->data[3] = num_sat;
+"370
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _num_sat ]
+[; ;can_common.c: 371: output->data[4] = quality;
+"371
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _quality ]
+[; ;can_common.c: 373: output->data_len = 5;
+"373
+[e = . *U _output 1 -> -> 5 `i `uc ]
+[; ;can_common.c: 375: return 1;
+"375
+[e ) -> -> 1 `i `uc ]
+[e $UE 52  ]
+[; ;can_common.c: 376: }
+"376
+[e :UE 52 ]
+}
+"378
+[v _build_fill_msg `(uc ~T0 @X0 1 ef4`ul`uc`uc`*S2 ]
+"382
+{
+[; ;can_common.c: 378: bool build_fill_msg(uint32_t timestamp,
+[; ;can_common.c: 379: uint8_t lvl,
+[; ;can_common.c: 380: uint8_t direction,
+[; ;can_common.c: 381: can_msg_t *output)
+[; ;can_common.c: 382: {
+[e :U _build_fill_msg ]
+"378
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"379
+[v _lvl `uc ~T0 @X0 1 r2 ]
+"380
+[v _direction `uc ~T0 @X0 1 r3 ]
+"381
+[v _output `*S2 ~T0 @X0 1 r4 ]
+"382
+[f ]
+[; ;can_common.c: 383: if (!output) { return 0; }
+"383
+[e $ ! ! != _output -> -> 0 `i `*S2 55  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 54  ]
+}
+[e :U 55 ]
+[; ;can_common.c: 385: output->sid = 0x780 | 0X01;
+"385
+[e = . *U _output 0 -> | -> 1920 `i -> 1 `i `ui ]
+[; ;can_common.c: 386: write_timestamp_3bytes(timestamp, output);
+"386
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 388: output->data[3] = lvl;
+"388
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _lvl ]
+[; ;can_common.c: 389: output->data[4] = direction;
+"389
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _direction ]
+[; ;can_common.c: 391: output->data_len = 5;
+"391
+[e = . *U _output 1 -> -> 5 `i `uc ]
+[; ;can_common.c: 393: return 1;
+"393
+[e ) -> -> 1 `i `uc ]
+[e $UE 54  ]
+[; ;can_common.c: 394: }
+"394
+[e :UE 54 ]
+}
+"396
+[v _build_radi_info_msg `(uc ~T0 @X0 1 ef4`ul`uc`ui`*S2 ]
+"400
+{
+[; ;can_common.c: 396: bool build_radi_info_msg(uint32_t timestamp,
+[; ;can_common.c: 397: uint8_t sensor_identifier,
+[; ;can_common.c: 398: uint16_t adc_value,
+[; ;can_common.c: 399: can_msg_t *output)
+[; ;can_common.c: 400: {
+[e :U _build_radi_info_msg ]
+"396
+[v _timestamp `ul ~T0 @X0 1 r1 ]
+"397
+[v _sensor_identifier `uc ~T0 @X0 1 r2 ]
+"398
+[v _adc_value `ui ~T0 @X0 1 r3 ]
+"399
+[v _output `*S2 ~T0 @X0 1 r4 ]
+"400
+[f ]
+[; ;can_common.c: 401: if (!output) { return 0; }
+"401
+[e $ ! ! != _output -> -> 0 `i `*S2 57  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 56  ]
+}
+[e :U 57 ]
+[; ;can_common.c: 403: output->sid = 0x7A0 | 0X01;
+"403
+[e = . *U _output 0 -> | -> 1952 `i -> 1 `i `ui ]
+[; ;can_common.c: 404: write_timestamp_3bytes(timestamp, output);
+"404
+[e ( _write_timestamp_3bytes (2 , _timestamp _output ]
+[; ;can_common.c: 406: output->data[3] = sensor_identifier;
+"406
+[e = *U + &U . *U _output 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux _sensor_identifier ]
+[; ;can_common.c: 407: output->data[4] = (uint8_t) ((adc_value >> 8) & 0x0F);
+"407
+[e = *U + &U . *U _output 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & >> _adc_value -> 8 `i -> -> 15 `i `ui `uc ]
+[; ;can_common.c: 408: output->data[5] = (uint8_t) (adc_value & 0xFF);
+"408
+[e = *U + &U . *U _output 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _output 2 `ui `ux -> & _adc_value -> -> 255 `i `ui `uc ]
+[; ;can_common.c: 410: output->data_len = 6;
+"410
+[e = . *U _output 1 -> -> 6 `i `uc ]
+[; ;can_common.c: 412: return 1;
+"412
+[e ) -> -> 1 `i `uc ]
+[e $UE 56  ]
+[; ;can_common.c: 413: }
+"413
+[e :UE 56 ]
+}
+"415
+[v _get_fill_info `(uc ~T0 @X0 1 ef3`*CS2`*uc`*uc ]
+"418
+{
+[; ;can_common.c: 415: bool get_fill_info(const can_msg_t *msg,
+[; ;can_common.c: 416: uint8_t *lvl,
+[; ;can_common.c: 417: uint8_t *direction)
+[; ;can_common.c: 418: {
+[e :U _get_fill_info ]
+"415
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"416
+[v _lvl `*uc ~T0 @X0 1 r2 ]
+"417
+[v _direction `*uc ~T0 @X0 1 r3 ]
+"418
+[f ]
+[; ;can_common.c: 419: if (!msg | !lvl | !direction) { return 0; }
+"419
+[e $ ! | | ! != _msg -> -> 0 `i `*CS2 ! != _lvl -> -> 0 `i `*uc ! != _direction -> -> 0 `i `*uc 59  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 58  ]
+}
+[e :U 59 ]
+"421
+[v _msg_type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 421: uint16_t msg_type = get_message_type(msg);
+[e = _msg_type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 422: if (msg_type == 0x780) {
+"422
+[e $ ! == _msg_type -> -> 1920 `i `ui 60  ]
+{
+[; ;can_common.c: 423: *lvl = msg->data[3];
+"423
+[e = *U _lvl *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 424: *direction = msg->data[4];
+"424
+[e = *U _direction *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 425: return 1;
+"425
+[e ) -> -> 1 `i `uc ]
+[e $UE 58  ]
+"426
+}
+[e :U 60 ]
+[; ;can_common.c: 426: }
+[; ;can_common.c: 428: return 0;
+"428
+[e ) -> -> 0 `i `uc ]
+[e $UE 58  ]
+[; ;can_common.c: 429: }
+"429
+[e :UE 58 ]
+}
+"431
+[v _get_general_cmd_type `(i ~T0 @X0 1 ef1`*CS2 ]
+{
+[; ;can_common.c: 431: int get_general_cmd_type(const can_msg_t *msg) {
+[e :U _get_general_cmd_type ]
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[f ]
+[; ;can_common.c: 432: if (!msg) { return -1; }
+"432
+[e $ ! ! != _msg -> -> 0 `i `*CS2 62  ]
+{
+[e ) -U -> 1 `i ]
+[e $UE 61  ]
+}
+[e :U 62 ]
+"434
+[v _msg_type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 434: uint16_t msg_type = get_message_type(msg);
+[e = _msg_type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 435: if (msg_type == 0x060) {
+"435
+[e $ ! == _msg_type -> -> 96 `i `ui 63  ]
+{
+[; ;can_common.c: 436: return msg->data[3];
+"436
+[e ) -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i ]
+[e $UE 61  ]
+"437
+}
+[; ;can_common.c: 437: } else {
+[e $U 64  ]
+[e :U 63 ]
+{
+[; ;can_common.c: 438: return -1;
+"438
+[e ) -U -> 1 `i ]
+[e $UE 61  ]
+"439
+}
+[e :U 64 ]
+[; ;can_common.c: 439: }
+[; ;can_common.c: 440: }
+"440
+[e :UE 61 ]
+}
+"442
+[v _get_reset_board_id `(i ~T0 @X0 1 ef1`*CS2 ]
+{
+[; ;can_common.c: 442: int get_reset_board_id(const can_msg_t *msg){
+[e :U _get_reset_board_id ]
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[f ]
+[; ;can_common.c: 443: if (!msg) { return -1; }
+"443
+[e $ ! ! != _msg -> -> 0 `i `*CS2 66  ]
+{
+[e ) -U -> 1 `i ]
+[e $UE 65  ]
+}
+[e :U 66 ]
+"445
+[v _msg_type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 445: uint16_t msg_type = get_message_type(msg);
+[e = _msg_type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 446: if (msg_type == 0x160) {
+"446
+[e $ ! == _msg_type -> -> 352 `i `ui 67  ]
+{
+[; ;can_common.c: 447: return msg->data[3];
+"447
+[e ) -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i ]
+[e $UE 65  ]
+"448
+}
+[; ;can_common.c: 448: } else {
+[e $U 68  ]
+[e :U 67 ]
+{
+[; ;can_common.c: 450: return -1;
+"450
+[e ) -U -> 1 `i ]
+[e $UE 65  ]
+"451
+}
+[e :U 68 ]
+[; ;can_common.c: 451: }
+[; ;can_common.c: 452: }
+"452
+[e :UE 65 ]
+}
+"454
+[v _get_curr_valve_state `(i ~T0 @X0 1 ef1`*CS2 ]
+"455
+{
+[; ;can_common.c: 454: int get_curr_valve_state(const can_msg_t *msg)
+[; ;can_common.c: 455: {
+[e :U _get_curr_valve_state ]
+"454
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"455
+[f ]
+[; ;can_common.c: 456: if (!msg) { return -1; }
+"456
+[e $ ! ! != _msg -> -> 0 `i `*CS2 70  ]
+{
+[e ) -U -> 1 `i ]
+[e $UE 69  ]
+}
+[e :U 70 ]
+"458
+[v _msg_type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 458: uint16_t msg_type = get_message_type(msg);
+[e = _msg_type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 459: if (msg_type == 0x460 || msg_type == 0x4C0) {
+"459
+[e $ ! || == _msg_type -> -> 1120 `i `ui == _msg_type -> -> 1216 `i `ui 71  ]
+{
+[; ;can_common.c: 460: return msg->data[3];
+"460
+[e ) -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i ]
+[e $UE 69  ]
+"461
+}
+[; ;can_common.c: 461: } else {
+[e $U 72  ]
+[e :U 71 ]
+{
+[; ;can_common.c: 463: return -1;
+"463
+[e ) -U -> 1 `i ]
+[e $UE 69  ]
+"464
+}
+[e :U 72 ]
+[; ;can_common.c: 464: }
+[; ;can_common.c: 465: }
+"465
+[e :UE 69 ]
+}
+"467
+[v _get_req_valve_state `(i ~T0 @X0 1 ef1`*CS2 ]
+"468
+{
+[; ;can_common.c: 467: int get_req_valve_state(const can_msg_t *msg)
+[; ;can_common.c: 468: {
+[e :U _get_req_valve_state ]
+"467
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"468
+[f ]
+[; ;can_common.c: 469: if (!msg) { return -1; }
+"469
+[e $ ! ! != _msg -> -> 0 `i `*CS2 74  ]
+{
+[e ) -U -> 1 `i ]
+[e $UE 73  ]
+}
+[e :U 74 ]
+"471
+[v _msg_type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 471: uint16_t msg_type = get_message_type(msg);
+[e = _msg_type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 472: switch (msg_type) {
+"472
+[e $U 76  ]
+{
+[; ;can_common.c: 473: case 0x460:
+"473
+[e :U 77 ]
+"474
+[e :U 78 ]
+[; ;can_common.c: 474: case 0x4C0:
+[; ;can_common.c: 475: return msg->data[4];
+"475
+[e ) -> *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i ]
+[e $UE 73  ]
+[; ;can_common.c: 477: case 0x120:
+"477
+[e :U 79 ]
+"478
+[e :U 80 ]
+[; ;can_common.c: 478: case 0x0C0:
+[; ;can_common.c: 479: return msg->data[3];
+"479
+[e ) -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i ]
+[e $UE 73  ]
+[; ;can_common.c: 481: default:
+"481
+[e :U 81 ]
+[; ;can_common.c: 483: return -1;
+"483
+[e ) -U -> 1 `i ]
+[e $UE 73  ]
+"484
+}
+[; ;can_common.c: 484: }
+[e $U 75  ]
+"472
+[e :U 76 ]
+[e [\ _msg_type , $ -> -> 1120 `i `ui 77
+ , $ -> -> 1216 `i `ui 78
+ , $ -> -> 288 `i `ui 79
+ , $ -> -> 192 `i `ui 80
+ 81 ]
+"484
+[e :U 75 ]
+[; ;can_common.c: 485: }
+"485
+[e :UE 73 ]
+}
+"487
+[v _get_curr_arm_state `(uc ~T0 @X0 1 ef3`*CS2`*uc`*E51 ]
+"488
+{
+[; ;can_common.c: 487: bool get_curr_arm_state(const can_msg_t *msg, uint8_t *alt_num, enum ARM_STATE *arm_state)
+[; ;can_common.c: 488: {
+[e :U _get_curr_arm_state ]
+"487
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[v _alt_num `*uc ~T0 @X0 1 r2 ]
+[v _arm_state `*E51 ~T0 @X0 1 r3 ]
+"488
+[f ]
+[; ;can_common.c: 489: if( !msg || !alt_num || !arm_state) { return 0; }
+"489
+[e $ ! || || ! != _msg -> -> 0 `i `*CS2 ! != _alt_num -> -> 0 `i `*uc ! != _arm_state -> -> 0 `i `*E51 83  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 82  ]
+}
+[e :U 83 ]
+[; ;can_common.c: 490: if(get_message_type(msg) != 0x440) { return 0; }
+"490
+[e $ ! != ( _get_message_type (1 _msg -> -> 1088 `i `ui 84  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 82  ]
+}
+[e :U 84 ]
+[; ;can_common.c: 491: *alt_num = msg->data[3] & 0x0F;
+"491
+[e = *U _alt_num -> & -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 15 `i `uc ]
+[; ;can_common.c: 492: *arm_state = msg->data[3] >> 4;
+"492
+[e = *U _arm_state -> >> -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 4 `i `E51 ]
+[; ;can_common.c: 494: return 1;
+"494
+[e ) -> -> 1 `i `uc ]
+[e $UE 82  ]
+[; ;can_common.c: 495: }
+"495
+[e :UE 82 ]
+}
+"497
+[v _get_req_arm_state `(uc ~T0 @X0 1 ef3`*CS2`*uc`*E51 ]
+"498
+{
+[; ;can_common.c: 497: bool get_req_arm_state(const can_msg_t *msg, uint8_t *alt_num, enum ARM_STATE *arm_state)
+[; ;can_common.c: 498: {
+[e :U _get_req_arm_state ]
+"497
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[v _alt_num `*uc ~T0 @X0 1 r2 ]
+[v _arm_state `*E51 ~T0 @X0 1 r3 ]
+"498
+[f ]
+[; ;can_common.c: 499: if( !msg || !alt_num || !arm_state) { return 0; }
+"499
+[e $ ! || || ! != _msg -> -> 0 `i `*CS2 ! != _alt_num -> -> 0 `i `*uc ! != _arm_state -> -> 0 `i `*E51 86  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 85  ]
+}
+[e :U 86 ]
+[; ;can_common.c: 500: if(get_message_type(msg) != 0x140) { return 0; }
+"500
+[e $ ! != ( _get_message_type (1 _msg -> -> 320 `i `ui 87  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 85  ]
+}
+[e :U 87 ]
+[; ;can_common.c: 501: *alt_num = msg->data[3] & 0x0F;
+"501
+[e = *U _alt_num -> & -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 15 `i `uc ]
+[; ;can_common.c: 502: *arm_state = msg->data[3] >> 4;
+"502
+[e = *U _arm_state -> >> -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 4 `i `E51 ]
+[; ;can_common.c: 504: return 1;
+"504
+[e ) -> -> 1 `i `uc ]
+[e $UE 85  ]
+[; ;can_common.c: 505: }
+"505
+[e :UE 85 ]
+}
+"507
+[v _get_message_type `(ui ~T0 @X0 1 ef1`*CS2 ]
+"508
+{
+[; ;can_common.c: 507: uint16_t get_message_type(const can_msg_t *msg)
+[; ;can_common.c: 508: {
+[e :U _get_message_type ]
+"507
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"508
+[f ]
+[; ;can_common.c: 510: if (!msg) { return 0; }
+"510
+[e $ ! ! != _msg -> -> 0 `i `*CS2 89  ]
+{
+[e ) -> -> 0 `i `ui ]
+[e $UE 88  ]
+}
+[e :U 89 ]
+[; ;can_common.c: 512: return (msg->sid & 0x7E0);
+"512
+[e ) & . *U _msg 0 -> -> 2016 `i `ui ]
+[e $UE 88  ]
+[; ;can_common.c: 513: }
+"513
+[e :UE 88 ]
+}
+"515
+[v _get_board_unique_id `(uc ~T0 @X0 1 ef1`*CS2 ]
+"516
+{
+[; ;can_common.c: 515: uint8_t get_board_unique_id(const can_msg_t *msg)
+[; ;can_common.c: 516: {
+[e :U _get_board_unique_id ]
+"515
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"516
+[f ]
+[; ;can_common.c: 518: if (!msg) { return 0; }
+"518
+[e $ ! ! != _msg -> -> 0 `i `*CS2 91  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 90  ]
+}
+[e :U 91 ]
+[; ;can_common.c: 520: return ((uint8_t) (msg->sid & 0x1F));
+"520
+[e ) -> & . *U _msg 0 -> -> 31 `i `ui `uc ]
+[e $UE 90  ]
+[; ;can_common.c: 521: }
+"521
+[e :UE 90 ]
+}
+"523
+[v _get_timestamp `(ul ~T0 @X0 1 ef1`*CS2 ]
+"524
+{
+[; ;can_common.c: 523: uint32_t get_timestamp(const can_msg_t *msg)
+[; ;can_common.c: 524: {
+[e :U _get_timestamp ]
+"523
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"524
+[f ]
+[; ;can_common.c: 526: if (!msg) { return 0; }
+"526
+[e $ ! ! != _msg -> -> 0 `i `*CS2 93  ]
+{
+[e ) -> -> -> 0 `i `l `ul ]
+[e $UE 92  ]
+}
+[e :U 93 ]
+"528
+[v _msg_type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 528: uint16_t msg_type = get_message_type(msg);
+[e = _msg_type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 529: switch(msg_type) {
+"529
+[e $U 95  ]
+{
+[; ;can_common.c: 531: case 0x060:
+"531
+[e :U 96 ]
+"532
+[e :U 97 ]
+"533
+[e :U 98 ]
+"534
+[e :U 99 ]
+"535
+[e :U 100 ]
+"536
+[e :U 101 ]
+"537
+[e :U 102 ]
+"538
+[e :U 103 ]
+"539
+[e :U 104 ]
+"540
+[e :U 105 ]
+"541
+[e :U 106 ]
+"542
+[e :U 107 ]
+"543
+[e :U 108 ]
+"544
+[e :U 109 ]
+"545
+[e :U 110 ]
+"546
+[e :U 111 ]
+"547
+[e :U 112 ]
+"548
+[e :U 113 ]
+[; ;can_common.c: 532: case 0x120:
+[; ;can_common.c: 533: case 0x0C0:
+[; ;can_common.c: 534: case 0x140:
+[; ;can_common.c: 535: case 0x180:
+[; ;can_common.c: 536: case 0x4C0:
+[; ;can_common.c: 537: case 0x460:
+[; ;can_common.c: 538: case 0x440:
+[; ;can_common.c: 539: case 0x520:
+[; ;can_common.c: 540: case 0x6C0:
+[; ;can_common.c: 541: case 0x6E0:
+[; ;can_common.c: 542: case 0x700:
+[; ;can_common.c: 543: case 0x720:
+[; ;can_common.c: 544: case 0x740:
+[; ;can_common.c: 545: case 0x160:
+[; ;can_common.c: 546: case 0x780:
+[; ;can_common.c: 547: case 0x560:
+[; ;can_common.c: 548: case 0x7A0:
+[; ;can_common.c: 549: return (uint32_t)msg->data[0] << 16
+[; ;can_common.c: 550: | (uint32_t)msg->data[1] << 8
+[; ;can_common.c: 551: | msg->data[2];
+"551
+[e ) | | << -> *U + &U . *U _msg 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul -> 16 `i << -> *U + &U . *U _msg 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul ]
+[e $UE 92  ]
+[; ;can_common.c: 554: case 0x580:
+"554
+[e :U 114 ]
+"555
+[e :U 115 ]
+"556
+[e :U 116 ]
+"557
+[e :U 117 ]
+[; ;can_common.c: 555: case 0x5E0:
+[; ;can_common.c: 556: case 0x640:
+[; ;can_common.c: 557: case 0x6A0:
+[; ;can_common.c: 558: return (uint32_t)msg->data[0] << 8
+[; ;can_common.c: 559: | msg->data[1];
+"559
+[e ) | << -> *U + &U . *U _msg 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul ]
+[e $UE 92  ]
+[; ;can_common.c: 562: case 0x1E0:
+"562
+[e :U 118 ]
+"563
+[e :U 119 ]
+"564
+[e :U 120 ]
+[; ;can_common.c: 563: case 0x7E0:
+[; ;can_common.c: 564: case 0x7C0:
+[; ;can_common.c: 565: return 0;
+"565
+[e ) -> -> -> 0 `i `l `ul ]
+[e $UE 92  ]
+[; ;can_common.c: 568: default:
+"568
+[e :U 121 ]
+[; ;can_common.c: 570: return 0;
+"570
+[e ) -> -> -> 0 `i `l `ul ]
+[e $UE 92  ]
+"571
+}
+[; ;can_common.c: 571: }
+[e $U 94  ]
+"529
+[e :U 95 ]
+[e [\ _msg_type , $ -> -> 96 `i `ui 96
+ , $ -> -> 288 `i `ui 97
+ , $ -> -> 192 `i `ui 98
+ , $ -> -> 320 `i `ui 99
+ , $ -> -> 384 `i `ui 100
+ , $ -> -> 1216 `i `ui 101
+ , $ -> -> 1120 `i `ui 102
+ , $ -> -> 1088 `i `ui 103
+ , $ -> -> 1312 `i `ui 104
+ , $ -> -> 1728 `i `ui 105
+ , $ -> -> 1760 `i `ui 106
+ , $ -> -> 1792 `i `ui 107
+ , $ -> -> 1824 `i `ui 108
+ , $ -> -> 1856 `i `ui 109
+ , $ -> -> 352 `i `ui 110
+ , $ -> -> 1920 `i `ui 111
+ , $ -> -> 1376 `i `ui 112
+ , $ -> -> 1952 `i `ui 113
+ , $ -> -> 1408 `i `ui 114
+ , $ -> -> 1504 `i `ui 115
+ , $ -> -> 1600 `i `ui 116
+ , $ -> -> 1696 `i `ui 117
+ , $ -> -> 480 `i `ui 118
+ , $ -> -> 2016 `i `ui 119
+ , $ -> -> 1984 `i `ui 120
+ 121 ]
+"571
+[e :U 94 ]
+[; ;can_common.c: 572: }
+"572
+[e :UE 92 ]
+}
+"574
+[v _is_sensor_data `(uc ~T0 @X0 1 ef1`*CS2 ]
+"575
+{
+[; ;can_common.c: 574: bool is_sensor_data(const can_msg_t *msg)
+[; ;can_common.c: 575: {
+[e :U _is_sensor_data ]
+"574
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"575
+[f ]
+[; ;can_common.c: 576: if (!msg) { return 0; }
+"576
+[e $ ! ! != _msg -> -> 0 `i `*CS2 123  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 122  ]
+}
+[e :U 123 ]
+"578
+[v _type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 578: uint16_t type = get_message_type(msg);
+[e = _type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 579: if (type == 0x580 ||
+[; ;can_common.c: 580: type == 0x5E0 ||
+[; ;can_common.c: 581: type == 0x640 ||
+[; ;can_common.c: 582: type == 0x6A0) {
+"582
+[e $ ! || || || == _type -> -> 1408 `i `ui == _type -> -> 1504 `i `ui == _type -> -> 1600 `i `ui == _type -> -> 1696 `i `ui 124  ]
+{
+[; ;can_common.c: 583: return 1;
+"583
+[e ) -> -> 1 `i `uc ]
+[e $UE 122  ]
+"584
+}
+[; ;can_common.c: 584: } else {
+[e $U 125  ]
+[e :U 124 ]
+{
+[; ;can_common.c: 585: return 0;
+"585
+[e ) -> -> 0 `i `uc ]
+[e $UE 122  ]
+"586
+}
+[e :U 125 ]
+[; ;can_common.c: 586: }
+[; ;can_common.c: 587: }
+"587
+[e :UE 122 ]
+}
+"589
+[v _get_imu_data `(uc ~T0 @X0 1 ef4`*CS2`*ui`*ui`*ui ]
+"590
+{
+[; ;can_common.c: 589: bool get_imu_data(const can_msg_t *msg, uint16_t *output_x, uint16_t *output_y, uint16_t *output_z)
+[; ;can_common.c: 590: {
+[e :U _get_imu_data ]
+"589
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[v _output_x `*ui ~T0 @X0 1 r2 ]
+[v _output_y `*ui ~T0 @X0 1 r3 ]
+[v _output_z `*ui ~T0 @X0 1 r4 ]
+"590
+[f ]
+[; ;can_common.c: 591: if (!msg) { return 0; }
+"591
+[e $ ! ! != _msg -> -> 0 `i `*CS2 127  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 126  ]
+}
+[e :U 127 ]
+[; ;can_common.c: 592: if (!output_x) { return 0; }
+"592
+[e $ ! ! != _output_x -> -> 0 `i `*ui 128  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 126  ]
+}
+[e :U 128 ]
+[; ;can_common.c: 593: if (!output_y) { return 0; }
+"593
+[e $ ! ! != _output_y -> -> 0 `i `*ui 129  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 126  ]
+}
+[e :U 129 ]
+[; ;can_common.c: 594: if (!output_z) { return 0; }
+"594
+[e $ ! ! != _output_z -> -> 0 `i `*ui 130  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 126  ]
+}
+[e :U 130 ]
+[; ;can_common.c: 595: if (!is_sensor_data(msg)) { return 0; }
+"595
+[e $ ! ! != -> ( _is_sensor_data (1 _msg `i -> -> -> 0 `i `uc `i 131  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 126  ]
+}
+[e :U 131 ]
+[; ;can_common.c: 596: if (get_message_type(msg) == 0x6A0) { return 0; }
+"596
+[e $ ! == ( _get_message_type (1 _msg -> -> 1696 `i `ui 132  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 126  ]
+}
+[e :U 132 ]
+[; ;can_common.c: 598: *output_x = (uint16_t)msg->data[2] << 8 | msg->data[3];
+"598
+[e = *U _output_x | << -> *U + &U . *U _msg 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui ]
+[; ;can_common.c: 599: *output_y = (uint16_t)msg->data[4] << 8 | msg->data[5];
+"599
+[e = *U _output_y | << -> *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui ]
+[; ;can_common.c: 600: *output_z = (uint16_t)msg->data[6] << 8 | msg->data[7];
+"600
+[e = *U _output_z | << -> *U + &U . *U _msg 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui ]
+[; ;can_common.c: 602: return 1;
+"602
+[e ) -> -> 1 `i `uc ]
+[e $UE 126  ]
+[; ;can_common.c: 603: }
+"603
+[e :UE 126 ]
+}
+"605
+[v _get_analog_data `(uc ~T0 @X0 1 ef3`*CS2`*E76`*ui ]
+"606
+{
+[; ;can_common.c: 605: bool get_analog_data(const can_msg_t *msg, enum SENSOR_ID *sensor_id, uint16_t *output_data)
+[; ;can_common.c: 606: {
+[e :U _get_analog_data ]
+"605
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[v _sensor_id `*E76 ~T0 @X0 1 r2 ]
+[v _output_data `*ui ~T0 @X0 1 r3 ]
+"606
+[f ]
+[; ;can_common.c: 607: if (!msg) { return 0; }
+"607
+[e $ ! ! != _msg -> -> 0 `i `*CS2 134  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 133  ]
+}
+[e :U 134 ]
+[; ;can_common.c: 608: if (!output_data) { return 0; }
+"608
+[e $ ! ! != _output_data -> -> 0 `i `*ui 135  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 133  ]
+}
+[e :U 135 ]
+[; ;can_common.c: 609: if (get_message_type(msg) != 0x6A0) { return 0; }
+"609
+[e $ ! != ( _get_message_type (1 _msg -> -> 1696 `i `ui 136  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 133  ]
+}
+[e :U 136 ]
+[; ;can_common.c: 611: *sensor_id = msg->data[2];
+"611
+[e = *U _sensor_id -> *U + &U . *U _msg 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `E76 ]
+[; ;can_common.c: 612: *output_data = (uint16_t)msg->data[3] << 8 | msg->data[4];
+"612
+[e = *U _output_data | << -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui ]
+[; ;can_common.c: 614: return 1;
+"614
+[e ) -> -> 1 `i `uc ]
+[e $UE 133  ]
+[; ;can_common.c: 615: }
+"615
+[e :UE 133 ]
+}
+"617
+[v _get_altitude_data `(uc ~T0 @X0 1 ef2`*CS2`*l ]
+"618
+{
+[; ;can_common.c: 617: bool get_altitude_data(const can_msg_t *msg, int32_t *altitude)
+[; ;can_common.c: 618: {
+[e :U _get_altitude_data ]
+"617
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[v _altitude `*l ~T0 @X0 1 r2 ]
+"618
+[f ]
+[; ;can_common.c: 619: if (!msg || !altitude) { return 0; }
+"619
+[e $ ! || ! != _msg -> -> 0 `i `*CS2 ! != _altitude -> -> 0 `i `*l 138  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 137  ]
+}
+[e :U 138 ]
+[; ;can_common.c: 620: if (get_message_type(msg) != 0x560) { return 0; }
+"620
+[e $ ! != ( _get_message_type (1 _msg -> -> 1376 `i `ui 139  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 137  ]
+}
+[e :U 139 ]
+[; ;can_common.c: 622: *altitude = ((uint32_t)msg->data[3] << 24);
+"622
+[e = *U _altitude -> << -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul -> 24 `i `l ]
+[; ;can_common.c: 623: *altitude |= ((uint32_t)msg->data[4] << 16);
+"623
+[e =| *U _altitude -> << -> *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul -> 16 `i `l ]
+[; ;can_common.c: 624: *altitude |= ((uint32_t)msg->data[5] << 8);
+"624
+[e =| *U _altitude -> << -> *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ul -> 8 `i `l ]
+[; ;can_common.c: 625: *altitude |= msg->data[6];
+"625
+[e =| *U _altitude -> *U + &U . *U _msg 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `l ]
+[; ;can_common.c: 627: return 1;
+"627
+[e ) -> -> 1 `i `uc ]
+[e $UE 137  ]
+[; ;can_common.c: 628: }
+"628
+[e :UE 137 ]
+}
+"630
+[v _get_pyro_voltage_data `(uc ~T0 @X0 1 ef3`*CS2`*ui`*ui ]
+"633
+{
+[; ;can_common.c: 630: bool get_pyro_voltage_data(const can_msg_t *msg,
+[; ;can_common.c: 631: uint16_t *v_drogue,
+[; ;can_common.c: 632: uint16_t *v_main)
+[; ;can_common.c: 633: {
+[e :U _get_pyro_voltage_data ]
+"630
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"631
+[v _v_drogue `*ui ~T0 @X0 1 r2 ]
+"632
+[v _v_main `*ui ~T0 @X0 1 r3 ]
+"633
+[f ]
+[; ;can_common.c: 634: if (!msg || !v_drogue || !v_main) { return 0; }
+"634
+[e $ ! || || ! != _msg -> -> 0 `i `*CS2 ! != _v_drogue -> -> 0 `i `*ui ! != _v_main -> -> 0 `i `*ui 141  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 140  ]
+}
+[e :U 141 ]
+[; ;can_common.c: 635: if (get_message_type(msg) != 0x440) { return 0; }
+"635
+[e $ ! != ( _get_message_type (1 _msg -> -> 1088 `i `ui 142  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 140  ]
+}
+[e :U 142 ]
+[; ;can_common.c: 637: *v_drogue = (msg->data[4] << 8);
+"637
+[e = *U _v_drogue -> << -> *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 8 `i `ui ]
+[; ;can_common.c: 638: *v_drogue += msg->data[5];
+"638
+[e =+ *U _v_drogue -> *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui ]
+[; ;can_common.c: 639: *v_main = (msg->data[6] << 8);
+"639
+[e = *U _v_main -> << -> *U + &U . *U _msg 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 8 `i `ui ]
+[; ;can_common.c: 640: *v_main += msg->data[7];
+"640
+[e =+ *U _v_main -> *U + &U . *U _msg 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui ]
+[; ;can_common.c: 642: return 1;
+"642
+[e ) -> -> 1 `i `uc ]
+[e $UE 140  ]
+[; ;can_common.c: 643: }
+"643
+[e :UE 140 ]
+}
+"645
+[v _get_gps_time `(uc ~T0 @X0 1 ef5`*CS2`*uc`*uc`*uc`*uc ]
+"650
+{
+[; ;can_common.c: 645: bool get_gps_time(const can_msg_t *msg,
+[; ;can_common.c: 646: uint8_t *utc_hours,
+[; ;can_common.c: 647: uint8_t *utc_mins,
+[; ;can_common.c: 648: uint8_t *utc_secs,
+[; ;can_common.c: 649: uint8_t *utc_dsecs)
+[; ;can_common.c: 650: {
+[e :U _get_gps_time ]
+"645
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"646
+[v _utc_hours `*uc ~T0 @X0 1 r2 ]
+"647
+[v _utc_mins `*uc ~T0 @X0 1 r3 ]
+"648
+[v _utc_secs `*uc ~T0 @X0 1 r4 ]
+"649
+[v _utc_dsecs `*uc ~T0 @X0 1 r5 ]
+"650
+[f ]
+[; ;can_common.c: 651: if (!msg) { return 0; }
+"651
+[e $ ! ! != _msg -> -> 0 `i `*CS2 144  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 143  ]
+}
+[e :U 144 ]
+[; ;can_common.c: 652: if (!utc_hours) { return 0; }
+"652
+[e $ ! ! != _utc_hours -> -> 0 `i `*uc 145  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 143  ]
+}
+[e :U 145 ]
+[; ;can_common.c: 653: if (!utc_mins) { return 0; }
+"653
+[e $ ! ! != _utc_mins -> -> 0 `i `*uc 146  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 143  ]
+}
+[e :U 146 ]
+[; ;can_common.c: 654: if (!utc_secs) { return 0; }
+"654
+[e $ ! ! != _utc_secs -> -> 0 `i `*uc 147  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 143  ]
+}
+[e :U 147 ]
+[; ;can_common.c: 655: if (!utc_dsecs) { return 0; }
+"655
+[e $ ! ! != _utc_dsecs -> -> 0 `i `*uc 148  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 143  ]
+}
+[e :U 148 ]
+[; ;can_common.c: 656: if (get_message_type(msg) != 0x6C0) { return 0; }
+"656
+[e $ ! != ( _get_message_type (1 _msg -> -> 1728 `i `ui 149  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 143  ]
+}
+[e :U 149 ]
+[; ;can_common.c: 658: *utc_hours = msg->data[3];
+"658
+[e = *U _utc_hours *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 659: *utc_mins = msg->data[4];
+"659
+[e = *U _utc_mins *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 660: *utc_secs = msg->data[5];
+"660
+[e = *U _utc_secs *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 661: *utc_dsecs = msg->data[6];
+"661
+[e = *U _utc_dsecs *U + &U . *U _msg 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 663: return 1;
+"663
+[e ) -> -> 1 `i `uc ]
+[e $UE 143  ]
+[; ;can_common.c: 664: }
+"664
+[e :UE 143 ]
+}
+"666
+[v _get_gps_lat `(uc ~T0 @X0 1 ef5`*CS2`*uc`*uc`*ui`*uc ]
+"671
+{
+[; ;can_common.c: 666: bool get_gps_lat(const can_msg_t *msg,
+[; ;can_common.c: 667: uint8_t *degrees,
+[; ;can_common.c: 668: uint8_t *minutes,
+[; ;can_common.c: 669: uint16_t *dminutes,
+[; ;can_common.c: 670: uint8_t *direction)
+[; ;can_common.c: 671: {
+[e :U _get_gps_lat ]
+"666
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"667
+[v _degrees `*uc ~T0 @X0 1 r2 ]
+"668
+[v _minutes `*uc ~T0 @X0 1 r3 ]
+"669
+[v _dminutes `*ui ~T0 @X0 1 r4 ]
+"670
+[v _direction `*uc ~T0 @X0 1 r5 ]
+"671
+[f ]
+[; ;can_common.c: 672: if (!msg) { return 0; }
+"672
+[e $ ! ! != _msg -> -> 0 `i `*CS2 151  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 150  ]
+}
+[e :U 151 ]
+[; ;can_common.c: 673: if (!degrees) { return 0; }
+"673
+[e $ ! ! != _degrees -> -> 0 `i `*uc 152  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 150  ]
+}
+[e :U 152 ]
+[; ;can_common.c: 674: if (!minutes) { return 0; }
+"674
+[e $ ! ! != _minutes -> -> 0 `i `*uc 153  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 150  ]
+}
+[e :U 153 ]
+[; ;can_common.c: 675: if (!dminutes) { return 0; }
+"675
+[e $ ! ! != _dminutes -> -> 0 `i `*ui 154  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 150  ]
+}
+[e :U 154 ]
+[; ;can_common.c: 676: if (!direction) { return 0; }
+"676
+[e $ ! ! != _direction -> -> 0 `i `*uc 155  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 150  ]
+}
+[e :U 155 ]
+[; ;can_common.c: 677: if (get_message_type(msg) != 0x6E0) { return 0; }
+"677
+[e $ ! != ( _get_message_type (1 _msg -> -> 1760 `i `ui 156  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 150  ]
+}
+[e :U 156 ]
+[; ;can_common.c: 679: *degrees = msg->data[3];
+"679
+[e = *U _degrees *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 680: *minutes = msg->data[4];
+"680
+[e = *U _minutes *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 681: *dminutes = msg->data[5] << 8 | msg->data[6];
+"681
+[e = *U _dminutes -> | << -> *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i `ui ]
+[; ;can_common.c: 682: *direction = msg->data[7];
+"682
+[e = *U _direction *U + &U . *U _msg 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 684: return 1;
+"684
+[e ) -> -> 1 `i `uc ]
+[e $UE 150  ]
+[; ;can_common.c: 685: }
+"685
+[e :UE 150 ]
+}
+"687
+[v _get_gps_lon `(uc ~T0 @X0 1 ef5`*CS2`*uc`*uc`*ui`*uc ]
+"692
+{
+[; ;can_common.c: 687: bool get_gps_lon(const can_msg_t *msg,
+[; ;can_common.c: 688: uint8_t *degrees,
+[; ;can_common.c: 689: uint8_t *minutes,
+[; ;can_common.c: 690: uint16_t *dminutes,
+[; ;can_common.c: 691: uint8_t *direction)
+[; ;can_common.c: 692: {
+[e :U _get_gps_lon ]
+"687
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"688
+[v _degrees `*uc ~T0 @X0 1 r2 ]
+"689
+[v _minutes `*uc ~T0 @X0 1 r3 ]
+"690
+[v _dminutes `*ui ~T0 @X0 1 r4 ]
+"691
+[v _direction `*uc ~T0 @X0 1 r5 ]
+"692
+[f ]
+[; ;can_common.c: 693: if (!msg) { return 0; }
+"693
+[e $ ! ! != _msg -> -> 0 `i `*CS2 158  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 157  ]
+}
+[e :U 158 ]
+[; ;can_common.c: 694: if (!degrees) { return 0; }
+"694
+[e $ ! ! != _degrees -> -> 0 `i `*uc 159  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 157  ]
+}
+[e :U 159 ]
+[; ;can_common.c: 695: if (!minutes) { return 0; }
+"695
+[e $ ! ! != _minutes -> -> 0 `i `*uc 160  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 157  ]
+}
+[e :U 160 ]
+[; ;can_common.c: 696: if (!dminutes) { return 0; }
+"696
+[e $ ! ! != _dminutes -> -> 0 `i `*ui 161  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 157  ]
+}
+[e :U 161 ]
+[; ;can_common.c: 697: if (!direction) { return 0; }
+"697
+[e $ ! ! != _direction -> -> 0 `i `*uc 162  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 157  ]
+}
+[e :U 162 ]
+[; ;can_common.c: 698: if (get_message_type(msg) != 0x700) { return 0; }
+"698
+[e $ ! != ( _get_message_type (1 _msg -> -> 1792 `i `ui 163  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 157  ]
+}
+[e :U 163 ]
+[; ;can_common.c: 700: *degrees = msg->data[3];
+"700
+[e = *U _degrees *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 701: *minutes = msg->data[4];
+"701
+[e = *U _minutes *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 702: *dminutes = msg->data[5] << 8 | msg->data[6];
+"702
+[e = *U _dminutes -> | << -> *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i `ui ]
+[; ;can_common.c: 703: *direction = msg->data[7];
+"703
+[e = *U _direction *U + &U . *U _msg 2 * -> -> -> 7 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 705: return 1;
+"705
+[e ) -> -> 1 `i `uc ]
+[e $UE 157  ]
+[; ;can_common.c: 706: }
+"706
+[e :UE 157 ]
+}
+"708
+[v _get_gps_alt `(uc ~T0 @X0 1 ef4`*CS2`*ui`*uc`*uc ]
+"712
+{
+[; ;can_common.c: 708: bool get_gps_alt(const can_msg_t *msg,
+[; ;can_common.c: 709: uint16_t *altitude,
+[; ;can_common.c: 710: uint8_t *daltitude,
+[; ;can_common.c: 711: uint8_t *units)
+[; ;can_common.c: 712: {
+[e :U _get_gps_alt ]
+"708
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"709
+[v _altitude `*ui ~T0 @X0 1 r2 ]
+"710
+[v _daltitude `*uc ~T0 @X0 1 r3 ]
+"711
+[v _units `*uc ~T0 @X0 1 r4 ]
+"712
+[f ]
+[; ;can_common.c: 713: if (!msg) { return 0; }
+"713
+[e $ ! ! != _msg -> -> 0 `i `*CS2 165  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 164  ]
+}
+[e :U 165 ]
+[; ;can_common.c: 714: if (!altitude) { return 0; }
+"714
+[e $ ! ! != _altitude -> -> 0 `i `*ui 166  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 164  ]
+}
+[e :U 166 ]
+[; ;can_common.c: 715: if (!daltitude) { return 0; }
+"715
+[e $ ! ! != _daltitude -> -> 0 `i `*uc 167  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 164  ]
+}
+[e :U 167 ]
+[; ;can_common.c: 716: if (!units) { return 0; }
+"716
+[e $ ! ! != _units -> -> 0 `i `*uc 168  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 164  ]
+}
+[e :U 168 ]
+[; ;can_common.c: 717: if (get_message_type(msg) != 0x720) { return 0; }
+"717
+[e $ ! != ( _get_message_type (1 _msg -> -> 1824 `i `ui 169  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 164  ]
+}
+[e :U 169 ]
+[; ;can_common.c: 719: *altitude = (uint16_t)msg->data[3] << 8 | msg->data[4];
+"719
+[e = *U _altitude | << -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `ui ]
+[; ;can_common.c: 720: *daltitude = msg->data[5];
+"720
+[e = *U _daltitude *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 721: *units = msg->data[6];
+"721
+[e = *U _units *U + &U . *U _msg 2 * -> -> -> 6 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 723: return 1;
+"723
+[e ) -> -> 1 `i `uc ]
+[e $UE 164  ]
+[; ;can_common.c: 724: }
+"724
+[e :UE 164 ]
+}
+"726
+[v _get_gps_info `(uc ~T0 @X0 1 ef3`*CS2`*uc`*uc ]
+"729
+{
+[; ;can_common.c: 726: bool get_gps_info(const can_msg_t *msg,
+[; ;can_common.c: 727: uint8_t *num_sat,
+[; ;can_common.c: 728: uint8_t *quality)
+[; ;can_common.c: 729: {
+[e :U _get_gps_info ]
+"726
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"727
+[v _num_sat `*uc ~T0 @X0 1 r2 ]
+"728
+[v _quality `*uc ~T0 @X0 1 r3 ]
+"729
+[f ]
+[; ;can_common.c: 730: if (!msg) { return 0; }
+"730
+[e $ ! ! != _msg -> -> 0 `i `*CS2 171  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 170  ]
+}
+[e :U 171 ]
+[; ;can_common.c: 731: if (!num_sat) { return 0; }
+"731
+[e $ ! ! != _num_sat -> -> 0 `i `*uc 172  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 170  ]
+}
+[e :U 172 ]
+[; ;can_common.c: 732: if (!quality) { return 0; }
+"732
+[e $ ! ! != _quality -> -> 0 `i `*uc 173  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 170  ]
+}
+[e :U 173 ]
+[; ;can_common.c: 733: if (get_message_type(msg) != 0x740) { return 0; }
+"733
+[e $ ! != ( _get_message_type (1 _msg -> -> 1856 `i `ui 174  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 170  ]
+}
+[e :U 174 ]
+[; ;can_common.c: 735: *num_sat = msg->data[3];
+"735
+[e = *U _num_sat *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 736: *quality = msg->data[4];
+"736
+[e = *U _quality *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 738: return 1;
+"738
+[e ) -> -> 1 `i `uc ]
+[e $UE 170  ]
+[; ;can_common.c: 739: }
+"739
+[e :UE 170 ]
+}
+"741
+[v _get_radi_info `(uc ~T0 @X0 1 ef3`*CS2`*uc`*ui ]
+"744
+{
+[; ;can_common.c: 741: bool get_radi_info(const can_msg_t* msg,
+[; ;can_common.c: 742: uint8_t *sensor_identifier,
+[; ;can_common.c: 743: uint16_t *adc_value)
+[; ;can_common.c: 744: {
+[e :U _get_radi_info ]
+"741
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"742
+[v _sensor_identifier `*uc ~T0 @X0 1 r2 ]
+"743
+[v _adc_value `*ui ~T0 @X0 1 r3 ]
+"744
+[f ]
+[; ;can_common.c: 745: if (!msg) { return 0; }
+"745
+[e $ ! ! != _msg -> -> 0 `i `*CS2 176  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 175  ]
+}
+[e :U 176 ]
+[; ;can_common.c: 746: if (!sensor_identifier) { return 0; }
+"746
+[e $ ! ! != _sensor_identifier -> -> 0 `i `*uc 177  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 175  ]
+}
+[e :U 177 ]
+[; ;can_common.c: 747: if (!adc_value) { return 0; }
+"747
+[e $ ! ! != _adc_value -> -> 0 `i `*ui 178  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 175  ]
+}
+[e :U 178 ]
+[; ;can_common.c: 748: if (get_message_type(msg) != 0x7A0) {return 0;}
+"748
+[e $ ! != ( _get_message_type (1 _msg -> -> 1952 `i `ui 179  ]
+{
+[e ) -> -> 0 `i `uc ]
+[e $UE 175  ]
+}
+[e :U 179 ]
+[; ;can_common.c: 750: *sensor_identifier = msg -> data[3];
+"750
+[e = *U _sensor_identifier *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux ]
+[; ;can_common.c: 751: *adc_value = msg -> data[4] << 8 | msg -> data[5];
+"751
+[e = *U _adc_value -> | << -> *U + &U . *U _msg 2 * -> -> -> 4 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 8 `i -> *U + &U . *U _msg 2 * -> -> -> 5 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i `ui ]
+[; ;can_common.c: 752: return 1;
+"752
+[e ) -> -> 1 `i `uc ]
+[e $UE 175  ]
+[; ;can_common.c: 753: }
+"753
+[e :UE 175 ]
+}
+"755
+[v _message_debug_level `(E94 ~T0 @X0 1 ef1`*CS2 ]
+"756
+{
+[; ;can_common.c: 755: can_debug_level_t message_debug_level(const can_msg_t *msg)
+[; ;can_common.c: 756: {
+[e :U _message_debug_level ]
+"755
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+"756
+[f ]
+"757
+[v _type `ui ~T0 @X0 1 a ]
+[; ;can_common.c: 757: uint16_t type = get_message_type(msg);
+[e = _type ( _get_message_type (1 _msg ]
+[; ;can_common.c: 758: if (type != 0x180) {
+"758
+[e $ ! != _type -> -> 384 `i `ui 181  ]
+{
+[; ;can_common.c: 759: return NONE;
+"759
+[e ) . `E94 0 ]
+[e $UE 180  ]
+"760
+}
+[; ;can_common.c: 760: } else {
+[e $U 182  ]
+[e :U 181 ]
+{
+[; ;can_common.c: 767: return ((msg->data[3] >> 4) & 0xf);
+"767
+[e ) -> & >> -> *U + &U . *U _msg 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . *U _msg 2 `ui `ux `i -> 4 `i -> 15 `i `E94 ]
+[e $UE 180  ]
+"768
+}
+[e :U 182 ]
+[; ;can_common.c: 768: }
+[; ;can_common.c: 769: }
+"769
+[e :UE 180 ]
+}
+"788
+[v _build_printf_can_message `(*Cuc ~T0 @X0 1 ef2`*Cuc`*S2 ]
+"789
+{
+[; ;can_common.c: 788: const char *build_printf_can_message(const char *string, can_msg_t *output)
+[; ;can_common.c: 789: {
+[e :U _build_printf_can_message ]
+"788
+[v _string `*Cuc ~T0 @X0 1 r1 ]
+[v _output `*S2 ~T0 @X0 1 r2 ]
+"789
+[f ]
+[; ;can_common.c: 791: output->sid = (0x1E0 | 0X01);
+"791
+[e = . *U _output 0 -> | -> 480 `i -> 1 `i `ui ]
+"792
+[v _i `uc ~T0 @X0 1 a ]
+[; ;can_common.c: 792: uint8_t i;
+[; ;can_common.c: 793: for (i = 0; i < 8; ++i) {
+"793
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 184  ]
+[e $U 185  ]
+[e :U 184 ]
+{
+[; ;can_common.c: 794: if (*string == '\0') {
+"794
+[e $ ! == -> *U _string `ui -> 0 `ui 187  ]
+{
+[; ;can_common.c: 795: output->data_len = i;
+"795
+[e = . *U _output 1 _i ]
+[; ;can_common.c: 796: return string;
+"796
+[e ) _string ]
+[e $UE 183  ]
+"797
+}
+[e :U 187 ]
+[; ;can_common.c: 797: }
+[; ;can_common.c: 798: output->data[i] = *string;
+"798
+[e = *U + &U . *U _output 2 * -> _i `ux -> -> # *U &U . *U _output 2 `ui `ux *U _string ]
+[; ;can_common.c: 799: string++;
+"799
+[e ++ _string * -> -> 1 `i `x -> -> # *U _string `i `x ]
+"800
+}
+"793
+[e =+ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 184  ]
+[e :U 185 ]
+"800
+}
+[; ;can_common.c: 800: }
+[; ;can_common.c: 801: output->data_len = i;
+"801
+[e = . *U _output 1 _i ]
+[; ;can_common.c: 802: return string;
+"802
+[e ) _string ]
+[e $UE 183  ]
+[; ;can_common.c: 803: }
+"803
+[e :UE 183 ]
+}
+"805
+[v _build_radio_cmd_can_message `(*Cuc ~T0 @X0 1 ef2`*Cuc`*S2 ]
+"806
+{
+[; ;can_common.c: 805: const char *build_radio_cmd_can_message(const char *string, can_msg_t *output)
+[; ;can_common.c: 806: {
+[e :U _build_radio_cmd_can_message ]
+"805
+[v _string `*Cuc ~T0 @X0 1 r1 ]
+[v _output `*S2 ~T0 @X0 1 r2 ]
+"806
+[f ]
+[; ;can_common.c: 808: string = build_printf_can_message(string, output);
+"808
+[e = _string ( _build_printf_can_message (2 , _string _output ]
+[; ;can_common.c: 810: output->sid = (0x200 | 0X01);
+"810
+[e = . *U _output 0 -> | -> 512 `i -> 1 `i `ui ]
+[; ;can_common.c: 811: return string;
+"811
+[e ) _string ]
+[e $UE 188  ]
+[; ;can_common.c: 812: }
+"812
+[e :UE 188 ]
+}

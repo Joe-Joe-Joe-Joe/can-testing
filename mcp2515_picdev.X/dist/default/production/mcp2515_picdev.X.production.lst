@@ -1,0 +1,3781 @@
+
+
+Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
+                                                                                               Wed Oct 27 21:49:53 2021
+
+Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1 
+     1                           	processor	16F1455
+     2                           	pagewidth 120
+     3                           	opt	flic
+     4                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     5                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1,noexec
+     6                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1,noexec
+     7                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1,noexec
+     8                           	psect	maintext,global,class=CODE,merge=1,split=1,delta=2
+     9                           	psect	text1,local,class=CODE,merge=1,delta=2
+    10                           	psect	text2,local,class=CODE,merge=1,delta=2
+    11                           	psect	text3,local,class=CODE,merge=1,delta=2
+    12                           	psect	text4,local,class=CODE,merge=1,delta=2
+    13                           	psect	text5,local,class=CODE,merge=1,delta=2
+    14                           	psect	text6,local,class=CODE,merge=1,delta=2
+    15                           	psect	text7,local,class=CODE,merge=1,delta=2
+    16                           	psect	text8,local,class=CODE,merge=1,delta=2
+    17                           	psect	text9,local,class=CODE,merge=1,delta=2
+    18                           	psect	text10,local,class=CODE,merge=1,delta=2
+    19                           	psect	text11,local,class=CODE,merge=1,delta=2
+    20                           	psect	text12,local,class=CODE,merge=1,delta=2
+    21                           	psect	text13,local,class=CODE,merge=1,delta=2
+    22                           	psect	intentry,global,class=CODE,delta=2
+    23                           	psect	text15,local,class=CODE,merge=1,delta=2
+    24                           	psect	text16,local,class=CODE,merge=1,delta=2
+    25                           	psect	text17,local,class=CODE,merge=1,delta=2
+    26                           	psect	text18,local,class=CODE,merge=1,delta=2
+    27                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=2,noexec
+    28                           	dabs	1,0x7E,2
+    29  0000                     
+    30                           ; Version 2.20
+    31                           ; Generated 12/02/2020 GMT
+    32                           ; 
+    33                           ; Copyright © 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    34                           ; All rights reserved.
+    35                           ; 
+    36                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    37                           ; 
+    38                           ; Redistribution and use in source and binary forms, with or without modification, are
+    39                           ; permitted provided that the following conditions are met:
+    40                           ; 
+    41                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    42                           ;        conditions and the following disclaimer.
+    43                           ; 
+    44                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    45                           ;        of conditions and the following disclaimer in the documentation and/or other
+    46                           ;        materials provided with the distribution.
+    47                           ; 
+    48                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    49                           ;        software without specific prior written permission.
+    50                           ; 
+    51                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    52                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    53                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    54                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    55                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    56                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    57                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    58                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    59                           ; 
+    60                           ; 
+    61                           ; Code-generator required, PIC16F1455 Definitions
+    62                           ; 
+    63                           ; SFR Addresses
+    64  0000                     	;# 
+    65  0001                     	;# 
+    66  0002                     	;# 
+    67  0003                     	;# 
+    68  0004                     	;# 
+    69  0005                     	;# 
+    70  0006                     	;# 
+    71  0007                     	;# 
+    72  0008                     	;# 
+    73  0009                     	;# 
+    74  000A                     	;# 
+    75  000B                     	;# 
+    76  000C                     	;# 
+    77  000E                     	;# 
+    78  0011                     	;# 
+    79  0012                     	;# 
+    80  0015                     	;# 
+    81  0016                     	;# 
+    82  0016                     	;# 
+    83  0017                     	;# 
+    84  0018                     	;# 
+    85  0019                     	;# 
+    86  001A                     	;# 
+    87  001B                     	;# 
+    88  001C                     	;# 
+    89  008C                     	;# 
+    90  008E                     	;# 
+    91  0091                     	;# 
+    92  0092                     	;# 
+    93  0095                     	;# 
+    94  0096                     	;# 
+    95  0097                     	;# 
+    96  0098                     	;# 
+    97  0099                     	;# 
+    98  009A                     	;# 
+    99  009B                     	;# 
+   100  009B                     	;# 
+   101  009C                     	;# 
+   102  009D                     	;# 
+   103  009E                     	;# 
+   104  009F                     	;# 
+   105  010C                     	;# 
+   106  010E                     	;# 
+   107  0111                     	;# 
+   108  0112                     	;# 
+   109  0113                     	;# 
+   110  0114                     	;# 
+   111  0115                     	;# 
+   112  0116                     	;# 
+   113  0117                     	;# 
+   114  0118                     	;# 
+   115  0119                     	;# 
+   116  011D                     	;# 
+   117  018C                     	;# 
+   118  018E                     	;# 
+   119  0191                     	;# 
+   120  0191                     	;# 
+   121  0192                     	;# 
+   122  0193                     	;# 
+   123  0193                     	;# 
+   124  0194                     	;# 
+   125  0195                     	;# 
+   126  0196                     	;# 
+   127  0197                     	;# 
+   128  0199                     	;# 
+   129  019A                     	;# 
+   130  019B                     	;# 
+   131  019B                     	;# 
+   132  019C                     	;# 
+   133  019D                     	;# 
+   134  019E                     	;# 
+   135  019F                     	;# 
+   136  020C                     	;# 
+   137  0211                     	;# 
+   138  0211                     	;# 
+   139  0212                     	;# 
+   140  0212                     	;# 
+   141  0213                     	;# 
+   142  0213                     	;# 
+   143  0214                     	;# 
+   144  0214                     	;# 
+   145  0215                     	;# 
+   146  0215                     	;# 
+   147  0215                     	;# 
+   148  0216                     	;# 
+   149  0216                     	;# 
+   150  0217                     	;# 
+   151  0217                     	;# 
+   152  0391                     	;# 
+   153  0392                     	;# 
+   154  0393                     	;# 
+   155  039A                     	;# 
+   156  039B                     	;# 
+   157  0611                     	;# 
+   158  0612                     	;# 
+   159  0613                     	;# 
+   160  0613                     	;# 
+   161  0614                     	;# 
+   162  0615                     	;# 
+   163  0616                     	;# 
+   164  0616                     	;# 
+   165  0691                     	;# 
+   166  0692                     	;# 
+   167  0693                     	;# 
+   168  0694                     	;# 
+   169  0695                     	;# 
+   170  0E8E                     	;# 
+   171  0E8F                     	;# 
+   172  0E90                     	;# 
+   173  0E91                     	;# 
+   174  0E92                     	;# 
+   175  0E93                     	;# 
+   176  0E94                     	;# 
+   177  0E94                     	;# 
+   178  0E95                     	;# 
+   179  0E96                     	;# 
+   180  0E97                     	;# 
+   181  0E98                     	;# 
+   182  0E99                     	;# 
+   183  0E9A                     	;# 
+   184  0E9B                     	;# 
+   185  0E9C                     	;# 
+   186  0E9D                     	;# 
+   187  0E9E                     	;# 
+   188  0E9F                     	;# 
+   189  0FE4                     	;# 
+   190  0FE5                     	;# 
+   191  0FE6                     	;# 
+   192  0FE7                     	;# 
+   193  0FE8                     	;# 
+   194  0FE9                     	;# 
+   195  0FEA                     	;# 
+   196  0FEB                     	;# 
+   197  0FED                     	;# 
+   198  0FEE                     	;# 
+   199  0FEF                     	;# 
+   200  0000                     	;# 
+   201  0001                     	;# 
+   202  0002                     	;# 
+   203  0003                     	;# 
+   204  0004                     	;# 
+   205  0005                     	;# 
+   206  0006                     	;# 
+   207  0007                     	;# 
+   208  0008                     	;# 
+   209  0009                     	;# 
+   210  000A                     	;# 
+   211  000B                     	;# 
+   212  000C                     	;# 
+   213  000E                     	;# 
+   214  0011                     	;# 
+   215  0012                     	;# 
+   216  0015                     	;# 
+   217  0016                     	;# 
+   218  0016                     	;# 
+   219  0017                     	;# 
+   220  0018                     	;# 
+   221  0019                     	;# 
+   222  001A                     	;# 
+   223  001B                     	;# 
+   224  001C                     	;# 
+   225  008C                     	;# 
+   226  008E                     	;# 
+   227  0091                     	;# 
+   228  0092                     	;# 
+   229  0095                     	;# 
+   230  0096                     	;# 
+   231  0097                     	;# 
+   232  0098                     	;# 
+   233  0099                     	;# 
+   234  009A                     	;# 
+   235  009B                     	;# 
+   236  009B                     	;# 
+   237  009C                     	;# 
+   238  009D                     	;# 
+   239  009E                     	;# 
+   240  009F                     	;# 
+   241  010C                     	;# 
+   242  010E                     	;# 
+   243  0111                     	;# 
+   244  0112                     	;# 
+   245  0113                     	;# 
+   246  0114                     	;# 
+   247  0115                     	;# 
+   248  0116                     	;# 
+   249  0117                     	;# 
+   250  0118                     	;# 
+   251  0119                     	;# 
+   252  011D                     	;# 
+   253  018C                     	;# 
+   254  018E                     	;# 
+   255  0191                     	;# 
+   256  0191                     	;# 
+   257  0192                     	;# 
+   258  0193                     	;# 
+   259  0193                     	;# 
+   260  0194                     	;# 
+   261  0195                     	;# 
+   262  0196                     	;# 
+   263  0197                     	;# 
+   264  0199                     	;# 
+   265  019A                     	;# 
+   266  019B                     	;# 
+   267  019B                     	;# 
+   268  019C                     	;# 
+   269  019D                     	;# 
+   270  019E                     	;# 
+   271  019F                     	;# 
+   272  020C                     	;# 
+   273  0211                     	;# 
+   274  0211                     	;# 
+   275  0212                     	;# 
+   276  0212                     	;# 
+   277  0213                     	;# 
+   278  0213                     	;# 
+   279  0214                     	;# 
+   280  0214                     	;# 
+   281  0215                     	;# 
+   282  0215                     	;# 
+   283  0215                     	;# 
+   284  0216                     	;# 
+   285  0216                     	;# 
+   286  0217                     	;# 
+   287  0217                     	;# 
+   288  0391                     	;# 
+   289  0392                     	;# 
+   290  0393                     	;# 
+   291  039A                     	;# 
+   292  039B                     	;# 
+   293  0611                     	;# 
+   294  0612                     	;# 
+   295  0613                     	;# 
+   296  0613                     	;# 
+   297  0614                     	;# 
+   298  0615                     	;# 
+   299  0616                     	;# 
+   300  0616                     	;# 
+   301  0691                     	;# 
+   302  0692                     	;# 
+   303  0693                     	;# 
+   304  0694                     	;# 
+   305  0695                     	;# 
+   306  0E8E                     	;# 
+   307  0E8F                     	;# 
+   308  0E90                     	;# 
+   309  0E91                     	;# 
+   310  0E92                     	;# 
+   311  0E93                     	;# 
+   312  0E94                     	;# 
+   313  0E94                     	;# 
+   314  0E95                     	;# 
+   315  0E96                     	;# 
+   316  0E97                     	;# 
+   317  0E98                     	;# 
+   318  0E99                     	;# 
+   319  0E9A                     	;# 
+   320  0E9B                     	;# 
+   321  0E9C                     	;# 
+   322  0E9D                     	;# 
+   323  0E9E                     	;# 
+   324  0E9F                     	;# 
+   325  0FE4                     	;# 
+   326  0FE5                     	;# 
+   327  0FE6                     	;# 
+   328  0FE7                     	;# 
+   329  0FE8                     	;# 
+   330  0FE9                     	;# 
+   331  0FEA                     	;# 
+   332  0FEB                     	;# 
+   333  0FED                     	;# 
+   334  0FEE                     	;# 
+   335  0FEF                     	;# 
+   336  0000                     	;# 
+   337  0001                     	;# 
+   338  0002                     	;# 
+   339  0003                     	;# 
+   340  0004                     	;# 
+   341  0005                     	;# 
+   342  0006                     	;# 
+   343  0007                     	;# 
+   344  0008                     	;# 
+   345  0009                     	;# 
+   346  000A                     	;# 
+   347  000B                     	;# 
+   348  000C                     	;# 
+   349  000E                     	;# 
+   350  0011                     	;# 
+   351  0012                     	;# 
+   352  0015                     	;# 
+   353  0016                     	;# 
+   354  0016                     	;# 
+   355  0017                     	;# 
+   356  0018                     	;# 
+   357  0019                     	;# 
+   358  001A                     	;# 
+   359  001B                     	;# 
+   360  001C                     	;# 
+   361  008C                     	;# 
+   362  008E                     	;# 
+   363  0091                     	;# 
+   364  0092                     	;# 
+   365  0095                     	;# 
+   366  0096                     	;# 
+   367  0097                     	;# 
+   368  0098                     	;# 
+   369  0099                     	;# 
+   370  009A                     	;# 
+   371  009B                     	;# 
+   372  009B                     	;# 
+   373  009C                     	;# 
+   374  009D                     	;# 
+   375  009E                     	;# 
+   376  009F                     	;# 
+   377  010C                     	;# 
+   378  010E                     	;# 
+   379  0111                     	;# 
+   380  0112                     	;# 
+   381  0113                     	;# 
+   382  0114                     	;# 
+   383  0115                     	;# 
+   384  0116                     	;# 
+   385  0117                     	;# 
+   386  0118                     	;# 
+   387  0119                     	;# 
+   388  011D                     	;# 
+   389  018C                     	;# 
+   390  018E                     	;# 
+   391  0191                     	;# 
+   392  0191                     	;# 
+   393  0192                     	;# 
+   394  0193                     	;# 
+   395  0193                     	;# 
+   396  0194                     	;# 
+   397  0195                     	;# 
+   398  0196                     	;# 
+   399  0197                     	;# 
+   400  0199                     	;# 
+   401  019A                     	;# 
+   402  019B                     	;# 
+   403  019B                     	;# 
+   404  019C                     	;# 
+   405  019D                     	;# 
+   406  019E                     	;# 
+   407  019F                     	;# 
+   408  020C                     	;# 
+   409  0211                     	;# 
+   410  0211                     	;# 
+   411  0212                     	;# 
+   412  0212                     	;# 
+   413  0213                     	;# 
+   414  0213                     	;# 
+   415  0214                     	;# 
+   416  0214                     	;# 
+   417  0215                     	;# 
+   418  0215                     	;# 
+   419  0215                     	;# 
+   420  0216                     	;# 
+   421  0216                     	;# 
+   422  0217                     	;# 
+   423  0217                     	;# 
+   424  0391                     	;# 
+   425  0392                     	;# 
+   426  0393                     	;# 
+   427  039A                     	;# 
+   428  039B                     	;# 
+   429  0611                     	;# 
+   430  0612                     	;# 
+   431  0613                     	;# 
+   432  0613                     	;# 
+   433  0614                     	;# 
+   434  0615                     	;# 
+   435  0616                     	;# 
+   436  0616                     	;# 
+   437  0691                     	;# 
+   438  0692                     	;# 
+   439  0693                     	;# 
+   440  0694                     	;# 
+   441  0695                     	;# 
+   442  0E8E                     	;# 
+   443  0E8F                     	;# 
+   444  0E90                     	;# 
+   445  0E91                     	;# 
+   446  0E92                     	;# 
+   447  0E93                     	;# 
+   448  0E94                     	;# 
+   449  0E94                     	;# 
+   450  0E95                     	;# 
+   451  0E96                     	;# 
+   452  0E97                     	;# 
+   453  0E98                     	;# 
+   454  0E99                     	;# 
+   455  0E9A                     	;# 
+   456  0E9B                     	;# 
+   457  0E9C                     	;# 
+   458  0E9D                     	;# 
+   459  0E9E                     	;# 
+   460  0E9F                     	;# 
+   461  0FE4                     	;# 
+   462  0FE5                     	;# 
+   463  0FE6                     	;# 
+   464  0FE7                     	;# 
+   465  0FE8                     	;# 
+   466  0FE9                     	;# 
+   467  0FEA                     	;# 
+   468  0FEB                     	;# 
+   469  0FED                     	;# 
+   470  0FEE                     	;# 
+   471  0FEF                     	;# 
+   472  0000                     	;# 
+   473  0001                     	;# 
+   474  0002                     	;# 
+   475  0003                     	;# 
+   476  0004                     	;# 
+   477  0005                     	;# 
+   478  0006                     	;# 
+   479  0007                     	;# 
+   480  0008                     	;# 
+   481  0009                     	;# 
+   482  000A                     	;# 
+   483  000B                     	;# 
+   484  000C                     	;# 
+   485  000E                     	;# 
+   486  0011                     	;# 
+   487  0012                     	;# 
+   488  0015                     	;# 
+   489  0016                     	;# 
+   490  0016                     	;# 
+   491  0017                     	;# 
+   492  0018                     	;# 
+   493  0019                     	;# 
+   494  001A                     	;# 
+   495  001B                     	;# 
+   496  001C                     	;# 
+   497  008C                     	;# 
+   498  008E                     	;# 
+   499  0091                     	;# 
+   500  0092                     	;# 
+   501  0095                     	;# 
+   502  0096                     	;# 
+   503  0097                     	;# 
+   504  0098                     	;# 
+   505  0099                     	;# 
+   506  009A                     	;# 
+   507  009B                     	;# 
+   508  009B                     	;# 
+   509  009C                     	;# 
+   510  009D                     	;# 
+   511  009E                     	;# 
+   512  009F                     	;# 
+   513  010C                     	;# 
+   514  010E                     	;# 
+   515  0111                     	;# 
+   516  0112                     	;# 
+   517  0113                     	;# 
+   518  0114                     	;# 
+   519  0115                     	;# 
+   520  0116                     	;# 
+   521  0117                     	;# 
+   522  0118                     	;# 
+   523  0119                     	;# 
+   524  011D                     	;# 
+   525  018C                     	;# 
+   526  018E                     	;# 
+   527  0191                     	;# 
+   528  0191                     	;# 
+   529  0192                     	;# 
+   530  0193                     	;# 
+   531  0193                     	;# 
+   532  0194                     	;# 
+   533  0195                     	;# 
+   534  0196                     	;# 
+   535  0197                     	;# 
+   536  0199                     	;# 
+   537  019A                     	;# 
+   538  019B                     	;# 
+   539  019B                     	;# 
+   540  019C                     	;# 
+   541  019D                     	;# 
+   542  019E                     	;# 
+   543  019F                     	;# 
+   544  020C                     	;# 
+   545  0211                     	;# 
+   546  0211                     	;# 
+   547  0212                     	;# 
+   548  0212                     	;# 
+   549  0213                     	;# 
+   550  0213                     	;# 
+   551  0214                     	;# 
+   552  0214                     	;# 
+   553  0215                     	;# 
+   554  0215                     	;# 
+   555  0215                     	;# 
+   556  0216                     	;# 
+   557  0216                     	;# 
+   558  0217                     	;# 
+   559  0217                     	;# 
+   560  0391                     	;# 
+   561  0392                     	;# 
+   562  0393                     	;# 
+   563  039A                     	;# 
+   564  039B                     	;# 
+   565  0611                     	;# 
+   566  0612                     	;# 
+   567  0613                     	;# 
+   568  0613                     	;# 
+   569  0614                     	;# 
+   570  0615                     	;# 
+   571  0616                     	;# 
+   572  0616                     	;# 
+   573  0691                     	;# 
+   574  0692                     	;# 
+   575  0693                     	;# 
+   576  0694                     	;# 
+   577  0695                     	;# 
+   578  0E8E                     	;# 
+   579  0E8F                     	;# 
+   580  0E90                     	;# 
+   581  0E91                     	;# 
+   582  0E92                     	;# 
+   583  0E93                     	;# 
+   584  0E94                     	;# 
+   585  0E94                     	;# 
+   586  0E95                     	;# 
+   587  0E96                     	;# 
+   588  0E97                     	;# 
+   589  0E98                     	;# 
+   590  0E99                     	;# 
+   591  0E9A                     	;# 
+   592  0E9B                     	;# 
+   593  0E9C                     	;# 
+   594  0E9D                     	;# 
+   595  0E9E                     	;# 
+   596  0E9F                     	;# 
+   597  0FE4                     	;# 
+   598  0FE5                     	;# 
+   599  0FE6                     	;# 
+   600  0FE7                     	;# 
+   601  0FE8                     	;# 
+   602  0FE9                     	;# 
+   603  0FEA                     	;# 
+   604  0FEB                     	;# 
+   605  0FED                     	;# 
+   606  0FEE                     	;# 
+   607  0FEF                     	;# 
+   608  0000                     	;# 
+   609  0001                     	;# 
+   610  0002                     	;# 
+   611  0003                     	;# 
+   612  0004                     	;# 
+   613  0005                     	;# 
+   614  0006                     	;# 
+   615  0007                     	;# 
+   616  0008                     	;# 
+   617  0009                     	;# 
+   618  000A                     	;# 
+   619  000B                     	;# 
+   620  000C                     	;# 
+   621  000E                     	;# 
+   622  0011                     	;# 
+   623  0012                     	;# 
+   624  0015                     	;# 
+   625  0016                     	;# 
+   626  0016                     	;# 
+   627  0017                     	;# 
+   628  0018                     	;# 
+   629  0019                     	;# 
+   630  001A                     	;# 
+   631  001B                     	;# 
+   632  001C                     	;# 
+   633  008C                     	;# 
+   634  008E                     	;# 
+   635  0091                     	;# 
+   636  0092                     	;# 
+   637  0095                     	;# 
+   638  0096                     	;# 
+   639  0097                     	;# 
+   640  0098                     	;# 
+   641  0099                     	;# 
+   642  009A                     	;# 
+   643  009B                     	;# 
+   644  009B                     	;# 
+   645  009C                     	;# 
+   646  009D                     	;# 
+   647  009E                     	;# 
+   648  009F                     	;# 
+   649  010C                     	;# 
+   650  010E                     	;# 
+   651  0111                     	;# 
+   652  0112                     	;# 
+   653  0113                     	;# 
+   654  0114                     	;# 
+   655  0115                     	;# 
+   656  0116                     	;# 
+   657  0117                     	;# 
+   658  0118                     	;# 
+   659  0119                     	;# 
+   660  011D                     	;# 
+   661  018C                     	;# 
+   662  018E                     	;# 
+   663  0191                     	;# 
+   664  0191                     	;# 
+   665  0192                     	;# 
+   666  0193                     	;# 
+   667  0193                     	;# 
+   668  0194                     	;# 
+   669  0195                     	;# 
+   670  0196                     	;# 
+   671  0197                     	;# 
+   672  0199                     	;# 
+   673  019A                     	;# 
+   674  019B                     	;# 
+   675  019B                     	;# 
+   676  019C                     	;# 
+   677  019D                     	;# 
+   678  019E                     	;# 
+   679  019F                     	;# 
+   680  020C                     	;# 
+   681  0211                     	;# 
+   682  0211                     	;# 
+   683  0212                     	;# 
+   684  0212                     	;# 
+   685  0213                     	;# 
+   686  0213                     	;# 
+   687  0214                     	;# 
+   688  0214                     	;# 
+   689  0215                     	;# 
+   690  0215                     	;# 
+   691  0215                     	;# 
+   692  0216                     	;# 
+   693  0216                     	;# 
+   694  0217                     	;# 
+   695  0217                     	;# 
+   696  0391                     	;# 
+   697  0392                     	;# 
+   698  0393                     	;# 
+   699  039A                     	;# 
+   700  039B                     	;# 
+   701  0611                     	;# 
+   702  0612                     	;# 
+   703  0613                     	;# 
+   704  0613                     	;# 
+   705  0614                     	;# 
+   706  0615                     	;# 
+   707  0616                     	;# 
+   708  0616                     	;# 
+   709  0691                     	;# 
+   710  0692                     	;# 
+   711  0693                     	;# 
+   712  0694                     	;# 
+   713  0695                     	;# 
+   714  0E8E                     	;# 
+   715  0E8F                     	;# 
+   716  0E90                     	;# 
+   717  0E91                     	;# 
+   718  0E92                     	;# 
+   719  0E93                     	;# 
+   720  0E94                     	;# 
+   721  0E94                     	;# 
+   722  0E95                     	;# 
+   723  0E96                     	;# 
+   724  0E97                     	;# 
+   725  0E98                     	;# 
+   726  0E99                     	;# 
+   727  0E9A                     	;# 
+   728  0E9B                     	;# 
+   729  0E9C                     	;# 
+   730  0E9D                     	;# 
+   731  0E9E                     	;# 
+   732  0E9F                     	;# 
+   733  0FE4                     	;# 
+   734  0FE5                     	;# 
+   735  0FE6                     	;# 
+   736  0FE7                     	;# 
+   737  0FE8                     	;# 
+   738  0FE9                     	;# 
+   739  0FEA                     	;# 
+   740  0FEB                     	;# 
+   741  0FED                     	;# 
+   742  0FEE                     	;# 
+   743  0FEF                     	;# 
+   744  0018                     _T1CONbits	set	24
+   745  0011                     _PIR1bits	set	17
+   746  000B                     _INTCONbits	set	11
+   747  008E                     _TRISCbits	set	142
+   748  0095                     _OPTION_REGbits	set	149
+   749  008E                     _TRISC	set	142
+   750  008C                     _TRISA	set	140
+   751  0097                     _WDTCON	set	151
+   752  0098                     _OSCTUNE	set	152
+   753  0099                     _OSCCON	set	153
+   754  0091                     _PIE1bits	set	145
+   755  0475                     _TRISC5	set	1141
+   756  04D6                     _PLLRDY	set	1238
+   757  011D                     _APFCON	set	285
+   758  010E                     _LATC	set	270
+   759  010C                     _LATA	set	268
+   760  0116                     _BORCON	set	278
+   761  0875                     _LATC5	set	2165
+   762  018C                     _ANSELA	set	396
+   763  018E                     _ANSELC	set	398
+   764  0215                     _SSPCONbits	set	533
+   765  0211                     _SSPBUF	set	529
+   766  0216                     _SSPCON2	set	534
+   767  0215                     _SSPCON1	set	533
+   768  0214                     _SSPSTAT	set	532
+   769  020C                     _WPUA	set	524
+   770  039B                     _ACTCON	set	923
+   771                           
+   772                           	psect	cinit
+   773  003B                     start_initialization:	
+   774                           ; #config settings
+   775                           
+   776  003B                     __initialization:
+   777                           
+   778                           ; Clear objects allocated to BANK0
+   779  003B  0020               	movlb	0	; select bank0
+   780  003C  01CF               	clrf	__pbssBANK0& (0+127)
+   781  003D  01D0               	clrf	(__pbssBANK0+1)& (0+127)
+   782  003E  01D1               	clrf	(__pbssBANK0+2)& (0+127)
+   783  003F  01D2               	clrf	(__pbssBANK0+3)& (0+127)
+   784  0040  01D3               	clrf	(__pbssBANK0+4)& (0+127)
+   785  0041  01D4               	clrf	(__pbssBANK0+5)& (0+127)
+   786  0042  01D5               	clrf	(__pbssBANK0+6)& (0+127)
+   787  0043  01D6               	clrf	(__pbssBANK0+7)& (0+127)
+   788  0044                     end_of_initialization:	
+   789                           ;End of C runtime variable initialization code
+   790                           
+   791  0044                     __end_of__initialization:
+   792  0044  107E               	bcf	int$flags,0	;clear compiler interrupt flag (level 1)
+   793  0045  0020               	movlb	0
+   794  0046  3181  29D9         	ljmp	_main	;jump to C main() function
+   795                           
+   796                           	psect	bssBANK0
+   797  004F                     __pbssBANK0:
+   798  004F                     ___cs_drive:
+   799  004F                     	ds	2
+   800  0051                     ___spi_write:
+   801  0051                     	ds	2
+   802  0053                     ___spi_read:
+   803  0053                     	ds	2
+   804  0055                     _counter:
+   805  0055                     	ds	2
+   806                           
+   807                           	psect	cstackCOMMON
+   808  0070                     __pcstackCOMMON:
+   809  0070                     ?_mcp_can_send:
+   810  0070                     ?_PIN_MANAGER_Initialize:	
+   811                           ; 1 bytes @ 0x0
+   812                           
+   813  0070                     ?_OSCILLATOR_Initialize:	
+   814                           ; 1 bytes @ 0x0
+   815                           
+   816  0070                     ?_WDT_Initialize:	
+   817                           ; 1 bytes @ 0x0
+   818                           
+   819  0070                     ?_TIMER_Initialize:	
+   820                           ; 1 bytes @ 0x0
+   821                           
+   822  0070                     ?_spi_init:	
+   823                           ; 1 bytes @ 0x0
+   824                           
+   825  0070                     ?_spi_read:	
+   826                           ; 1 bytes @ 0x0
+   827                           
+   828  0070                     ?_INTERRUPT_InterruptManager:	
+   829                           ; 1 bytes @ 0x0
+   830                           
+   831  0070                     ?_SYSTEM_Initialize:	
+   832                           ; 1 bytes @ 0x0
+   833                           
+   834  0070                     ?_main:	
+   835                           ; 1 bytes @ 0x0
+   836                           
+   837  0070                     ?_mcp_read_reg:	
+   838                           ; 1 bytes @ 0x0
+   839                           
+   840  0070                     ?i1_spi_write:	
+   841                           ; 1 bytes @ 0x0
+   842                           
+   843  0070                     ?i1_cs_drive:	
+   844                           ; 1 bytes @ 0x0
+   845                           
+   846  0070                     ?i1_mcp_can_send:	
+   847                           ; 1 bytes @ 0x0
+   848                           
+   849  0070                     i1spi_write@data:	
+   850                           ; 1 bytes @ 0x0
+   851                           
+   852  0070                     i1cs_drive@state:	
+   853                           ; 1 bytes @ 0x0
+   854                           
+   855                           
+   856                           ; 1 bytes @ 0x0
+   857  0070                     	ds	1
+   858  0071                     ??i1_spi_write:
+   859  0071                     ??i1_cs_drive:	
+   860                           ; 1 bytes @ 0x1
+   861                           
+   862                           
+   863                           ; 1 bytes @ 0x1
+   864  0071                     	ds	1
+   865  0072                     ?i1_mcp_write_reg:
+   866  0072                     i1mcp_write_reg@data:	
+   867                           ; 1 bytes @ 0x2
+   868                           
+   869                           
+   870                           ; 1 bytes @ 0x2
+   871  0072                     	ds	1
+   872  0073                     ??i1_mcp_write_reg:
+   873                           
+   874                           ; 1 bytes @ 0x3
+   875  0073                     	ds	1
+   876  0074                     i1mcp_write_reg@addr:
+   877                           
+   878                           ; 1 bytes @ 0x4
+   879  0074                     	ds	1
+   880  0075                     ??i1_mcp_can_send:
+   881                           
+   882                           ; 1 bytes @ 0x5
+   883  0075                     	ds	3
+   884  0078                     i1mcp_can_send@i:
+   885                           
+   886                           ; 2 bytes @ 0x8
+   887  0078                     	ds	2
+   888  007A                     i1mcp_can_send@msg:
+   889                           
+   890                           ; 1 bytes @ 0xA
+   891  007A                     	ds	1
+   892  007B                     ??_INTERRUPT_InterruptManager:
+   893                           
+   894                           ; 1 bytes @ 0xB
+   895  007B                     	ds	1
+   896                           
+   897                           	psect	cstackBANK0
+   898  0020                     __pcstackBANK0:
+   899  0020                     INTERRUPT_InterruptManager@msg:
+   900                           
+   901                           ; 11 bytes @ 0x0
+   902  0020                     	ds	11
+   903  002B                     ??_PIN_MANAGER_Initialize:
+   904  002B                     ??_OSCILLATOR_Initialize:	
+   905                           ; 1 bytes @ 0xB
+   906                           
+   907  002B                     ??_WDT_Initialize:	
+   908                           ; 1 bytes @ 0xB
+   909                           
+   910  002B                     ??_TIMER_Initialize:	
+   911                           ; 1 bytes @ 0xB
+   912                           
+   913  002B                     ??_spi_init:	
+   914                           ; 1 bytes @ 0xB
+   915                           
+   916  002B                     ??_spi_read:	
+   917                           ; 1 bytes @ 0xB
+   918                           
+   919  002B                     ?_spi_write:	
+   920                           ; 1 bytes @ 0xB
+   921                           
+   922  002B                     ?_cs_drive:	
+   923                           ; 1 bytes @ 0xB
+   924                           
+   925  002B                     ??_SYSTEM_Initialize:	
+   926                           ; 1 bytes @ 0xB
+   927                           
+   928  002B                     spi_write@data:	
+   929                           ; 1 bytes @ 0xB
+   930                           
+   931  002B                     cs_drive@state:	
+   932                           ; 1 bytes @ 0xB
+   933                           
+   934                           
+   935                           ; 1 bytes @ 0xB
+   936  002B                     	ds	1
+   937  002C                     ??_spi_write:
+   938  002C                     ??_cs_drive:	
+   939                           ; 1 bytes @ 0xC
+   940                           
+   941                           
+   942                           ; 1 bytes @ 0xC
+   943  002C                     	ds	1
+   944  002D                     ?_mcp_write_reg:
+   945  002D                     ??_mcp_read_reg:	
+   946                           ; 1 bytes @ 0xD
+   947                           
+   948  002D                     mcp_write_reg@data:	
+   949                           ; 1 bytes @ 0xD
+   950                           
+   951                           
+   952                           ; 1 bytes @ 0xD
+   953  002D                     	ds	1
+   954  002E                     ??_mcp_write_reg:
+   955  002E                     mcp_read_reg@addr:	
+   956                           ; 1 bytes @ 0xE
+   957                           
+   958                           
+   959                           ; 1 bytes @ 0xE
+   960  002E                     	ds	1
+   961  002F                     mcp_write_reg@addr:
+   962  002F                     mcp_read_reg@ret:	
+   963                           ; 1 bytes @ 0xF
+   964                           
+   965                           
+   966                           ; 1 bytes @ 0xF
+   967  002F                     	ds	1
+   968  0030                     ??_mcp_can_send:
+   969  0030                     ?_mcp_can_init:	
+   970                           ; 1 bytes @ 0x10
+   971                           
+   972  0030                     mcp_can_init@spi_read_fcn:	
+   973                           ; 1 bytes @ 0x10
+   974                           
+   975                           
+   976                           ; 2 bytes @ 0x10
+   977  0030                     	ds	2
+   978  0032                     mcp_can_init@spi_write_fcn:
+   979                           
+   980                           ; 2 bytes @ 0x12
+   981  0032                     	ds	1
+   982  0033                     mcp_can_send@i:
+   983                           
+   984                           ; 2 bytes @ 0x13
+   985  0033                     	ds	1
+   986  0034                     mcp_can_init@cs_drive_fcn:
+   987                           
+   988                           ; 2 bytes @ 0x14
+   989  0034                     	ds	1
+   990  0035                     mcp_can_send@msg:
+   991                           
+   992                           ; 1 bytes @ 0x15
+   993  0035                     	ds	1
+   994  0036                     ??_mcp_can_init:
+   995                           
+   996                           ; 1 bytes @ 0x16
+   997  0036                     	ds	4
+   998  003A                     mcp_can_init@can_params:
+   999                           
+  1000                           ; 1 bytes @ 0x1A
+  1001  003A                     	ds	1
+  1002  003B                     ??_main:
+  1003                           
+  1004                           ; 1 bytes @ 0x1B
+  1005  003B                     	ds	2
+  1006  003D                     main@msg_LEDs_on:
+  1007                           
+  1008                           ; 11 bytes @ 0x1D
+  1009  003D                     	ds	11
+  1010  0048                     main@can_setup:
+  1011                           
+  1012                           ; 7 bytes @ 0x28
+  1013  0048                     	ds	7
+  1014                           
+  1015                           	psect	maintext
+  1016  01D9                     __pmaintext:	
+  1017 ;;
+  1018 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+  1019 ;;
+  1020 ;; *************** function _main *****************
+  1021 ;; Defined at:
+  1022 ;;		line 43 in file "main.c"
+  1023 ;; Parameters:    Size  Location     Type
+  1024 ;;		None
+  1025 ;; Auto vars:     Size  Location     Type
+  1026 ;;  msg_LEDs_on    11   29[BANK0 ] struct .
+  1027 ;;  can_setup       7   40[BANK0 ] struct .
+  1028 ;; Return value:  Size  Location     Type
+  1029 ;;                  1    wreg      void 
+  1030 ;; Registers used:
+  1031 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+  1032 ;; Tracked objects:
+  1033 ;;		On entry : B1F/0
+  1034 ;;		On exit  : 0/0
+  1035 ;;		Unchanged: 0/0
+  1036 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  1037 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1038 ;;      Locals:         0      18       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1039 ;;      Temps:          0       2       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1040 ;;      Totals:         0      20       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1041 ;;Total ram usage:       20 bytes
+  1042 ;; Hardware stack levels required when called: 7
+  1043 ;; This function calls:
+  1044 ;;		_SYSTEM_Initialize
+  1045 ;;		_mcp_can_init
+  1046 ;;		_mcp_can_send
+  1047 ;;		_spi_init
+  1048 ;; This function is called by:
+  1049 ;;		Startup code after reset
+  1050 ;; This function uses a non-reentrant model
+  1051 ;;
+  1052                           
+  1053                           
+  1054                           ;psect for function _main
+  1055  01D9                     _main:
+  1056  01D9                     l1147:	
+  1057                           ;incstack = 0
+  1058                           ; Regs used in _main: [wreg-fsr1h+status,2+status,0+pclath+cstack]
+  1059                           
+  1060                           
+  1061                           ;main.c: 46:     SYSTEM_Initialize();
+  1062  01D9  3183  2347  3181   	fcall	_SYSTEM_Initialize
+  1063                           
+  1064                           ;main.c: 50:     spi_init();
+  1065  01DC  3182  22FE  3181   	fcall	_spi_init
+  1066  01DF                     l1149:
+  1067                           
+  1068                           ;main.c: 53:     can_timing_t can_setup;;main.c: 54:     can_setup.brp = 11;
+  1069  01DF  300B               	movlw	11
+  1070  01E0  0020               	movlb	0	; select bank0
+  1071  01E1  00BB               	movwf	??_main
+  1072  01E2  083B               	movf	??_main,w
+  1073  01E3  00C8               	movwf	main@can_setup
+  1074  01E4                     l1151:
+  1075                           
+  1076                           ;main.c: 55:     can_setup.sjw = 3;
+  1077  01E4  3003               	movlw	3
+  1078  01E5  00BB               	movwf	??_main
+  1079  01E6  083B               	movf	??_main,w
+  1080  01E7  00C9               	movwf	main@can_setup+1
+  1081  01E8                     l1153:
+  1082                           
+  1083                           ;main.c: 56:     can_setup.btlmode = 0x01;
+  1084  01E8  01CE               	clrf	main@can_setup+6
+  1085  01E9  0ACE               	incf	main@can_setup+6,f
+  1086  01EA                     l1155:
+  1087                           
+  1088                           ;main.c: 57:     can_setup.sam = 0;
+  1089  01EA  01CA               	clrf	main@can_setup+2
+  1090  01EB                     l1157:
+  1091                           
+  1092                           ;main.c: 58:     can_setup.seg1ph = 0x04;
+  1093  01EB  3004               	movlw	4
+  1094  01EC  00BB               	movwf	??_main
+  1095  01ED  083B               	movf	??_main,w
+  1096  01EE  00CB               	movwf	main@can_setup+3
+  1097  01EF                     l1159:
+  1098                           
+  1099                           ;main.c: 59:     can_setup.prseg = 0;
+  1100  01EF  01CD               	clrf	main@can_setup+5
+  1101  01F0                     l1161:
+  1102                           
+  1103                           ;main.c: 60:     can_setup.seg2ph = 0x04;
+  1104  01F0  3004               	movlw	4
+  1105  01F1  00BB               	movwf	??_main
+  1106  01F2  083B               	movf	??_main,w
+  1107  01F3  00CC               	movwf	main@can_setup+4
+  1108  01F4                     l1163:
+  1109                           
+  1110                           ;main.c: 62:     mcp_can_init(&can_setup, spi_read, spi_write, cs_drive);
+  1111  01F4  300F               	movlw	low _spi_read
+  1112  01F5  00B0               	movwf	mcp_can_init@spi_read_fcn
+  1113  01F6  3003               	movlw	high _spi_read
+  1114  01F7  00B1               	movwf	mcp_can_init@spi_read_fcn+1
+  1115  01F8  30C3               	movlw	low _spi_write
+  1116  01F9  00B2               	movwf	mcp_can_init@spi_write_fcn
+  1117  01FA  3002               	movlw	high _spi_write
+  1118  01FB  00B3               	movwf	mcp_can_init@spi_write_fcn+1
+  1119  01FC  30EB               	movlw	low _cs_drive
+  1120  01FD  00B4               	movwf	mcp_can_init@cs_drive_fcn
+  1121  01FE  3002               	movlw	high _cs_drive
+  1122  01FF  00B5               	movwf	mcp_can_init@cs_drive_fcn+1
+  1123  0200  3048               	movlw	(low (main@can_setup| 0))& (0+255)
+  1124  0201  3180  2048  3181   	fcall	_mcp_can_init
+  1125  0204                     l1165:
+  1126                           
+  1127                           ;main.c: 68:     (INTCONbits.GIE = 1);
+  1128  0204  178B               	bsf	11,7	;volatile
+  1129  0205                     l1167:
+  1130                           
+  1131                           ;main.c: 71:     (INTCONbits.PEIE = 1);
+  1132  0205  170B               	bsf	11,6	;volatile
+  1133  0206                     l1169:
+  1134                           
+  1135                           ;main.c: 73:     can_msg_t msg_LEDs_on;;main.c: 74:     msg_LEDs_on.data[0] = 0x00;
+  1136  0206  0020               	movlb	0	; select bank0
+  1137  0207  01C0               	clrf	main@msg_LEDs_on+3
+  1138  0208                     l1171:
+  1139                           
+  1140                           ;main.c: 75:     msg_LEDs_on.data_len = 1;
+  1141  0208  01BF               	clrf	main@msg_LEDs_on+2
+  1142  0209  0ABF               	incf	main@msg_LEDs_on+2,f
+  1143  020A                     l1173:
+  1144                           
+  1145                           ;main.c: 76:     msg_LEDs_on.sid = 0x7E0;
+  1146  020A  30E0               	movlw	224
+  1147  020B  00BD               	movwf	main@msg_LEDs_on
+  1148  020C  3007               	movlw	7
+  1149  020D  00BE               	movwf	main@msg_LEDs_on+1
+  1150  020E                     l1175:
+  1151                           
+  1152                           ;main.c: 78:     TRISC5 = 0;
+  1153  020E  0021               	movlb	1	; select bank1
+  1154  020F  128E               	bcf	14,5	;volatile
+  1155  0210                     l1177:
+  1156                           
+  1157                           ;main.c: 80:     {;main.c: 81:         mcp_can_send(&msg_LEDs_on);
+  1158  0210  303D               	movlw	(low (main@msg_LEDs_on| 0))& (0+255)
+  1159  0211  3180  20FC  3181   	fcall	_mcp_can_send
+  1160  0214                     l1179:
+  1161                           
+  1162                           ;main.c: 82:         LATC5 = 0;
+  1163  0214  0022               	movlb	2	; select bank2
+  1164  0215  128E               	bcf	14,5	;volatile
+  1165  0216                     l1181:
+  1166                           
+  1167                           ;main.c: 83:         _delay((unsigned long)((1000)*(48000000/4000.0)));
+  1168  0216  303D               	movlw	61
+  1169  0217  0020               	movlb	0	; select bank0
+  1170  0218  00BC               	movwf	??_main+1
+  1171  0219  30E1               	movlw	225
+  1172  021A  00BB               	movwf	??_main
+  1173  021B  303F               	movlw	63
+  1174  021C                     u497:
+  1175  021C  0B89               	decfsz	9,f
+  1176  021D  2A1C               	goto	u497
+  1177  021E  0BBB               	decfsz	??_main,f
+  1178  021F  2A1C               	goto	u497
+  1179  0220  0BBC               	decfsz	??_main+1,f
+  1180  0221  2A1C               	goto	u497
+  1181  0222  3200               	nop2
+  1182  0223                     l1183:
+  1183                           
+  1184                           ;main.c: 84:         LATC5 = 1;
+  1185  0223  0022               	movlb	2	; select bank2
+  1186  0224  168E               	bsf	14,5	;volatile
+  1187  0225                     l1185:
+  1188                           
+  1189                           ;main.c: 85:         _delay((unsigned long)((1000)*(48000000/4000.0)));
+  1190  0225  303D               	movlw	61
+  1191  0226  0020               	movlb	0	; select bank0
+  1192  0227  00BC               	movwf	??_main+1
+  1193  0228  30E1               	movlw	225
+  1194  0229  00BB               	movwf	??_main
+  1195  022A  303F               	movlw	63
+  1196  022B                     u507:
+  1197  022B  0B89               	decfsz	9,f
+  1198  022C  2A2B               	goto	u507
+  1199  022D  0BBB               	decfsz	??_main,f
+  1200  022E  2A2B               	goto	u507
+  1201  022F  0BBC               	decfsz	??_main+1,f
+  1202  0230  2A2B               	goto	u507
+  1203  0231  3200               	nop2
+  1204  0232  2A10               	goto	l1177
+  1205  0233  3180  2839         	ljmp	start
+  1206  0235                     __end_of_main:
+  1207                           
+  1208                           	psect	text1
+  1209  02FE                     __ptext1:	
+  1210 ;; *************** function _spi_init *****************
+  1211 ;; Defined at:
+  1212 ;;		line 5 in file "spi.c"
+  1213 ;; Parameters:    Size  Location     Type
+  1214 ;;		None
+  1215 ;; Auto vars:     Size  Location     Type
+  1216 ;;		None
+  1217 ;; Return value:  Size  Location     Type
+  1218 ;;                  1    wreg      void 
+  1219 ;; Registers used:
+  1220 ;;		wreg, status,2, status,0
+  1221 ;; Tracked objects:
+  1222 ;;		On entry : 0/0
+  1223 ;;		On exit  : 0/0
+  1224 ;;		Unchanged: 0/0
+  1225 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  1226 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1227 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1228 ;;      Temps:          0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1229 ;;      Totals:         0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1230 ;;Total ram usage:        1 bytes
+  1231 ;; Hardware stack levels used: 1
+  1232 ;; Hardware stack levels required when called: 4
+  1233 ;; This function calls:
+  1234 ;;		Nothing
+  1235 ;; This function is called by:
+  1236 ;;		_main
+  1237 ;; This function uses a non-reentrant model
+  1238 ;;
+  1239                           
+  1240                           
+  1241                           ;psect for function _spi_init
+  1242  02FE                     _spi_init:
+  1243  02FE                     l1075:	
+  1244                           ;incstack = 0
+  1245                           ; Regs used in _spi_init: [wreg+status,2+status,0]
+  1246                           
+  1247                           
+  1248                           ;spi.c: 7:     TRISCbits.TRISC0 = 0;
+  1249  02FE  0021               	movlb	1	; select bank1
+  1250  02FF  100E               	bcf	14,0	;volatile
+  1251                           
+  1252                           ;spi.c: 9:     TRISCbits.TRISC1 = 1;
+  1253  0300  148E               	bsf	14,1	;volatile
+  1254                           
+  1255                           ;spi.c: 11:     TRISCbits.TRISC2 = 0;
+  1256  0301  110E               	bcf	14,2	;volatile
+  1257  0302                     l1077:
+  1258                           
+  1259                           ;spi.c: 14:     ANSELC &= ~(0x07);
+  1260  0302  30F8               	movlw	248
+  1261  0303  0020               	movlb	0	; select bank0
+  1262  0304  00AB               	movwf	??_spi_init
+  1263  0305  082B               	movf	??_spi_init,w
+  1264  0306  0023               	movlb	3	; select bank3
+  1265  0307  058E               	andwf	14,f	;volatile
+  1266  0308                     l1079:
+  1267                           
+  1268                           ;spi.c: 16:     SSPSTAT = 0b10000000;
+  1269  0308  3080               	movlw	128
+  1270  0309  0024               	movlb	4	; select bank4
+  1271  030A  0094               	movwf	20	;volatile
+  1272  030B                     l1081:
+  1273                           
+  1274                           ;spi.c: 17:     SSPCON1 = 0b00110010;
+  1275  030B  3032               	movlw	50
+  1276  030C  0095               	movwf	21	;volatile
+  1277  030D                     l1083:
+  1278                           
+  1279                           ;spi.c: 18:     SSPCON2 = 0b00000000;
+  1280  030D  0196               	clrf	22	;volatile
+  1281  030E                     l131:
+  1282  030E  0008               	return
+  1283  030F                     __end_of_spi_init:
+  1284                           
+  1285                           	psect	text2
+  1286  00FC                     __ptext2:	
+  1287 ;; *************** function _mcp_can_send *****************
+  1288 ;; Defined at:
+  1289 ;;		line 88 in file "../../mcp2515/mcp_2515.c"
+  1290 ;; Parameters:    Size  Location     Type
+  1291 ;;  msg             1    wreg     PTR struct .
+  1292 ;;		 -> main@msg_LEDs_on(11), INTERRUPT_InterruptManager@msg(11), 
+  1293 ;; Auto vars:     Size  Location     Type
+  1294 ;;  msg             1   21[BANK0 ] PTR struct .
+  1295 ;;		 -> main@msg_LEDs_on(11), INTERRUPT_InterruptManager@msg(11), 
+  1296 ;;  i               2   19[BANK0 ] int 
+  1297 ;; Return value:  Size  Location     Type
+  1298 ;;                  1    wreg      void 
+  1299 ;; Registers used:
+  1300 ;;		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+  1301 ;; Tracked objects:
+  1302 ;;		On entry : 0/0
+  1303 ;;		On exit  : 0/0
+  1304 ;;		Unchanged: 0/0
+  1305 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  1306 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1307 ;;      Locals:         0       3       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1308 ;;      Temps:          0       3       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1309 ;;      Totals:         0       6       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1310 ;;Total ram usage:        6 bytes
+  1311 ;; Hardware stack levels used: 1
+  1312 ;; Hardware stack levels required when called: 6
+  1313 ;; This function calls:
+  1314 ;;		_mcp_write_reg
+  1315 ;; This function is called by:
+  1316 ;;		_main
+  1317 ;; This function uses a non-reentrant model
+  1318 ;;
+  1319                           
+  1320                           
+  1321                           ;psect for function _mcp_can_send
+  1322  00FC                     _mcp_can_send:
+  1323                           
+  1324                           ;incstack = 0
+  1325                           ; Regs used in _mcp_can_send: [wreg+fsr1l+fsr1h+status,2+status,0+pclath+cstack]
+  1326                           ;mcp_can_send@msg stored from wreg
+  1327  00FC  0020               	movlb	0	; select bank0
+  1328  00FD  00B5               	movwf	mcp_can_send@msg
+  1329  00FE                     l1055:
+  1330                           
+  1331                           ;../../mcp2515/mcp_2515.c: 89:     mcp_write_reg(0x2C, 0);
+  1332  00FE  01AD               	clrf	mcp_write_reg@data
+  1333  00FF  302C               	movlw	44
+  1334  0100  3182  2265  3180   	fcall	_mcp_write_reg
+  1335                           
+  1336                           ;../../mcp2515/mcp_2515.c: 90:     mcp_write_reg(0x2D, 0);
+  1337  0103  0020               	movlb	0	; select bank0
+  1338  0104  01AD               	clrf	mcp_write_reg@data
+  1339  0105  302D               	movlw	45
+  1340  0106  3182  2265  3180   	fcall	_mcp_write_reg
+  1341  0109                     l1057:
+  1342                           
+  1343                           ;../../mcp2515/mcp_2515.c: 92:     mcp_write_reg(0x31, (uint8_t) (msg->sid >> 3));
+  1344  0109  0020               	movlb	0	; select bank0
+  1345  010A  0835               	movf	mcp_can_send@msg,w
+  1346  010B  0086               	movwf	6
+  1347  010C  0187               	clrf	7
+  1348  010D  3F40               	moviw [0]fsr1
+  1349  010E  00B0               	movwf	??_mcp_can_send
+  1350  010F  3F41               	moviw [1]fsr1
+  1351  0110  00B1               	movwf	??_mcp_can_send+1
+  1352  0111  36B1               	lsrf	??_mcp_can_send+1,f
+  1353  0112  0CB0               	rrf	??_mcp_can_send,f
+  1354  0113  36B1               	lsrf	??_mcp_can_send+1,f
+  1355  0114  0CB0               	rrf	??_mcp_can_send,f
+  1356  0115  36B1               	lsrf	??_mcp_can_send+1,f
+  1357  0116  0CB0               	rrf	??_mcp_can_send,f
+  1358  0117  0830               	movf	??_mcp_can_send,w
+  1359  0118  00B2               	movwf	??_mcp_can_send+2
+  1360  0119  0832               	movf	??_mcp_can_send+2,w
+  1361  011A  00AD               	movwf	mcp_write_reg@data
+  1362  011B  3031               	movlw	49
+  1363  011C  3182  2265  3180   	fcall	_mcp_write_reg
+  1364  011F                     l1059:
+  1365                           
+  1366                           ;../../mcp2515/mcp_2515.c: 93:     mcp_write_reg(0x32, (msg->sid & 0x7) << 5);
+  1367  011F  0020               	movlb	0	; select bank0
+  1368  0120  0835               	movf	mcp_can_send@msg,w
+  1369  0121  0086               	movwf	6
+  1370  0122  0187               	clrf	7
+  1371  0123  0801               	movf	1,w
+  1372  0124  3907               	andlw	7
+  1373  0125  00B0               	movwf	??_mcp_can_send
+  1374  0126  3004               	movlw	4
+  1375  0127                     u315:
+  1376  0127  35B0               	lslf	??_mcp_can_send,f
+  1377  0128  3EFF               	addlw	-1
+  1378  0129  1D03               	skipz
+  1379  012A  2927               	goto	u315
+  1380  012B  3530               	lslf	??_mcp_can_send,w
+  1381  012C  00B1               	movwf	??_mcp_can_send+1
+  1382  012D  0831               	movf	??_mcp_can_send+1,w
+  1383  012E  00AD               	movwf	mcp_write_reg@data
+  1384  012F  3032               	movlw	50
+  1385  0130  3182  2265  3180   	fcall	_mcp_write_reg
+  1386  0133                     l1061:
+  1387                           
+  1388                           ;../../mcp2515/mcp_2515.c: 96:     for (int i = 0; i < msg->data_len; ++i) {
+  1389  0133  0020               	movlb	0	; select bank0
+  1390  0134  01B3               	clrf	mcp_can_send@i
+  1391  0135  01B4               	clrf	mcp_can_send@i+1
+  1392  0136  294A               	goto	l1067
+  1393  0137                     l1063:
+  1394                           
+  1395                           ;../../mcp2515/mcp_2515.c: 97:         mcp_write_reg(0x36 + i, msg->data[i]);
+  1396  0137  0020               	movlb	0	; select bank0
+  1397  0138  0833               	movf	mcp_can_send@i,w
+  1398  0139  0735               	addwf	mcp_can_send@msg,w
+  1399  013A  00B0               	movwf	??_mcp_can_send
+  1400  013B  0830               	movf	??_mcp_can_send,w
+  1401  013C  0086               	movwf	6
+  1402  013D  0187               	clrf	7
+  1403  013E  3F43               	moviw [3]fsr1
+  1404  013F  00AD               	movwf	mcp_write_reg@data
+  1405  0140  0833               	movf	mcp_can_send@i,w
+  1406  0141  3E36               	addlw	54
+  1407  0142  3182  2265  3180   	fcall	_mcp_write_reg
+  1408  0145                     l1065:
+  1409                           
+  1410                           ;../../mcp2515/mcp_2515.c: 98:     }
+  1411  0145  3001               	movlw	1
+  1412  0146  0020               	movlb	0	; select bank0
+  1413  0147  07B3               	addwf	mcp_can_send@i,f
+  1414  0148  3000               	movlw	0
+  1415  0149  3DB4               	addwfc	mcp_can_send@i+1,f
+  1416  014A                     l1067:
+  1417  014A  0835               	movf	mcp_can_send@msg,w
+  1418  014B  3E02               	addlw	2
+  1419  014C  0086               	movwf	6
+  1420  014D  0187               	clrf	7
+  1421  014E  0834               	movf	mcp_can_send@i+1,w
+  1422  014F  3A80               	xorlw	128
+  1423  0150  00B0               	movwf	??_mcp_can_send
+  1424  0151  3080               	movlw	128
+  1425  0152  0230               	subwf	??_mcp_can_send,w
+  1426  0153  1D03               	skipz
+  1427  0154  2957               	goto	u325
+  1428  0155  0801               	movf	1,w
+  1429  0156  0233               	subwf	mcp_can_send@i,w
+  1430  0157                     u325:
+  1431  0157  1C03               	skipc
+  1432  0158  295A               	goto	u321
+  1433  0159  295B               	goto	u320
+  1434  015A                     u321:
+  1435  015A  2937               	goto	l1063
+  1436  015B                     u320:
+  1437  015B                     l1069:
+  1438                           
+  1439                           ;../../mcp2515/mcp_2515.c: 101:     mcp_write_reg(0x35, msg->data_len);
+  1440  015B  0020               	movlb	0	; select bank0
+  1441  015C  0835               	movf	mcp_can_send@msg,w
+  1442  015D  0086               	movwf	6
+  1443  015E  0187               	clrf	7
+  1444  015F  3F42               	moviw [2]fsr1
+  1445  0160  00AD               	movwf	mcp_write_reg@data
+  1446  0161  3035               	movlw	53
+  1447  0162  3182  2265  3180   	fcall	_mcp_write_reg
+  1448  0165                     l1071:
+  1449                           
+  1450                           ;../../mcp2515/mcp_2515.c: 102:     mcp_write_reg(0x30, 1 << 3);
+  1451  0165  3008               	movlw	8
+  1452  0166  0020               	movlb	0	; select bank0
+  1453  0167  00B0               	movwf	??_mcp_can_send
+  1454  0168  0830               	movf	??_mcp_can_send,w
+  1455  0169  00AD               	movwf	mcp_write_reg@data
+  1456  016A  3030               	movlw	48
+  1457  016B  3182  2265  3180   	fcall	_mcp_write_reg
+  1458  016E                     l178:
+  1459  016E  0008               	return
+  1460  016F                     __end_of_mcp_can_send:
+  1461                           
+  1462                           	psect	text3
+  1463  0048                     __ptext3:	
+  1464 ;; *************** function _mcp_can_init *****************
+  1465 ;; Defined at:
+  1466 ;;		line 52 in file "../../mcp2515/mcp_2515.c"
+  1467 ;; Parameters:    Size  Location     Type
+  1468 ;;  can_params      1    wreg     PTR struct .
+  1469 ;;		 -> main@can_setup(7), 
+  1470 ;;  spi_read_fcn    2   16[BANK0 ] PTR FTN()unsigned char 
+  1471 ;;		 -> spi_read(1), 
+  1472 ;;  spi_write_fc    2   18[BANK0 ] PTR FTN(unsigned char ,)
+  1473 ;;		 -> spi_write(1), 
+  1474 ;;  cs_drive_fcn    2   20[BANK0 ] PTR FTN(unsigned char ,)
+  1475 ;;		 -> cs_drive(1), 
+  1476 ;; Auto vars:     Size  Location     Type
+  1477 ;;  can_params      1   26[BANK0 ] PTR struct .
+  1478 ;;		 -> main@can_setup(7), 
+  1479 ;; Return value:  Size  Location     Type
+  1480 ;;                  1    wreg      void 
+  1481 ;; Registers used:
+  1482 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+  1483 ;; Tracked objects:
+  1484 ;;		On entry : 0/0
+  1485 ;;		On exit  : 0/0
+  1486 ;;		Unchanged: 0/0
+  1487 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  1488 ;;      Params:         0       6       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1489 ;;      Locals:         0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1490 ;;      Temps:          0       4       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1491 ;;      Totals:         0      11       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1492 ;;Total ram usage:       11 bytes
+  1493 ;; Hardware stack levels used: 1
+  1494 ;; Hardware stack levels required when called: 6
+  1495 ;; This function calls:
+  1496 ;;		Absolute function
+  1497 ;;		_cs_drive
+  1498 ;;		_mcp_read_reg
+  1499 ;;		_mcp_write_reg
+  1500 ;; This function is called by:
+  1501 ;;		_main
+  1502 ;; This function uses a non-reentrant model
+  1503 ;;
+  1504                           
+  1505                           
+  1506                           ;psect for function _mcp_can_init
+  1507  0048                     _mcp_can_init:
+  1508                           
+  1509                           ;incstack = 0
+  1510                           ; Regs used in _mcp_can_init: [wreg-fsr1h+status,2+status,0+pclath+cstack]
+  1511                           ;mcp_can_init@can_params stored from wreg
+  1512  0048  0020               	movlb	0	; select bank0
+  1513  0049  00BA               	movwf	mcp_can_init@can_params
+  1514  004A                     l1085:
+  1515                           
+  1516                           ;../../mcp2515/mcp_2515.c: 52: void mcp_can_init(can_timing_t *can_params,;../../mcp2515
+      +                          /mcp_2515.c: 53:                   uint8_t (*spi_read_fcn)(void),;../../mcp2515/mcp_2515
+      +                          .c: 54:                   void (*spi_write_fcn)(uint8_t data),;../../mcp2515/mcp_2515.c:
+      +                           55:                   void (*cs_drive_fcn)(uint8_t state)) {;../../mcp2515/mcp_2515.c: 
+      +                          56:     __spi_read = spi_read_fcn;
+  1517  004A  0831               	movf	mcp_can_init@spi_read_fcn+1,w
+  1518  004B  00D4               	movwf	___spi_read+1
+  1519  004C  0830               	movf	mcp_can_init@spi_read_fcn,w
+  1520  004D  00D3               	movwf	___spi_read
+  1521                           
+  1522                           ;../../mcp2515/mcp_2515.c: 57:     __spi_write= spi_write_fcn;
+  1523  004E  0833               	movf	mcp_can_init@spi_write_fcn+1,w
+  1524  004F  00D2               	movwf	___spi_write+1
+  1525  0050  0832               	movf	mcp_can_init@spi_write_fcn,w
+  1526  0051  00D1               	movwf	___spi_write
+  1527                           
+  1528                           ;../../mcp2515/mcp_2515.c: 58:     __cs_drive = cs_drive_fcn;
+  1529  0052  0835               	movf	mcp_can_init@cs_drive_fcn+1,w
+  1530  0053  00D0               	movwf	___cs_drive+1
+  1531  0054  0834               	movf	mcp_can_init@cs_drive_fcn,w
+  1532  0055  00CF               	movwf	___cs_drive
+  1533  0056                     l1087:
+  1534                           
+  1535                           ;../../mcp2515/mcp_2515.c: 60:     __cs_drive(1);
+  1536  0056  01AB               	clrf	cs_drive@state
+  1537  0057  0AAB               	incf	cs_drive@state,f
+  1538  0058  0850               	movf	___cs_drive+1,w
+  1539  0059  008A               	movwf	10
+  1540  005A  084F               	movf	___cs_drive,w
+  1541  005B  000A               	callw
+  1542  005C  3180               	pagesel	$
+  1543  005D                     l1089:
+  1544                           
+  1545                           ;../../mcp2515/mcp_2515.c: 63:     mcp_write_reg(0x0F, 0x4 << 5);
+  1546  005D  3080               	movlw	128
+  1547  005E  0020               	movlb	0	; select bank0
+  1548  005F  00B6               	movwf	??_mcp_can_init
+  1549  0060  0836               	movf	??_mcp_can_init,w
+  1550  0061  00AD               	movwf	mcp_write_reg@data
+  1551  0062  300F               	movlw	15
+  1552  0063  3182  2265  3180   	fcall	_mcp_write_reg
+  1553  0066                     l1091:	
+  1554                           ;../../mcp2515/mcp_2515.c: 64:     while (!(mcp_read_reg(0x0F))) { }
+  1555                           
+  1556  0066  300F               	movlw	15
+  1557  0067  3182  2235  3180   	fcall	_mcp_read_reg
+  1558  006A  3A00               	xorlw	0
+  1559  006B  1903               	skipnz
+  1560  006C  286E               	goto	u331
+  1561  006D  286F               	goto	u330
+  1562  006E                     u331:
+  1563  006E  2866               	goto	l1091
+  1564  006F                     u330:
+  1565  006F                     l1093:
+  1566                           
+  1567                           ;../../mcp2515/mcp_2515.c: 66:     mcp_write_reg(0x2A, can_params->sjw << 6 | can_params
+      +                          ->brp);
+  1568  006F  0020               	movlb	0	; select bank0
+  1569  0070  083A               	movf	mcp_can_init@can_params,w
+  1570  0071  0086               	movwf	6
+  1571  0072  0187               	clrf	7
+  1572  0073  0A3A               	incf	mcp_can_init@can_params,w
+  1573  0074  0084               	movwf	4
+  1574  0075  0185               	clrf	5
+  1575  0076  0800               	movf	0,w
+  1576  0077  00B6               	movwf	??_mcp_can_init
+  1577  0078  3005               	movlw	5
+  1578  0079                     u345:
+  1579  0079  35B6               	lslf	??_mcp_can_init,f
+  1580  007A  3EFF               	addlw	-1
+  1581  007B  1D03               	skipz
+  1582  007C  2879               	goto	u345
+  1583  007D  3536               	lslf	??_mcp_can_init,w
+  1584  007E  0401               	iorwf	1,w
+  1585  007F  00B7               	movwf	??_mcp_can_init+1
+  1586  0080  0837               	movf	??_mcp_can_init+1,w
+  1587  0081  00AD               	movwf	mcp_write_reg@data
+  1588  0082  302A               	movlw	42
+  1589  0083  3182  2265  3180   	fcall	_mcp_write_reg
+  1590                           
+  1591                           ;../../mcp2515/mcp_2515.c: 67:     mcp_write_reg(0x29, can_params->btlmode << 7 | can_pa
+      +                          rams->sam << 6
+  1592  0086  0020               	movlb	0	; select bank0
+  1593  0087  083A               	movf	mcp_can_init@can_params,w
+  1594  0088  3E05               	addlw	5
+  1595  0089  0086               	movwf	6
+  1596  008A  0187               	clrf	7
+  1597  008B  083A               	movf	mcp_can_init@can_params,w
+  1598  008C  3E03               	addlw	3
+  1599  008D  0084               	movwf	4
+  1600  008E  0185               	clrf	5
+  1601  008F  0800               	movf	0,w
+  1602  0090  00B6               	movwf	??_mcp_can_init
+  1603  0091  3003               	movlw	3
+  1604  0092                     u355:
+  1605  0092  35B6               	lslf	??_mcp_can_init,f
+  1606  0093  0B89               	decfsz	9,f
+  1607  0094  2892               	goto	u355
+  1608  0095  083A               	movf	mcp_can_init@can_params,w
+  1609  0096  3E02               	addlw	2
+  1610  0097  0084               	movwf	4
+  1611  0098  0185               	clrf	5
+  1612  0099  0800               	movf	0,w
+  1613  009A  00B7               	movwf	??_mcp_can_init+1
+  1614  009B  3006               	movlw	6
+  1615  009C                     u365:
+  1616  009C  35B7               	lslf	??_mcp_can_init+1,f
+  1617  009D  0B89               	decfsz	9,f
+  1618  009E  289C               	goto	u365
+  1619  009F  083A               	movf	mcp_can_init@can_params,w
+  1620  00A0  3E06               	addlw	6
+  1621  00A1  0084               	movwf	4
+  1622  00A2  0185               	clrf	5
+  1623  00A3  0800               	movf	0,w
+  1624  00A4  00B8               	movwf	??_mcp_can_init+2
+  1625  00A5  3006               	movlw	6
+  1626  00A6                     u375:
+  1627  00A6  35B8               	lslf	??_mcp_can_init+2,f
+  1628  00A7  3EFF               	addlw	-1
+  1629  00A8  1D03               	skipz
+  1630  00A9  28A6               	goto	u375
+  1631  00AA  3538               	lslf	??_mcp_can_init+2,w
+  1632  00AB  0437               	iorwf	??_mcp_can_init+1,w
+  1633  00AC  0436               	iorwf	??_mcp_can_init,w
+  1634  00AD  0401               	iorwf	1,w
+  1635  00AE  00B9               	movwf	??_mcp_can_init+3
+  1636  00AF  0839               	movf	??_mcp_can_init+3,w
+  1637  00B0  00AD               	movwf	mcp_write_reg@data
+  1638  00B1  3029               	movlw	41
+  1639  00B2  3182  2265  3180   	fcall	_mcp_write_reg
+  1640  00B5                     l1095:
+  1641                           
+  1642                           ;../../mcp2515/mcp_2515.c: 69:     mcp_write_reg(0x28, can_params->seg2ph);
+  1643  00B5  0020               	movlb	0	; select bank0
+  1644  00B6  083A               	movf	mcp_can_init@can_params,w
+  1645  00B7  0086               	movwf	6
+  1646  00B8  0187               	clrf	7
+  1647  00B9  3F44               	moviw [4]fsr1
+  1648  00BA  00AD               	movwf	mcp_write_reg@data
+  1649  00BB  3028               	movlw	40
+  1650  00BC  3182  2265  3180   	fcall	_mcp_write_reg
+  1651  00BF                     l1097:
+  1652                           
+  1653                           ;../../mcp2515/mcp_2515.c: 72:     mcp_write_reg(0x60, 0b0110000);
+  1654  00BF  3030               	movlw	48
+  1655  00C0  0020               	movlb	0	; select bank0
+  1656  00C1  00B6               	movwf	??_mcp_can_init
+  1657  00C2  0836               	movf	??_mcp_can_init,w
+  1658  00C3  00AD               	movwf	mcp_write_reg@data
+  1659  00C4  3060               	movlw	96
+  1660  00C5  3182  2265  3180   	fcall	_mcp_write_reg
+  1661  00C8                     l1099:
+  1662                           
+  1663                           ;../../mcp2515/mcp_2515.c: 73:     mcp_write_reg(0x70, 0b0110000);
+  1664  00C8  3030               	movlw	48
+  1665  00C9  0020               	movlb	0	; select bank0
+  1666  00CA  00B6               	movwf	??_mcp_can_init
+  1667  00CB  0836               	movf	??_mcp_can_init,w
+  1668  00CC  00AD               	movwf	mcp_write_reg@data
+  1669  00CD  3070               	movlw	112
+  1670  00CE  3182  2265  3180   	fcall	_mcp_write_reg
+  1671  00D1                     l1101:
+  1672                           
+  1673                           ;../../mcp2515/mcp_2515.c: 74:     mcp_write_reg(0x2C, 0);
+  1674  00D1  0020               	movlb	0	; select bank0
+  1675  00D2  01AD               	clrf	mcp_write_reg@data
+  1676  00D3  302C               	movlw	44
+  1677  00D4  3182  2265  3180   	fcall	_mcp_write_reg
+  1678  00D7                     l1103:
+  1679                           
+  1680                           ;../../mcp2515/mcp_2515.c: 76:     mcp_write_reg(0x2B, 0b100011);
+  1681  00D7  3023               	movlw	35
+  1682  00D8  0020               	movlb	0	; select bank0
+  1683  00D9  00B6               	movwf	??_mcp_can_init
+  1684  00DA  0836               	movf	??_mcp_can_init,w
+  1685  00DB  00AD               	movwf	mcp_write_reg@data
+  1686  00DC  302B               	movlw	43
+  1687  00DD  3182  2265  3180   	fcall	_mcp_write_reg
+  1688  00E0                     l1105:
+  1689                           
+  1690                           ;../../mcp2515/mcp_2515.c: 77:     mcp_write_reg(0x0C, 0b1111);
+  1691  00E0  300F               	movlw	15
+  1692  00E1  0020               	movlb	0	; select bank0
+  1693  00E2  00B6               	movwf	??_mcp_can_init
+  1694  00E3  0836               	movf	??_mcp_can_init,w
+  1695  00E4  00AD               	movwf	mcp_write_reg@data
+  1696  00E5  300C               	movlw	12
+  1697  00E6  3182  2265  3180   	fcall	_mcp_write_reg
+  1698  00E9                     l1107:
+  1699                           
+  1700                           ;../../mcp2515/mcp_2515.c: 81:     mcp_write_reg(0x0F, 0xc);
+  1701  00E9  300C               	movlw	12
+  1702  00EA  0020               	movlb	0	; select bank0
+  1703  00EB  00B6               	movwf	??_mcp_can_init
+  1704  00EC  0836               	movf	??_mcp_can_init,w
+  1705  00ED  00AD               	movwf	mcp_write_reg@data
+  1706  00EE  300F               	movlw	15
+  1707  00EF  3182  2265  3180   	fcall	_mcp_write_reg
+  1708  00F2                     l1109:	
+  1709                           ;../../mcp2515/mcp_2515.c: 85:     while ((mcp_read_reg(0x0F) & 0xe0) != 0);
+  1710                           
+  1711  00F2  300F               	movlw	15
+  1712  00F3  3182  2235  3180   	fcall	_mcp_read_reg
+  1713  00F6  39E0               	andlw	224
+  1714  00F7  1D03               	btfss	3,2
+  1715  00F8  28FA               	goto	u381
+  1716  00F9  28FB               	goto	u380
+  1717  00FA                     u381:
+  1718  00FA  28F2               	goto	l1109
+  1719  00FB                     u380:
+  1720  00FB                     l172:
+  1721  00FB  0008               	return
+  1722  00FC                     __end_of_mcp_can_init:
+  1723                           
+  1724                           	psect	text4
+  1725  0265                     __ptext4:	
+  1726 ;; *************** function _mcp_write_reg *****************
+  1727 ;; Defined at:
+  1728 ;;		line 26 in file "../../mcp2515/mcp_2515.c"
+  1729 ;; Parameters:    Size  Location     Type
+  1730 ;;  addr            1    wreg     unsigned char 
+  1731 ;;  data            1   13[BANK0 ] unsigned char 
+  1732 ;; Auto vars:     Size  Location     Type
+  1733 ;;  addr            1   15[BANK0 ] unsigned char 
+  1734 ;; Return value:  Size  Location     Type
+  1735 ;;                  1    wreg      void 
+  1736 ;; Registers used:
+  1737 ;;		wreg, status,2, status,0, pclath, cstack
+  1738 ;; Tracked objects:
+  1739 ;;		On entry : 0/0
+  1740 ;;		On exit  : 0/0
+  1741 ;;		Unchanged: 0/0
+  1742 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  1743 ;;      Params:         0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1744 ;;      Locals:         0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1745 ;;      Temps:          0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1746 ;;      Totals:         0       3       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1747 ;;Total ram usage:        3 bytes
+  1748 ;; Hardware stack levels used: 1
+  1749 ;; Hardware stack levels required when called: 5
+  1750 ;; This function calls:
+  1751 ;;		Absolute function
+  1752 ;;		_cs_drive
+  1753 ;;		_spi_write
+  1754 ;; This function is called by:
+  1755 ;;		_mcp_can_init
+  1756 ;;		_mcp_can_send
+  1757 ;; This function uses a non-reentrant model
+  1758 ;;
+  1759                           
+  1760                           
+  1761                           ;psect for function _mcp_write_reg
+  1762  0265                     _mcp_write_reg:
+  1763                           
+  1764                           ;incstack = 0
+  1765                           ; Regs used in _mcp_write_reg: [wreg+status,2+status,0+pclath+cstack]
+  1766                           ;mcp_write_reg@addr stored from wreg
+  1767  0265  0020               	movlb	0	; select bank0
+  1768  0266  00AF               	movwf	mcp_write_reg@addr
+  1769  0267                     l1041:
+  1770                           
+  1771                           ;../../mcp2515/mcp_2515.c: 27:     __cs_drive(0);
+  1772  0267  01AB               	clrf	cs_drive@state
+  1773  0268  0850               	movf	___cs_drive+1,w
+  1774  0269  008A               	movwf	10
+  1775  026A  084F               	movf	___cs_drive,w
+  1776  026B  000A               	callw
+  1777  026C  3182               	pagesel	$
+  1778                           
+  1779                           ;../../mcp2515/mcp_2515.c: 28:     __spi_write(0b00000010);
+  1780  026D  3002               	movlw	2
+  1781  026E  0020               	movlb	0	; select bank0
+  1782  026F  00AE               	movwf	??_mcp_write_reg
+  1783  0270  082E               	movf	??_mcp_write_reg,w
+  1784  0271  00AB               	movwf	spi_write@data
+  1785  0272  0852               	movf	___spi_write+1,w
+  1786  0273  008A               	movwf	10
+  1787  0274  0851               	movf	___spi_write,w
+  1788  0275  000A               	callw
+  1789  0276  3182               	pagesel	$
+  1790                           
+  1791                           ;../../mcp2515/mcp_2515.c: 29:     __spi_write(addr);
+  1792  0277  0020               	movlb	0	; select bank0
+  1793  0278  082F               	movf	mcp_write_reg@addr,w
+  1794  0279  00AE               	movwf	??_mcp_write_reg
+  1795  027A  082E               	movf	??_mcp_write_reg,w
+  1796  027B  00AB               	movwf	spi_write@data
+  1797  027C  0852               	movf	___spi_write+1,w
+  1798  027D  008A               	movwf	10
+  1799  027E  0851               	movf	___spi_write,w
+  1800  027F  000A               	callw
+  1801  0280  3182               	pagesel	$
+  1802                           
+  1803                           ;../../mcp2515/mcp_2515.c: 30:     __spi_write(data);
+  1804  0281  0020               	movlb	0	; select bank0
+  1805  0282  082D               	movf	mcp_write_reg@data,w
+  1806  0283  00AE               	movwf	??_mcp_write_reg
+  1807  0284  082E               	movf	??_mcp_write_reg,w
+  1808  0285  00AB               	movwf	spi_write@data
+  1809  0286  0852               	movf	___spi_write+1,w
+  1810  0287  008A               	movwf	10
+  1811  0288  0851               	movf	___spi_write,w
+  1812  0289  000A               	callw
+  1813  028A  3182               	pagesel	$
+  1814                           
+  1815                           ;../../mcp2515/mcp_2515.c: 31:     __cs_drive(1);
+  1816  028B  0020               	movlb	0	; select bank0
+  1817  028C  01AB               	clrf	cs_drive@state
+  1818  028D  0AAB               	incf	cs_drive@state,f
+  1819  028E  0850               	movf	___cs_drive+1,w
+  1820  028F  008A               	movwf	10
+  1821  0290  084F               	movf	___cs_drive,w
+  1822  0291  000A               	callw
+  1823  0292  3182               	pagesel	$
+  1824  0293                     l157:
+  1825  0293  0008               	return
+  1826  0294                     __end_of_mcp_write_reg:
+  1827                           
+  1828                           	psect	text5
+  1829  0235                     __ptext5:	
+  1830 ;; *************** function _mcp_read_reg *****************
+  1831 ;; Defined at:
+  1832 ;;		line 34 in file "../../mcp2515/mcp_2515.c"
+  1833 ;; Parameters:    Size  Location     Type
+  1834 ;;  addr            1    wreg     unsigned char 
+  1835 ;; Auto vars:     Size  Location     Type
+  1836 ;;  addr            1   14[BANK0 ] unsigned char 
+  1837 ;;  ret             1   15[BANK0 ] unsigned char 
+  1838 ;; Return value:  Size  Location     Type
+  1839 ;;                  1    wreg      unsigned char 
+  1840 ;; Registers used:
+  1841 ;;		wreg, status,2, status,0, pclath, cstack
+  1842 ;; Tracked objects:
+  1843 ;;		On entry : 0/0
+  1844 ;;		On exit  : 0/0
+  1845 ;;		Unchanged: 0/0
+  1846 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  1847 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1848 ;;      Locals:         0       2       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1849 ;;      Temps:          0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1850 ;;      Totals:         0       3       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1851 ;;Total ram usage:        3 bytes
+  1852 ;; Hardware stack levels used: 1
+  1853 ;; Hardware stack levels required when called: 5
+  1854 ;; This function calls:
+  1855 ;;		Absolute function
+  1856 ;;		_cs_drive
+  1857 ;;		_spi_read
+  1858 ;;		_spi_write
+  1859 ;; This function is called by:
+  1860 ;;		_mcp_can_init
+  1861 ;;		_mcp_can_receive
+  1862 ;; This function uses a non-reentrant model
+  1863 ;;
+  1864                           
+  1865                           
+  1866                           ;psect for function _mcp_read_reg
+  1867  0235                     _mcp_read_reg:
+  1868                           
+  1869                           ;incstack = 0
+  1870                           ; Regs used in _mcp_read_reg: [wreg+status,2+status,0+pclath+cstack]
+  1871                           ;mcp_read_reg@addr stored from wreg
+  1872  0235  0020               	movlb	0	; select bank0
+  1873  0236  00AE               	movwf	mcp_read_reg@addr
+  1874  0237                     l1043:
+  1875                           
+  1876                           ;../../mcp2515/mcp_2515.c: 35:     __cs_drive(0);
+  1877  0237  01AB               	clrf	cs_drive@state
+  1878  0238  0850               	movf	___cs_drive+1,w
+  1879  0239  008A               	movwf	10
+  1880  023A  084F               	movf	___cs_drive,w
+  1881  023B  000A               	callw
+  1882  023C  3182               	pagesel	$
+  1883                           
+  1884                           ;../../mcp2515/mcp_2515.c: 36:     __spi_write(0b00000011);
+  1885  023D  3003               	movlw	3
+  1886  023E  0020               	movlb	0	; select bank0
+  1887  023F  00AD               	movwf	??_mcp_read_reg
+  1888  0240  082D               	movf	??_mcp_read_reg,w
+  1889  0241  00AB               	movwf	spi_write@data
+  1890  0242  0852               	movf	___spi_write+1,w
+  1891  0243  008A               	movwf	10
+  1892  0244  0851               	movf	___spi_write,w
+  1893  0245  000A               	callw
+  1894  0246  3182               	pagesel	$
+  1895                           
+  1896                           ;../../mcp2515/mcp_2515.c: 37:     __spi_write(addr);
+  1897  0247  0020               	movlb	0	; select bank0
+  1898  0248  082E               	movf	mcp_read_reg@addr,w
+  1899  0249  00AD               	movwf	??_mcp_read_reg
+  1900  024A  082D               	movf	??_mcp_read_reg,w
+  1901  024B  00AB               	movwf	spi_write@data
+  1902  024C  0852               	movf	___spi_write+1,w
+  1903  024D  008A               	movwf	10
+  1904  024E  0851               	movf	___spi_write,w
+  1905  024F  000A               	callw
+  1906  0250  3182               	pagesel	$
+  1907  0251                     l1045:
+  1908                           
+  1909                           ;../../mcp2515/mcp_2515.c: 38:     uint8_t ret = __spi_read();
+  1910  0251  0020               	movlb	0	; select bank0
+  1911  0252  0854               	movf	___spi_read+1,w
+  1912  0253  008A               	movwf	10
+  1913  0254  0853               	movf	___spi_read,w
+  1914  0255  000A               	callw
+  1915  0256  3182               	pagesel	$
+  1916  0257  0020               	movlb	0	; select bank0
+  1917  0258  00AD               	movwf	??_mcp_read_reg
+  1918  0259  082D               	movf	??_mcp_read_reg,w
+  1919  025A  00AF               	movwf	mcp_read_reg@ret
+  1920  025B                     l1047:
+  1921                           
+  1922                           ;../../mcp2515/mcp_2515.c: 39:     __cs_drive(1);
+  1923  025B  01AB               	clrf	cs_drive@state
+  1924  025C  0AAB               	incf	cs_drive@state,f
+  1925  025D  0850               	movf	___cs_drive+1,w
+  1926  025E  008A               	movwf	10
+  1927  025F  084F               	movf	___cs_drive,w
+  1928  0260  000A               	callw
+  1929  0261  3182               	pagesel	$
+  1930  0262                     l1049:
+  1931                           
+  1932                           ;../../mcp2515/mcp_2515.c: 40:     return ret;
+  1933  0262  0020               	movlb	0	; select bank0
+  1934  0263  082F               	movf	mcp_read_reg@ret,w
+  1935  0264                     l160:
+  1936  0264  0008               	return
+  1937  0265                     __end_of_mcp_read_reg:
+  1938                           
+  1939                           	psect	text6
+  1940  02C3                     __ptext6:	
+  1941 ;; *************** function _spi_write *****************
+  1942 ;; Defined at:
+  1943 ;;		line 22 in file "spi.c"
+  1944 ;; Parameters:    Size  Location     Type
+  1945 ;;  data            1   11[BANK0 ] unsigned char 
+  1946 ;; Auto vars:     Size  Location     Type
+  1947 ;;  temp            1    0        unsigned char 
+  1948 ;; Return value:  Size  Location     Type
+  1949 ;;                  1    wreg      void 
+  1950 ;; Registers used:
+  1951 ;;		wreg
+  1952 ;; Tracked objects:
+  1953 ;;		On entry : 0/0
+  1954 ;;		On exit  : 0/0
+  1955 ;;		Unchanged: 0/0
+  1956 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  1957 ;;      Params:         0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1958 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1959 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1960 ;;      Totals:         0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  1961 ;;Total ram usage:        1 bytes
+  1962 ;; Hardware stack levels used: 1
+  1963 ;; Hardware stack levels required when called: 4
+  1964 ;; This function calls:
+  1965 ;;		Nothing
+  1966 ;; This function is called by:
+  1967 ;;		_main
+  1968 ;;		_mcp_write_reg
+  1969 ;;		_mcp_read_reg
+  1970 ;;		i1_mcp_write_reg
+  1971 ;;		_mcp_bit_modify
+  1972 ;; This function uses a non-reentrant model
+  1973 ;;
+  1974                           
+  1975                           
+  1976                           ;psect for function _spi_write
+  1977  02C3                     _spi_write:
+  1978                           
+  1979                           ;Skip over the trampoline to the duplicate function for level 1
+  1980  02C3  1C7E               	btfss	int$flags,0
+  1981  02C4  2AC7               	goto	_spi_write$intlevel0
+  1982  02C5  3183  2B2B         	ljmp	i1_spi_write
+  1983  02C7                     _spi_write$intlevel0:
+  1984  02C7                     l975:	
+  1985                           ;incstack = 0
+  1986                           ; Regs used in _spi_write: [wreg]
+  1987                           
+  1988  02C7  0024               	movlb	4	; select bank4
+  1989  02C8  0811               	movf	17,w	;volatile
+  1990  02C9                     l977:
+  1991                           
+  1992                           ;spi.c: 24:     PIR1bits.SSP1IF = 0;
+  1993  02C9  0020               	movlb	0	; select bank0
+  1994  02CA  1191               	bcf	17,3	;volatile
+  1995  02CB                     l979:
+  1996                           
+  1997                           ;spi.c: 25:     SSPCONbits.WCOL = 0;
+  1998  02CB  0024               	movlb	4	; select bank4
+  1999  02CC  1395               	bcf	21,7	;volatile
+  2000                           
+  2001                           ;spi.c: 26:     SSPBUF = data;
+  2002  02CD  0020               	movlb	0	; select bank0
+  2003  02CE  082B               	movf	spi_write@data,w
+  2004  02CF  0024               	movlb	4	; select bank4
+  2005  02D0  0091               	movwf	17	;volatile
+  2006  02D1                     l134:	
+  2007                           ;spi.c: 27:     while(!PIR1bits.SSP1IF) {};
+  2008                           
+  2009  02D1  0020               	movlb	0	; select bank0
+  2010  02D2  1D91               	btfss	17,3	;volatile
+  2011  02D3  2AD5               	goto	u251
+  2012  02D4  2AD6               	goto	u250
+  2013  02D5                     u251:
+  2014  02D5  2AD1               	goto	l134
+  2015  02D6                     u250:
+  2016  02D6                     l137:
+  2017  02D6  0008               	return
+  2018  02D7                     __end_of_spi_write:
+  2019                           
+  2020                           	psect	text7
+  2021  030F                     __ptext7:	
+  2022 ;; *************** function _spi_read *****************
+  2023 ;; Defined at:
+  2024 ;;		line 30 in file "spi.c"
+  2025 ;; Parameters:    Size  Location     Type
+  2026 ;;		None
+  2027 ;; Auto vars:     Size  Location     Type
+  2028 ;;  temp            1    0        unsigned char 
+  2029 ;; Return value:  Size  Location     Type
+  2030 ;;                  1    wreg      unsigned char 
+  2031 ;; Registers used:
+  2032 ;;		wreg, status,2
+  2033 ;; Tracked objects:
+  2034 ;;		On entry : 0/0
+  2035 ;;		On exit  : 0/0
+  2036 ;;		Unchanged: 0/0
+  2037 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2038 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2039 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2040 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2041 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2042 ;;Total ram usage:        0 bytes
+  2043 ;; Hardware stack levels used: 1
+  2044 ;; Hardware stack levels required when called: 4
+  2045 ;; This function calls:
+  2046 ;;		Nothing
+  2047 ;; This function is called by:
+  2048 ;;		_main
+  2049 ;;		_mcp_read_reg
+  2050 ;; This function uses a non-reentrant model
+  2051 ;;
+  2052                           
+  2053                           
+  2054                           ;psect for function _spi_read
+  2055  030F                     _spi_read:
+  2056  030F                     l981:	
+  2057                           ;incstack = 0
+  2058                           ; Regs used in _spi_read: [wreg+status,2]
+  2059                           
+  2060  030F  0024               	movlb	4	; select bank4
+  2061  0310  0811               	movf	17,w	;volatile
+  2062  0311                     l983:
+  2063                           
+  2064                           ;spi.c: 33:     PIR1bits.SSP1IF = 0;
+  2065  0311  0020               	movlb	0	; select bank0
+  2066  0312  1191               	bcf	17,3	;volatile
+  2067  0313                     l985:
+  2068                           
+  2069                           ;spi.c: 35:     SSPBUF = 0;
+  2070  0313  0024               	movlb	4	; select bank4
+  2071  0314  0191               	clrf	17	;volatile
+  2072  0315                     l140:	
+  2073                           ;spi.c: 36:     while(!PIR1bits.SSP1IF) {}
+  2074                           
+  2075  0315  0020               	movlb	0	; select bank0
+  2076  0316  1D91               	btfss	17,3	;volatile
+  2077  0317  2B19               	goto	u261
+  2078  0318  2B1A               	goto	u260
+  2079  0319                     u261:
+  2080  0319  2B15               	goto	l140
+  2081  031A                     u260:
+  2082  031A                     l987:
+  2083                           
+  2084                           ;spi.c: 37:     return SSPBUF;
+  2085  031A  0024               	movlb	4	; select bank4
+  2086  031B  0811               	movf	17,w	;volatile
+  2087  031C                     l143:
+  2088  031C  0008               	return
+  2089  031D                     __end_of_spi_read:
+  2090                           
+  2091                           	psect	text8
+  2092  02EB                     __ptext8:	
+  2093 ;; *************** function _cs_drive *****************
+  2094 ;; Defined at:
+  2095 ;;		line 40 in file "spi.c"
+  2096 ;; Parameters:    Size  Location     Type
+  2097 ;;  state           1   11[BANK0 ] unsigned char 
+  2098 ;; Auto vars:     Size  Location     Type
+  2099 ;;		None
+  2100 ;; Return value:  Size  Location     Type
+  2101 ;;                  1    wreg      void 
+  2102 ;; Registers used:
+  2103 ;;		wreg, status,2, status,0
+  2104 ;; Tracked objects:
+  2105 ;;		On entry : 0/0
+  2106 ;;		On exit  : 0/0
+  2107 ;;		Unchanged: 0/0
+  2108 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2109 ;;      Params:         0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2110 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2111 ;;      Temps:          0       1       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2112 ;;      Totals:         0       2       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2113 ;;Total ram usage:        2 bytes
+  2114 ;; Hardware stack levels used: 1
+  2115 ;; Hardware stack levels required when called: 4
+  2116 ;; This function calls:
+  2117 ;;		Nothing
+  2118 ;; This function is called by:
+  2119 ;;		_main
+  2120 ;;		_mcp_write_reg
+  2121 ;;		_mcp_read_reg
+  2122 ;;		i1_mcp_write_reg
+  2123 ;;		_mcp_can_init
+  2124 ;;		_mcp_bit_modify
+  2125 ;; This function uses a non-reentrant model
+  2126 ;;
+  2127                           
+  2128                           
+  2129                           ;psect for function _cs_drive
+  2130  02EB                     _cs_drive:
+  2131                           
+  2132                           ;Skip over the trampoline to the duplicate function for level 1
+  2133  02EB  1C7E               	btfss	int$flags,0
+  2134  02EC  2AEF               	goto	_cs_drive$intlevel0
+  2135  02ED  3183  2B39         	ljmp	i1_cs_drive
+  2136  02EF                     _cs_drive$intlevel0:
+  2137  02EF                     l991:	
+  2138                           ;incstack = 0
+  2139                           ; Regs used in _cs_drive: [wreg+status,2+status,0]
+  2140                           
+  2141                           
+  2142                           ;spi.c: 41:     if(state)
+  2143  02EF  0020               	movlb	0	; select bank0
+  2144  02F0  082B               	movf	cs_drive@state,w
+  2145  02F1  1903               	btfsc	3,2
+  2146  02F2  2AF4               	goto	u271
+  2147  02F3  2AF5               	goto	u270
+  2148  02F4                     u271:
+  2149  02F4  2AF8               	goto	l995
+  2150  02F5                     u270:
+  2151  02F5                     l993:
+  2152                           
+  2153                           ;spi.c: 42:         LATC |= (1 << 3);
+  2154  02F5  0022               	movlb	2	; select bank2
+  2155  02F6  158E               	bsf	14,3	;volatile
+  2156  02F7  2AFD               	goto	l148
+  2157  02F8                     l995:
+  2158                           
+  2159                           ;spi.c: 44:         LATC &= ~(1 << 3);
+  2160  02F8  30F7               	movlw	247
+  2161  02F9  00AC               	movwf	??_cs_drive
+  2162  02FA  082C               	movf	??_cs_drive,w
+  2163  02FB  0022               	movlb	2	; select bank2
+  2164  02FC  058E               	andwf	14,f	;volatile
+  2165  02FD                     l148:
+  2166  02FD  0008               	return
+  2167  02FE                     __end_of_cs_drive:
+  2168                           
+  2169                           	psect	text9
+  2170  0347                     __ptext9:	
+  2171 ;; *************** function _SYSTEM_Initialize *****************
+  2172 ;; Defined at:
+  2173 ;;		line 50 in file "mcc_generated_files/mcc.c"
+  2174 ;; Parameters:    Size  Location     Type
+  2175 ;;		None
+  2176 ;; Auto vars:     Size  Location     Type
+  2177 ;;		None
+  2178 ;; Return value:  Size  Location     Type
+  2179 ;;                  1    wreg      void 
+  2180 ;; Registers used:
+  2181 ;;		wreg, status,2, status,0, pclath, cstack
+  2182 ;; Tracked objects:
+  2183 ;;		On entry : 0/0
+  2184 ;;		On exit  : 0/0
+  2185 ;;		Unchanged: 0/0
+  2186 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2187 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2188 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2189 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2190 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2191 ;;Total ram usage:        0 bytes
+  2192 ;; Hardware stack levels used: 1
+  2193 ;; Hardware stack levels required when called: 5
+  2194 ;; This function calls:
+  2195 ;;		_OSCILLATOR_Initialize
+  2196 ;;		_PIN_MANAGER_Initialize
+  2197 ;;		_TIMER_Initialize
+  2198 ;;		_WDT_Initialize
+  2199 ;; This function is called by:
+  2200 ;;		_main
+  2201 ;; This function uses a non-reentrant model
+  2202 ;;
+  2203                           
+  2204                           
+  2205                           ;psect for function _SYSTEM_Initialize
+  2206  0347                     _SYSTEM_Initialize:
+  2207  0347                     l1073:	
+  2208                           ;incstack = 0
+  2209                           ; Regs used in _SYSTEM_Initialize: [wreg+status,2+status,0+pclath+cstack]
+  2210                           
+  2211                           
+  2212                           ;mcc_generated_files/mcc.c: 53:     PIN_MANAGER_Initialize();
+  2213  0347  3182  22D7  3183   	fcall	_PIN_MANAGER_Initialize
+  2214                           
+  2215                           ;mcc_generated_files/mcc.c: 54:     OSCILLATOR_Initialize();
+  2216  034A  3183  231D  3183   	fcall	_OSCILLATOR_Initialize
+  2217                           
+  2218                           ;mcc_generated_files/mcc.c: 55:     WDT_Initialize();
+  2219  034D  3183  235D  3183   	fcall	_WDT_Initialize
+  2220                           
+  2221                           ;mcc_generated_files/mcc.c: 56:     TIMER_Initialize();
+  2222  0350  3183  2354  3183   	fcall	_TIMER_Initialize
+  2223  0353                     l47:
+  2224  0353  0008               	return
+  2225  0354                     __end_of_SYSTEM_Initialize:
+  2226                           
+  2227                           	psect	text10
+  2228  035D                     __ptext10:	
+  2229 ;; *************** function _WDT_Initialize *****************
+  2230 ;; Defined at:
+  2231 ;;		line 86 in file "mcc_generated_files/mcc.c"
+  2232 ;; Parameters:    Size  Location     Type
+  2233 ;;		None
+  2234 ;; Auto vars:     Size  Location     Type
+  2235 ;;		None
+  2236 ;; Return value:  Size  Location     Type
+  2237 ;;                  1    wreg      void 
+  2238 ;; Registers used:
+  2239 ;;		wreg
+  2240 ;; Tracked objects:
+  2241 ;;		On entry : 0/0
+  2242 ;;		On exit  : 0/0
+  2243 ;;		Unchanged: 0/0
+  2244 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2245 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2246 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2247 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2248 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2249 ;;Total ram usage:        0 bytes
+  2250 ;; Hardware stack levels used: 1
+  2251 ;; Hardware stack levels required when called: 4
+  2252 ;; This function calls:
+  2253 ;;		Nothing
+  2254 ;; This function is called by:
+  2255 ;;		_SYSTEM_Initialize
+  2256 ;; This function uses a non-reentrant model
+  2257 ;;
+  2258                           
+  2259                           
+  2260                           ;psect for function _WDT_Initialize
+  2261  035D                     _WDT_Initialize:
+  2262  035D                     l1033:	
+  2263                           ;incstack = 0
+  2264                           ; Regs used in _WDT_Initialize: [wreg]
+  2265                           
+  2266                           
+  2267                           ;mcc_generated_files/mcc.c: 89:     WDTCON = 0x16;
+  2268  035D  3016               	movlw	22
+  2269  035E  0021               	movlb	1	; select bank1
+  2270  035F  0097               	movwf	23	;volatile
+  2271  0360                     l59:
+  2272  0360  0008               	return
+  2273  0361                     __end_of_WDT_Initialize:
+  2274                           
+  2275                           	psect	text11
+  2276  0354                     __ptext11:	
+  2277 ;; *************** function _TIMER_Initialize *****************
+  2278 ;; Defined at:
+  2279 ;;		line 59 in file "mcc_generated_files/mcc.c"
+  2280 ;; Parameters:    Size  Location     Type
+  2281 ;;		None
+  2282 ;; Auto vars:     Size  Location     Type
+  2283 ;;		None
+  2284 ;; Return value:  Size  Location     Type
+  2285 ;;                  1    wreg      void 
+  2286 ;; Registers used:
+  2287 ;;		wreg, status,2, status,0
+  2288 ;; Tracked objects:
+  2289 ;;		On entry : 0/0
+  2290 ;;		On exit  : 0/0
+  2291 ;;		Unchanged: 0/0
+  2292 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2293 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2294 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2295 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2296 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2297 ;;Total ram usage:        0 bytes
+  2298 ;; Hardware stack levels used: 1
+  2299 ;; Hardware stack levels required when called: 4
+  2300 ;; This function calls:
+  2301 ;;		Nothing
+  2302 ;; This function is called by:
+  2303 ;;		_SYSTEM_Initialize
+  2304 ;; This function uses a non-reentrant model
+  2305 ;;
+  2306                           
+  2307                           
+  2308                           ;psect for function _TIMER_Initialize
+  2309  0354                     _TIMER_Initialize:
+  2310  0354                     l1035:	
+  2311                           ;incstack = 0
+  2312                           ; Regs used in _TIMER_Initialize: [wreg+status,2+status,0]
+  2313                           
+  2314                           
+  2315                           ;mcc_generated_files/mcc.c: 62:     T1CONbits.TMR1ON = 1;
+  2316  0354  0020               	movlb	0	; select bank0
+  2317  0355  1418               	bsf	24,0	;volatile
+  2318  0356                     l1037:
+  2319                           
+  2320                           ;mcc_generated_files/mcc.c: 64:     T1CONbits.TMR1CS = 0;
+  2321  0356  303F               	movlw	-193
+  2322  0357  0598               	andwf	24,f	;volatile
+  2323                           
+  2324                           ;mcc_generated_files/mcc.c: 66:     T1CONbits.T1CKPS = 0b11;
+  2325  0358  3030               	movlw	48
+  2326  0359  0498               	iorwf	24,f	;volatile
+  2327  035A                     l1039:
+  2328                           
+  2329                           ;mcc_generated_files/mcc.c: 68:     PIE1bits.TMR1IE = 1;
+  2330  035A  0021               	movlb	1	; select bank1
+  2331  035B  1411               	bsf	17,0	;volatile
+  2332  035C                     l50:
+  2333  035C  0008               	return
+  2334  035D                     __end_of_TIMER_Initialize:
+  2335                           
+  2336                           	psect	text12
+  2337  02D7                     __ptext12:	
+  2338 ;; *************** function _PIN_MANAGER_Initialize *****************
+  2339 ;; Defined at:
+  2340 ;;		line 57 in file "mcc_generated_files/pin_manager.c"
+  2341 ;; Parameters:    Size  Location     Type
+  2342 ;;		None
+  2343 ;; Auto vars:     Size  Location     Type
+  2344 ;;		None
+  2345 ;; Return value:  Size  Location     Type
+  2346 ;;                  1    wreg      void 
+  2347 ;; Registers used:
+  2348 ;;		wreg, status,2
+  2349 ;; Tracked objects:
+  2350 ;;		On entry : 0/0
+  2351 ;;		On exit  : 0/0
+  2352 ;;		Unchanged: 0/0
+  2353 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2354 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2355 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2356 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2357 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2358 ;;Total ram usage:        0 bytes
+  2359 ;; Hardware stack levels used: 1
+  2360 ;; Hardware stack levels required when called: 4
+  2361 ;; This function calls:
+  2362 ;;		Nothing
+  2363 ;; This function is called by:
+  2364 ;;		_SYSTEM_Initialize
+  2365 ;; This function uses a non-reentrant model
+  2366 ;;
+  2367                           
+  2368                           
+  2369                           ;psect for function _PIN_MANAGER_Initialize
+  2370  02D7                     _PIN_MANAGER_Initialize:
+  2371  02D7                     l1009:	
+  2372                           ;incstack = 0
+  2373                           ; Regs used in _PIN_MANAGER_Initialize: [wreg+status,2]
+  2374                           
+  2375                           
+  2376                           ;mcc_generated_files/pin_manager.c: 62:     LATA = 0x00;
+  2377  02D7  0022               	movlb	2	; select bank2
+  2378  02D8  018C               	clrf	12	;volatile
+  2379  02D9                     l1011:
+  2380                           
+  2381                           ;mcc_generated_files/pin_manager.c: 63:     LATC = 0x30;
+  2382  02D9  3030               	movlw	48
+  2383  02DA  008E               	movwf	14	;volatile
+  2384  02DB                     l1013:
+  2385                           
+  2386                           ;mcc_generated_files/pin_manager.c: 68:     TRISA = 0b00110000;
+  2387  02DB  3030               	movlw	48
+  2388  02DC  0021               	movlb	1	; select bank1
+  2389  02DD  008C               	movwf	12	;volatile
+  2390  02DE                     l1015:
+  2391                           
+  2392                           ;mcc_generated_files/pin_manager.c: 69:     TRISC = 0b00000010;
+  2393  02DE  3002               	movlw	2
+  2394  02DF  008E               	movwf	14	;volatile
+  2395  02E0                     l1017:
+  2396                           
+  2397                           ;mcc_generated_files/pin_manager.c: 74:     ANSELC = 0x00;
+  2398  02E0  0023               	movlb	3	; select bank3
+  2399  02E1  018E               	clrf	14	;volatile
+  2400                           
+  2401                           ;mcc_generated_files/pin_manager.c: 75:     ANSELA = 0x10;
+  2402  02E2  3010               	movlw	16
+  2403  02E3  008C               	movwf	12	;volatile
+  2404  02E4                     l1019:
+  2405                           
+  2406                           ;mcc_generated_files/pin_manager.c: 80:     WPUA = 0x00;
+  2407  02E4  0024               	movlb	4	; select bank4
+  2408  02E5  018C               	clrf	12	;volatile
+  2409  02E6                     l1021:
+  2410                           
+  2411                           ;mcc_generated_files/pin_manager.c: 81:     OPTION_REGbits.nWPUEN = 1;
+  2412  02E6  0021               	movlb	1	; select bank1
+  2413  02E7  1795               	bsf	21,7	;volatile
+  2414  02E8                     l1023:
+  2415                           
+  2416                           ;mcc_generated_files/pin_manager.c: 86:     APFCON = 0x00;
+  2417  02E8  0022               	movlb	2	; select bank2
+  2418  02E9  019D               	clrf	29	;volatile
+  2419  02EA                     l80:
+  2420  02EA  0008               	return
+  2421  02EB                     __end_of_PIN_MANAGER_Initialize:
+  2422                           
+  2423                           	psect	text13
+  2424  031D                     __ptext13:	
+  2425 ;; *************** function _OSCILLATOR_Initialize *****************
+  2426 ;; Defined at:
+  2427 ;;		line 70 in file "mcc_generated_files/mcc.c"
+  2428 ;; Parameters:    Size  Location     Type
+  2429 ;;		None
+  2430 ;; Auto vars:     Size  Location     Type
+  2431 ;;		None
+  2432 ;; Return value:  Size  Location     Type
+  2433 ;;                  1    wreg      void 
+  2434 ;; Registers used:
+  2435 ;;		wreg, status,2
+  2436 ;; Tracked objects:
+  2437 ;;		On entry : 0/0
+  2438 ;;		On exit  : 0/0
+  2439 ;;		Unchanged: 0/0
+  2440 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2441 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2442 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2443 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2444 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2445 ;;Total ram usage:        0 bytes
+  2446 ;; Hardware stack levels used: 1
+  2447 ;; Hardware stack levels required when called: 4
+  2448 ;; This function calls:
+  2449 ;;		Nothing
+  2450 ;; This function is called by:
+  2451 ;;		_SYSTEM_Initialize
+  2452 ;; This function uses a non-reentrant model
+  2453 ;;
+  2454                           
+  2455                           
+  2456                           ;psect for function _OSCILLATOR_Initialize
+  2457  031D                     _OSCILLATOR_Initialize:
+  2458  031D                     l1025:	
+  2459                           ;incstack = 0
+  2460                           ; Regs used in _OSCILLATOR_Initialize: [wreg+status,2]
+  2461                           
+  2462                           
+  2463                           ;mcc_generated_files/mcc.c: 73:     OSCCON = 0x7C;
+  2464  031D  307C               	movlw	124
+  2465  031E  0021               	movlb	1	; select bank1
+  2466  031F  0099               	movwf	25	;volatile
+  2467  0320                     l1027:
+  2468                           
+  2469                           ;mcc_generated_files/mcc.c: 75:     OSCTUNE = 0x00;
+  2470  0320  0198               	clrf	24	;volatile
+  2471  0321                     l1029:
+  2472                           
+  2473                           ;mcc_generated_files/mcc.c: 77:     ACTCON = 0x00;
+  2474  0321  0027               	movlb	7	; select bank7
+  2475  0322  019B               	clrf	27	;volatile
+  2476  0323                     l1031:
+  2477                           
+  2478                           ;mcc_generated_files/mcc.c: 79:     BORCON = 0x00;
+  2479  0323  0022               	movlb	2	; select bank2
+  2480  0324  0196               	clrf	22	;volatile
+  2481  0325                     l53:	
+  2482                           ;mcc_generated_files/mcc.c: 82:     {;mcc_generated_files/mcc.c: 83:     }
+  2483                           
+  2484                           
+  2485                           ;mcc_generated_files/mcc.c: 81:     while(PLLRDY == 0)
+  2486  0325  0021               	movlb	1	; select bank1
+  2487  0326  1F1A               	btfss	26,6	;volatile
+  2488  0327  2B29               	goto	u301
+  2489  0328  2B2A               	goto	u300
+  2490  0329                     u301:
+  2491  0329  2B25               	goto	l53
+  2492  032A                     u300:
+  2493  032A                     l56:
+  2494  032A  0008               	return
+  2495  032B                     __end_of_OSCILLATOR_Initialize:
+  2496                           
+  2497                           	psect	intentry
+  2498  0004                     __pintentry:	
+  2499 ;; *************** function _INTERRUPT_InterruptManager *****************
+  2500 ;; Defined at:
+  2501 ;;		line 55 in file "mcc_generated_files/interrupt_manager.c"
+  2502 ;; Parameters:    Size  Location     Type
+  2503 ;;		None
+  2504 ;; Auto vars:     Size  Location     Type
+  2505 ;;  msg            11    0[BANK0 ] struct .
+  2506 ;; Return value:  Size  Location     Type
+  2507 ;;                  1    wreg      void 
+  2508 ;; Registers used:
+  2509 ;;		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+  2510 ;; Tracked objects:
+  2511 ;;		On entry : 0/0
+  2512 ;;		On exit  : 0/0
+  2513 ;;		Unchanged: 0/0
+  2514 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2515 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2516 ;;      Locals:         0      11       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2517 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2518 ;;      Totals:         1      11       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2519 ;;Total ram usage:       12 bytes
+  2520 ;; Hardware stack levels used: 1
+  2521 ;; Hardware stack levels required when called: 3
+  2522 ;; This function calls:
+  2523 ;;		i1_mcp_can_send
+  2524 ;; This function is called by:
+  2525 ;;		Interrupt level 1
+  2526 ;; This function uses a non-reentrant model
+  2527 ;;
+  2528                           
+  2529  0004                     _INTERRUPT_InterruptManager:
+  2530                           
+  2531                           ;incstack = 0
+  2532  0004  147E               	bsf	int$flags,0	;set compiler interrupt flag (level 1)
+  2533                           
+  2534                           ; Regs used in _INTERRUPT_InterruptManager: [wreg+fsr1l+fsr1h+status,2+status,0+pclath+c
+      +                          stack]
+  2535  0005  3180               	pagesel	$
+  2536  0006                     i1l1131:
+  2537                           
+  2538                           ;mcc_generated_files/interrupt_manager.c: 58:     if(INTCONbits.PEIE == 1)
+  2539  0006  1F0B               	btfss	11,6	;volatile
+  2540  0007  2809               	goto	u41_21
+  2541  0008  280A               	goto	u41_20
+  2542  0009                     u41_21:
+  2543  0009  2837               	goto	i1l20
+  2544  000A                     u41_20:
+  2545  000A                     i1l1133:
+  2546                           
+  2547                           ;mcc_generated_files/interrupt_manager.c: 59:     {;mcc_generated_files/interrupt_manage
+      +                          r.c: 60:         if (PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF == 1)
+  2548  000A  0021               	movlb	1	; select bank1
+  2549  000B  1C11               	btfss	17,0	;volatile
+  2550  000C  280E               	goto	u42_21
+  2551  000D  280F               	goto	u42_20
+  2552  000E                     u42_21:
+  2553  000E  2837               	goto	i1l20
+  2554  000F                     u42_20:
+  2555  000F                     i1l1135:
+  2556  000F  0020               	movlb	0	; select bank0
+  2557  0010  1C11               	btfss	17,0	;volatile
+  2558  0011  2813               	goto	u43_21
+  2559  0012  2814               	goto	u43_20
+  2560  0013                     u43_21:
+  2561  0013  2837               	goto	i1l20
+  2562  0014                     u43_20:
+  2563  0014                     i1l1137:
+  2564                           
+  2565                           ;mcc_generated_files/interrupt_manager.c: 61:         {;mcc_generated_files/interrupt_ma
+      +                          nager.c: 62:             if(counter++ == 100) {
+  2566  0014  3001               	movlw	1
+  2567  0015  07D5               	addwf	_counter,f
+  2568  0016  3000               	movlw	0
+  2569  0017  3DD6               	addwfc	_counter+1,f
+  2570  0018  3065               	movlw	101
+  2571  0019  0655               	xorwf	_counter,w
+  2572  001A  0456               	iorwf	_counter+1,w
+  2573  001B  1D03               	btfss	3,2
+  2574  001C  281E               	goto	u44_21
+  2575  001D  281F               	goto	u44_20
+  2576  001E                     u44_21:
+  2577  001E  2836               	goto	i1l1145
+  2578  001F                     u44_20:
+  2579  001F                     i1l1139:
+  2580                           
+  2581                           ;mcc_generated_files/interrupt_manager.c: 63:               can_msg_t msg;;mcc_generated
+      +                          _files/interrupt_manager.c: 64:               msg.sid = 0x7AD;
+  2582  001F  30AD               	movlw	173
+  2583  0020  00A0               	movwf	INTERRUPT_InterruptManager@msg
+  2584  0021  3007               	movlw	7
+  2585  0022  00A1               	movwf	INTERRUPT_InterruptManager@msg+1
+  2586                           
+  2587                           ;mcc_generated_files/interrupt_manager.c: 65:               msg.data_len = 2;
+  2588  0023  3002               	movlw	2
+  2589  0024  00FB               	movwf	??_INTERRUPT_InterruptManager
+  2590  0025  087B               	movf	??_INTERRUPT_InterruptManager,w
+  2591  0026  00A2               	movwf	INTERRUPT_InterruptManager@msg+2
+  2592                           
+  2593                           ;mcc_generated_files/interrupt_manager.c: 66:               msg.data[0] = 0x99;
+  2594  0027  3099               	movlw	153
+  2595  0028  00FB               	movwf	??_INTERRUPT_InterruptManager
+  2596  0029  087B               	movf	??_INTERRUPT_InterruptManager,w
+  2597  002A  00A3               	movwf	INTERRUPT_InterruptManager@msg+3
+  2598                           
+  2599                           ;mcc_generated_files/interrupt_manager.c: 67:               msg.data[1] = 0xCC;
+  2600  002B  30CC               	movlw	204
+  2601  002C  00FB               	movwf	??_INTERRUPT_InterruptManager
+  2602  002D  087B               	movf	??_INTERRUPT_InterruptManager,w
+  2603  002E  00A4               	movwf	INTERRUPT_InterruptManager@msg+4
+  2604  002F                     i1l1141:
+  2605                           
+  2606                           ;mcc_generated_files/interrupt_manager.c: 68:               mcp_can_send(&msg);
+  2607  002F  3020               	movlw	(low (INTERRUPT_InterruptManager@msg| 0))& (0+255)
+  2608  0030  3181  216F  3180   	fcall	i1_mcp_can_send
+  2609  0033                     i1l1143:
+  2610                           
+  2611                           ;mcc_generated_files/interrupt_manager.c: 69:               counter = 0;
+  2612  0033  0020               	movlb	0	; select bank0
+  2613  0034  01D5               	clrf	_counter
+  2614  0035  01D6               	clrf	_counter+1
+  2615  0036                     i1l1145:
+  2616                           
+  2617                           ;mcc_generated_files/interrupt_manager.c: 71:             PIR1bits.TMR1IF = 0;
+  2618  0036  1011               	bcf	17,0	;volatile
+  2619  0037                     i1l20:	
+  2620                           ;mcc_generated_files/interrupt_manager.c: 72:         }
+  2621                           
+  2622  0037  107E               	bcf	int$flags,0	;clear compiler interrupt flag (level 1)
+  2623  0038  0009               	retfie
+  2624  0039                     __end_of_INTERRUPT_InterruptManager:
+  2625                           
+  2626                           	psect	text15
+  2627  016F                     __ptext15:	
+  2628 ;; *************** function i1_mcp_can_send *****************
+  2629 ;; Defined at:
+  2630 ;;		line 88 in file "../../mcp2515/mcp_2515.c"
+  2631 ;; Parameters:    Size  Location     Type
+  2632 ;;  msg             1    wreg     PTR struct .
+  2633 ;;		 -> main@msg_LEDs_on(11), INTERRUPT_InterruptManager@msg(11), 
+  2634 ;; Auto vars:     Size  Location     Type
+  2635 ;;  msg             1   10[COMMON] PTR struct .
+  2636 ;;		 -> main@msg_LEDs_on(11), INTERRUPT_InterruptManager@msg(11), 
+  2637 ;;  i               2    8[COMMON] int 
+  2638 ;; Return value:  Size  Location     Type
+  2639 ;;                  1    wreg      void 
+  2640 ;; Registers used:
+  2641 ;;		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+  2642 ;; Tracked objects:
+  2643 ;;		On entry : 0/0
+  2644 ;;		On exit  : 0/0
+  2645 ;;		Unchanged: 0/0
+  2646 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2647 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2648 ;;      Locals:         3       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2649 ;;      Temps:          3       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2650 ;;      Totals:         6       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2651 ;;Total ram usage:        6 bytes
+  2652 ;; Hardware stack levels used: 1
+  2653 ;; Hardware stack levels required when called: 2
+  2654 ;; This function calls:
+  2655 ;;		i1_mcp_write_reg
+  2656 ;; This function is called by:
+  2657 ;;		_INTERRUPT_InterruptManager
+  2658 ;; This function uses a non-reentrant model
+  2659 ;;
+  2660                           
+  2661                           
+  2662                           ;psect for function i1_mcp_can_send
+  2663  016F                     i1_mcp_can_send:
+  2664                           
+  2665                           ;incstack = 0
+  2666                           ; Regs used in i1_mcp_can_send: [wreg+fsr1l+fsr1h+status,2+status,0+pclath+cstack]
+  2667                           ;i1mcp_can_send@msg stored from wreg
+  2668  016F  00FA               	movwf	i1mcp_can_send@msg
+  2669  0170                     i1l1113:
+  2670                           
+  2671                           ;../../mcp2515/mcp_2515.c: 89:     mcp_write_reg(0x2C, 0);
+  2672  0170  01F2               	clrf	i1mcp_write_reg@data
+  2673  0171  302C               	movlw	44
+  2674  0172  3182  2294  3181   	fcall	i1_mcp_write_reg
+  2675                           
+  2676                           ;../../mcp2515/mcp_2515.c: 90:     mcp_write_reg(0x2D, 0);
+  2677  0175  01F2               	clrf	i1mcp_write_reg@data
+  2678  0176  302D               	movlw	45
+  2679  0177  3182  2294  3181   	fcall	i1_mcp_write_reg
+  2680  017A                     i1l1115:
+  2681                           
+  2682                           ;../../mcp2515/mcp_2515.c: 92:     mcp_write_reg(0x31, (uint8_t) (msg->sid >> 3));
+  2683  017A  087A               	movf	i1mcp_can_send@msg,w
+  2684  017B  0086               	movwf	6
+  2685  017C  0187               	clrf	7
+  2686  017D  3F40               	moviw [0]fsr1
+  2687  017E  00F5               	movwf	??i1_mcp_can_send
+  2688  017F  3F41               	moviw [1]fsr1
+  2689  0180  00F6               	movwf	??i1_mcp_can_send+1
+  2690  0181  36F6               	lsrf	??i1_mcp_can_send+1,f
+  2691  0182  0CF5               	rrf	??i1_mcp_can_send,f
+  2692  0183  36F6               	lsrf	??i1_mcp_can_send+1,f
+  2693  0184  0CF5               	rrf	??i1_mcp_can_send,f
+  2694  0185  36F6               	lsrf	??i1_mcp_can_send+1,f
+  2695  0186  0CF5               	rrf	??i1_mcp_can_send,f
+  2696  0187  0875               	movf	??i1_mcp_can_send,w
+  2697  0188  00F7               	movwf	??i1_mcp_can_send+2
+  2698  0189  0877               	movf	??i1_mcp_can_send+2,w
+  2699  018A  00F2               	movwf	i1mcp_write_reg@data
+  2700  018B  3031               	movlw	49
+  2701  018C  3182  2294  3181   	fcall	i1_mcp_write_reg
+  2702  018F                     i1l1117:
+  2703                           
+  2704                           ;../../mcp2515/mcp_2515.c: 93:     mcp_write_reg(0x32, (msg->sid & 0x7) << 5);
+  2705  018F  087A               	movf	i1mcp_can_send@msg,w
+  2706  0190  0086               	movwf	6
+  2707  0191  0187               	clrf	7
+  2708  0192  0801               	movf	1,w
+  2709  0193  3907               	andlw	7
+  2710  0194  00F5               	movwf	??i1_mcp_can_send
+  2711  0195  3004               	movlw	4
+  2712  0196                     u39_25:
+  2713  0196  35F5               	lslf	??i1_mcp_can_send,f
+  2714  0197  3EFF               	addlw	-1
+  2715  0198  1D03               	skipz
+  2716  0199  2996               	goto	u39_25
+  2717  019A  3575               	lslf	??i1_mcp_can_send,w
+  2718  019B  00F6               	movwf	??i1_mcp_can_send+1
+  2719  019C  0876               	movf	??i1_mcp_can_send+1,w
+  2720  019D  00F2               	movwf	i1mcp_write_reg@data
+  2721  019E  3032               	movlw	50
+  2722  019F  3182  2294  3181   	fcall	i1_mcp_write_reg
+  2723  01A2                     i1l1119:
+  2724                           
+  2725                           ;../../mcp2515/mcp_2515.c: 96:     for (int i = 0; i < msg->data_len; ++i) {
+  2726  01A2  01F8               	clrf	i1mcp_can_send@i
+  2727  01A3  01F9               	clrf	i1mcp_can_send@i+1
+  2728  01A4  29B6               	goto	i1l1125
+  2729  01A5                     i1l1121:
+  2730                           
+  2731                           ;../../mcp2515/mcp_2515.c: 97:         mcp_write_reg(0x36 + i, msg->data[i]);
+  2732  01A5  0878               	movf	i1mcp_can_send@i,w
+  2733  01A6  077A               	addwf	i1mcp_can_send@msg,w
+  2734  01A7  00F5               	movwf	??i1_mcp_can_send
+  2735  01A8  0875               	movf	??i1_mcp_can_send,w
+  2736  01A9  0086               	movwf	6
+  2737  01AA  0187               	clrf	7
+  2738  01AB  3F43               	moviw [3]fsr1
+  2739  01AC  00F2               	movwf	i1mcp_write_reg@data
+  2740  01AD  0878               	movf	i1mcp_can_send@i,w
+  2741  01AE  3E36               	addlw	54
+  2742  01AF  3182  2294  3181   	fcall	i1_mcp_write_reg
+  2743  01B2                     i1l1123:
+  2744                           
+  2745                           ;../../mcp2515/mcp_2515.c: 98:     }
+  2746  01B2  3001               	movlw	1
+  2747  01B3  07F8               	addwf	i1mcp_can_send@i,f
+  2748  01B4  3000               	movlw	0
+  2749  01B5  3DF9               	addwfc	i1mcp_can_send@i+1,f
+  2750  01B6                     i1l1125:
+  2751  01B6  087A               	movf	i1mcp_can_send@msg,w
+  2752  01B7  3E02               	addlw	2
+  2753  01B8  0086               	movwf	6
+  2754  01B9  0187               	clrf	7
+  2755  01BA  0879               	movf	i1mcp_can_send@i+1,w
+  2756  01BB  3A80               	xorlw	128
+  2757  01BC  00F5               	movwf	??i1_mcp_can_send
+  2758  01BD  3080               	movlw	128
+  2759  01BE  0275               	subwf	??i1_mcp_can_send,w
+  2760  01BF  1D03               	skipz
+  2761  01C0  29C3               	goto	u40_25
+  2762  01C1  0801               	movf	1,w
+  2763  01C2  0278               	subwf	i1mcp_can_send@i,w
+  2764  01C3                     u40_25:
+  2765  01C3  1C03               	skipc
+  2766  01C4  29C6               	goto	u40_21
+  2767  01C5  29C7               	goto	u40_20
+  2768  01C6                     u40_21:
+  2769  01C6  29A5               	goto	i1l1121
+  2770  01C7                     u40_20:
+  2771  01C7                     i1l1127:
+  2772                           
+  2773                           ;../../mcp2515/mcp_2515.c: 101:     mcp_write_reg(0x35, msg->data_len);
+  2774  01C7  087A               	movf	i1mcp_can_send@msg,w
+  2775  01C8  0086               	movwf	6
+  2776  01C9  0187               	clrf	7
+  2777  01CA  3F42               	moviw [2]fsr1
+  2778  01CB  00F2               	movwf	i1mcp_write_reg@data
+  2779  01CC  3035               	movlw	53
+  2780  01CD  3182  2294  3181   	fcall	i1_mcp_write_reg
+  2781  01D0                     i1l1129:
+  2782                           
+  2783                           ;../../mcp2515/mcp_2515.c: 102:     mcp_write_reg(0x30, 1 << 3);
+  2784  01D0  3008               	movlw	8
+  2785  01D1  00F5               	movwf	??i1_mcp_can_send
+  2786  01D2  0875               	movf	??i1_mcp_can_send,w
+  2787  01D3  00F2               	movwf	i1mcp_write_reg@data
+  2788  01D4  3030               	movlw	48
+  2789  01D5  3182  2294  3181   	fcall	i1_mcp_write_reg
+  2790  01D8                     i1l178:
+  2791  01D8  0008               	return
+  2792  01D9                     __end_ofi1_mcp_can_send:
+  2793                           
+  2794                           	psect	text16
+  2795  0294                     __ptext16:	
+  2796 ;; *************** function i1_mcp_write_reg *****************
+  2797 ;; Defined at:
+  2798 ;;		line 26 in file "../../mcp2515/mcp_2515.c"
+  2799 ;; Parameters:    Size  Location     Type
+  2800 ;;  addr            1    wreg     unsigned char 
+  2801 ;;  data            1    2[COMMON] unsigned char 
+  2802 ;; Auto vars:     Size  Location     Type
+  2803 ;;  addr            1    4[COMMON] unsigned char 
+  2804 ;; Return value:  Size  Location     Type
+  2805 ;;                  1    wreg      void 
+  2806 ;; Registers used:
+  2807 ;;		wreg, status,2, status,0, pclath, cstack
+  2808 ;; Tracked objects:
+  2809 ;;		On entry : 0/0
+  2810 ;;		On exit  : 0/0
+  2811 ;;		Unchanged: 0/0
+  2812 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2813 ;;      Params:         1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2814 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2815 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2816 ;;      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2817 ;;Total ram usage:        3 bytes
+  2818 ;; Hardware stack levels used: 1
+  2819 ;; Hardware stack levels required when called: 1
+  2820 ;; This function calls:
+  2821 ;;		Absolute function
+  2822 ;;		i1_cs_drive
+  2823 ;;		i1_spi_write
+  2824 ;; This function is called by:
+  2825 ;;		i1_mcp_can_send
+  2826 ;; This function uses a non-reentrant model
+  2827 ;;
+  2828                           
+  2829                           
+  2830                           ;psect for function i1_mcp_write_reg
+  2831  0294                     i1_mcp_write_reg:
+  2832                           
+  2833                           ;incstack = 0
+  2834                           ; Regs used in i1_mcp_write_reg: [wreg+status,2+status,0+pclath+cstack]
+  2835                           ;i1mcp_write_reg@addr stored from wreg
+  2836  0294  00F4               	movwf	i1mcp_write_reg@addr
+  2837  0295                     i1l1053:
+  2838                           
+  2839                           ;../../mcp2515/mcp_2515.c: 27:     __cs_drive(0);
+  2840  0295  01F0               	clrf	i1cs_drive@state
+  2841  0296  0020               	movlb	0	; select bank0
+  2842  0297  0850               	movf	___cs_drive+1,w
+  2843  0298  008A               	movwf	10
+  2844  0299  084F               	movf	___cs_drive,w
+  2845  029A  000A               	callw
+  2846  029B  3182               	pagesel	$
+  2847                           
+  2848                           ;../../mcp2515/mcp_2515.c: 28:     __spi_write(0b00000010);
+  2849  029C  3002               	movlw	2
+  2850  029D  00F3               	movwf	??i1_mcp_write_reg
+  2851  029E  0873               	movf	??i1_mcp_write_reg,w
+  2852  029F  00F0               	movwf	i1spi_write@data
+  2853  02A0  0020               	movlb	0	; select bank0
+  2854  02A1  0852               	movf	___spi_write+1,w
+  2855  02A2  008A               	movwf	10
+  2856  02A3  0851               	movf	___spi_write,w
+  2857  02A4  000A               	callw
+  2858  02A5  3182               	pagesel	$
+  2859                           
+  2860                           ;../../mcp2515/mcp_2515.c: 29:     __spi_write(addr);
+  2861  02A6  0874               	movf	i1mcp_write_reg@addr,w
+  2862  02A7  00F3               	movwf	??i1_mcp_write_reg
+  2863  02A8  0873               	movf	??i1_mcp_write_reg,w
+  2864  02A9  00F0               	movwf	i1spi_write@data
+  2865  02AA  0020               	movlb	0	; select bank0
+  2866  02AB  0852               	movf	___spi_write+1,w
+  2867  02AC  008A               	movwf	10
+  2868  02AD  0851               	movf	___spi_write,w
+  2869  02AE  000A               	callw
+  2870  02AF  3182               	pagesel	$
+  2871                           
+  2872                           ;../../mcp2515/mcp_2515.c: 30:     __spi_write(data);
+  2873  02B0  0872               	movf	i1mcp_write_reg@data,w
+  2874  02B1  00F3               	movwf	??i1_mcp_write_reg
+  2875  02B2  0873               	movf	??i1_mcp_write_reg,w
+  2876  02B3  00F0               	movwf	i1spi_write@data
+  2877  02B4  0020               	movlb	0	; select bank0
+  2878  02B5  0852               	movf	___spi_write+1,w
+  2879  02B6  008A               	movwf	10
+  2880  02B7  0851               	movf	___spi_write,w
+  2881  02B8  000A               	callw
+  2882  02B9  3182               	pagesel	$
+  2883                           
+  2884                           ;../../mcp2515/mcp_2515.c: 31:     __cs_drive(1);
+  2885  02BA  01F0               	clrf	i1cs_drive@state
+  2886  02BB  0AF0               	incf	i1cs_drive@state,f
+  2887  02BC  0020               	movlb	0	; select bank0
+  2888  02BD  0850               	movf	___cs_drive+1,w
+  2889  02BE  008A               	movwf	10
+  2890  02BF  084F               	movf	___cs_drive,w
+  2891  02C0  000A               	callw
+  2892  02C1  3182               	pagesel	$
+  2893  02C2                     i1l157:
+  2894  02C2  0008               	return
+  2895  02C3                     __end_ofi1_mcp_write_reg:
+  2896                           
+  2897                           	psect	text17
+  2898  032B                     __ptext17:	
+  2899 ;; *************** function i1_spi_write *****************
+  2900 ;; Defined at:
+  2901 ;;		line 22 in file "spi.c"
+  2902 ;; Parameters:    Size  Location     Type
+  2903 ;;  data            1    0[COMMON] unsigned char 
+  2904 ;; Auto vars:     Size  Location     Type
+  2905 ;;  temp            1    0        unsigned char 
+  2906 ;; Return value:  Size  Location     Type
+  2907 ;;                  1    wreg      void 
+  2908 ;; Registers used:
+  2909 ;;		wreg
+  2910 ;; Tracked objects:
+  2911 ;;		On entry : 0/0
+  2912 ;;		On exit  : 0/0
+  2913 ;;		Unchanged: 0/0
+  2914 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2915 ;;      Params:         1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2916 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2917 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2918 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2919 ;;Total ram usage:        1 bytes
+  2920 ;; Hardware stack levels used: 1
+  2921 ;; This function calls:
+  2922 ;;		Nothing
+  2923 ;; This function is called by:
+  2924 ;;		_mcp_write_reg
+  2925 ;;		_mcp_read_reg
+  2926 ;;		i1_mcp_write_reg
+  2927 ;;		_mcp_bit_modify
+  2928 ;; This function uses a non-reentrant model
+  2929 ;;
+  2930                           
+  2931                           
+  2932                           ;psect for function i1_spi_write
+  2933  032B                     i1_spi_write:
+  2934  032B                     i1l997:	
+  2935                           ;incstack = 0
+  2936                           ; Regs used in i1_spi_write: [wreg]
+  2937                           
+  2938  032B  0024               	movlb	4	; select bank4
+  2939  032C  0811               	movf	17,w	;volatile
+  2940  032D                     i1l999:
+  2941                           
+  2942                           ;spi.c: 24:     PIR1bits.SSP1IF = 0;
+  2943  032D  0020               	movlb	0	; select bank0
+  2944  032E  1191               	bcf	17,3	;volatile
+  2945  032F                     i1l1001:
+  2946                           
+  2947                           ;spi.c: 25:     SSPCONbits.WCOL = 0;
+  2948  032F  0024               	movlb	4	; select bank4
+  2949  0330  1395               	bcf	21,7	;volatile
+  2950                           
+  2951                           ;spi.c: 26:     SSPBUF = data;
+  2952  0331  0870               	movf	i1spi_write@data,w
+  2953  0332  0091               	movwf	17	;volatile
+  2954  0333                     i1l134:	
+  2955                           ;spi.c: 27:     while(!PIR1bits.SSP1IF) {};
+  2956                           
+  2957  0333  0020               	movlb	0	; select bank0
+  2958  0334  1D91               	btfss	17,3	;volatile
+  2959  0335  2B37               	goto	u28_21
+  2960  0336  2B38               	goto	u28_20
+  2961  0337                     u28_21:
+  2962  0337  2B33               	goto	i1l134
+  2963  0338                     u28_20:
+  2964  0338                     i1l137:
+  2965  0338  0008               	return
+  2966  0339                     __end_ofi1_spi_write:
+  2967                           
+  2968                           	psect	text18
+  2969  0339                     __ptext18:	
+  2970 ;; *************** function i1_cs_drive *****************
+  2971 ;; Defined at:
+  2972 ;;		line 40 in file "spi.c"
+  2973 ;; Parameters:    Size  Location     Type
+  2974 ;;  state           1    0[COMMON] unsigned char 
+  2975 ;; Auto vars:     Size  Location     Type
+  2976 ;;		None
+  2977 ;; Return value:  Size  Location     Type
+  2978 ;;                  1    wreg      void 
+  2979 ;; Registers used:
+  2980 ;;		wreg, status,2, status,0
+  2981 ;; Tracked objects:
+  2982 ;;		On entry : 0/0
+  2983 ;;		On exit  : 0/0
+  2984 ;;		Unchanged: 0/0
+  2985 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12
+  2986 ;;      Params:         1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2987 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2988 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2989 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0
+  2990 ;;Total ram usage:        2 bytes
+  2991 ;; Hardware stack levels used: 1
+  2992 ;; This function calls:
+  2993 ;;		Nothing
+  2994 ;; This function is called by:
+  2995 ;;		_mcp_write_reg
+  2996 ;;		_mcp_read_reg
+  2997 ;;		i1_mcp_write_reg
+  2998 ;;		_mcp_can_init
+  2999 ;;		_mcp_bit_modify
+  3000 ;; This function uses a non-reentrant model
+  3001 ;;
+  3002                           
+  3003                           
+  3004                           ;psect for function i1_cs_drive
+  3005  0339                     i1_cs_drive:
+  3006  0339                     i1l1003:	
+  3007                           ;incstack = 0
+  3008                           ; Regs used in i1_cs_drive: [wreg+status,2+status,0]
+  3009                           
+  3010                           
+  3011                           ;spi.c: 41:     if(state)
+  3012  0339  0870               	movf	i1cs_drive@state,w
+  3013  033A  1903               	btfsc	3,2
+  3014  033B  2B3D               	goto	u29_21
+  3015  033C  2B3E               	goto	u29_20
+  3016  033D                     u29_21:
+  3017  033D  2B41               	goto	i1l1007
+  3018  033E                     u29_20:
+  3019  033E                     i1l1005:
+  3020                           
+  3021                           ;spi.c: 42:         LATC |= (1 << 3);
+  3022  033E  0022               	movlb	2	; select bank2
+  3023  033F  158E               	bsf	14,3	;volatile
+  3024  0340  2B46               	goto	i1l148
+  3025  0341                     i1l1007:
+  3026                           
+  3027                           ;spi.c: 44:         LATC &= ~(1 << 3);
+  3028  0341  30F7               	movlw	247
+  3029  0342  00F1               	movwf	??i1_cs_drive
+  3030  0343  0871               	movf	??i1_cs_drive,w
+  3031  0344  0022               	movlb	2	; select bank2
+  3032  0345  058E               	andwf	14,f	;volatile
+  3033  0346                     i1l148:
+  3034  0346  0008               	return
+  3035  0347                     __end_ofi1_cs_drive:
+  3036  007E                     btemp	set	126	;btemp
+  3037  007E                     int$flags	set	126
+  3038  007E                     wtemp0	set	126
+  3039                           
+  3040                           	psect	config
+  3041                           
+  3042                           ;Config register CONFIG1 @ 0x8007
+  3043                           ;	Oscillator Selection Bits
+  3044                           ;	FOSC = INTOSC, INTOSC oscillator: I/O function on CLKIN pin
+  3045                           ;	Watchdog Timer Enable
+  3046                           ;	WDTE = OFF, WDT disabled
+  3047                           ;	Power-up Timer Enable
+  3048                           ;	PWRTE = OFF, PWRT disabled
+  3049                           ;	MCLR Pin Function Select
+  3050                           ;	MCLRE = ON, MCLR/VPP pin function is MCLR
+  3051                           ;	Flash Program Memory Code Protection
+  3052                           ;	CP = OFF, Program memory code protection is disabled
+  3053                           ;	Brown-out Reset Enable
+  3054                           ;	BOREN = ON, Brown-out Reset enabled
+  3055                           ;	Clock Out Enable
+  3056                           ;	CLKOUTEN = ON, CLKOUT function is enabled on the CLKOUT pin
+  3057                           ;	Internal/External Switchover Mode
+  3058                           ;	IESO = ON, Internal/External Switchover Mode is enabled
+  3059                           ;	Fail-Safe Clock Monitor Enable
+  3060                           ;	FCMEN = ON, Fail-Safe Clock Monitor is enabled
+  3061  8007                     	org	32775
+  3062  8007  37E4               	dw	14308
+  3063                           
+  3064                           ;Config register CONFIG2 @ 0x8008
+  3065                           ;	Flash Memory Self-Write Protection
+  3066                           ;	WRT = OFF, Write protection off
+  3067                           ;	CPU System Clock Selection Bit
+  3068                           ;	CPUDIV = NOCLKDIV, NO CPU system divide
+  3069                           ;	USB Low SPeed Clock Selection bit
+  3070                           ;	USBLSCLK = 48MHz, System clock expects 48 MHz, FS/LS USB CLKENs divide-by is set to 8.
+  3071                           ;	PLL Multipler Selection Bit
+  3072                           ;	PLLMULT = 3x, 3x Output Frequency Selected
+  3073                           ;	PLL Enable Bit
+  3074                           ;	PLLEN = ENABLED, 3x or 4x PLL Enabled
+  3075                           ;	Stack Overflow/Underflow Reset Enable
+  3076                           ;	STVREN = ON, Stack Overflow or Underflow will cause a Reset
+  3077                           ;	Brown-out Reset Voltage Selection
+  3078                           ;	BORV = LO, Brown-out Reset Voltage (Vbor), low trip point selected.
+  3079                           ;	Low-Power Brown Out Reset
+  3080                           ;	LPBOR = OFF, Low-Power BOR is disabled
+  3081                           ;	Low-Voltage Programming Enable
+  3082                           ;	LVP = ON, Low-voltage programming enabled
+  3083  8008                     	org	32776
+  3084  8008  3FCF               	dw	16335
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         8
+    Persistent  32
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON           14     12      12
+    BANK0            80     47      55
+    BANK1            80      0       0
+    BANK2            80      0       0
+    BANK3            80      0       0
+    BANK4            80      0       0
+    BANK5            80      0       0
+    BANK6            80      0       0
+    BANK7            80      0       0
+    BANK8            80      0       0
+    BANK9            80      0       0
+    BANK10           80      0       0
+    BANK11           80      0       0
+    BANK12           48      0       0
+
+Pointer List with Targets:
+
+    mcp_can_send@msg	PTR struct . size(1) Largest target is 11
+		 -> main@msg_LEDs_on(BANK0[11]), INTERRUPT_InterruptManager@msg(BANK0[11]), 
+
+    mcp_can_init@can_params	PTR struct . size(1) Largest target is 7
+		 -> main@can_setup(BANK0[7]), 
+
+    mcp_can_init@cs_drive_fcn	PTR FTN(unsigned char ,)void  size(2) Largest target is 1
+		 -> cs_drive(), 
+
+    mcp_can_init@spi_write_fcn	PTR FTN(unsigned char ,)void  size(2) Largest target is 1
+		 -> spi_write(), 
+
+    mcp_can_init@spi_read_fcn	PTR FTN()unsigned char  size(2) Largest target is 1
+		 -> spi_read(), 
+
+    __spi_read	PTR FTN()unsigned char  size(2) Largest target is 1
+		 -> Absolute function(), spi_read(), 
+
+    __spi_write	PTR FTN(unsigned char ,)void  size(2) Largest target is 1
+		 -> i1_spi_write(), Absolute function(), spi_write(), 
+
+    __cs_drive	PTR FTN(unsigned char ,)void  size(2) Largest target is 1
+		 -> i1_cs_drive(), Absolute function(), cs_drive(), 
+
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in COMMON
+
+    _INTERRUPT_InterruptManager->i1_mcp_can_send
+    i1_mcp_can_send->i1_mcp_write_reg
+    i1_mcp_write_reg->i1_cs_drive
+
+Critical Paths under _main in BANK0
+
+    _main->_mcp_can_init
+    _mcp_can_send->_mcp_write_reg
+    _mcp_can_init->_mcp_read_reg
+    _mcp_can_init->_mcp_write_reg
+    _mcp_write_reg->_cs_drive
+    _mcp_read_reg->_cs_drive
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK7
+
+    None.
+
+Critical Paths under _main in BANK8
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK8
+
+    None.
+
+Critical Paths under _main in BANK9
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK9
+
+    None.
+
+Critical Paths under _main in BANK10
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK10
+
+    None.
+
+Critical Paths under _main in BANK11
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK11
+
+    None.
+
+Critical Paths under _main in BANK12
+
+    None.
+
+Critical Paths under _INTERRUPT_InterruptManager in BANK12
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                20    20      0    6770
+                                             27 BANK0     20    20      0
+                  _SYSTEM_Initialize
+                       _mcp_can_init
+                       _mcp_can_send
+                           _spi_init
+ ---------------------------------------------------------------------------------
+ (1) _spi_init                                             1     1      0       0
+                                             11 BANK0      1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _mcp_can_send                                         6     6      0    2473
+                                             16 BANK0      6     6      0
+                      _mcp_write_reg
+ ---------------------------------------------------------------------------------
+ (1) _mcp_can_init                                        11     5      6    4042
+                                             16 BANK0     11     5      6
+                   Absolute function *
+                           _cs_drive *
+                       _mcp_read_reg
+                      _mcp_write_reg
+ ---------------------------------------------------------------------------------
+ (2) _mcp_write_reg                                        3     2      1    2229
+                                             13 BANK0      3     2      1
+                   Absolute function *
+                           _cs_drive *
+                          _spi_write *
+ ---------------------------------------------------------------------------------
+ (2) _mcp_read_reg                                         3     3      0     939
+                                             13 BANK0      3     3      0
+                   Absolute function *
+                           _cs_drive *
+                           _spi_read *
+                          _spi_write *
+ ---------------------------------------------------------------------------------
+ (3) _spi_write                                            2     1      1     500
+                                             11 BANK0      1     0      1
+ ---------------------------------------------------------------------------------
+ (3) _spi_read                                             1     1      0       1
+ ---------------------------------------------------------------------------------
+ (3) _cs_drive                                             2     1      1     393
+                                             11 BANK0      2     1      1
+ ---------------------------------------------------------------------------------
+ (7) Absolute function(Fake)                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _SYSTEM_Initialize                                    0     0      0       0
+              _OSCILLATOR_Initialize
+             _PIN_MANAGER_Initialize
+                   _TIMER_Initialize
+                     _WDT_Initialize
+ ---------------------------------------------------------------------------------
+ (2) _WDT_Initialize                                       0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _TIMER_Initialize                                     0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _PIN_MANAGER_Initialize                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (2) _OSCILLATOR_Initialize                                0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 7
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (4) _INTERRUPT_InterruptManager                          12    12      0     684
+                                             11 COMMON     1     1      0
+                                              0 BANK0     11    11      0
+                     i1_mcp_can_send
+ ---------------------------------------------------------------------------------
+ (5) i1_mcp_can_send                                       6     6      0     579
+                                              5 COMMON     6     6      0
+                    i1_mcp_write_reg
+ ---------------------------------------------------------------------------------
+ (6) i1_mcp_write_reg                                      3     2      1     401
+                                              2 COMMON     3     2      1
+                   Absolute function *
+                         i1_cs_drive *
+                        i1_spi_write *
+ ---------------------------------------------------------------------------------
+ (7) i1_spi_write                                          2     1      1     101
+                                              0 COMMON     1     0      1
+ ---------------------------------------------------------------------------------
+ (7) i1_cs_drive                                           2     1      1      74
+                                              0 COMMON     2     1      1
+ ---------------------------------------------------------------------------------
+ (7) Absolute function(Fake)                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 7
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _SYSTEM_Initialize
+     _OSCILLATOR_Initialize
+     _PIN_MANAGER_Initialize
+     _TIMER_Initialize
+     _WDT_Initialize
+   _mcp_can_init
+     Absolute function(Fake) *
+     _cs_drive *
+     _mcp_read_reg *
+       Absolute function(Fake) *
+       _cs_drive *
+       _spi_read *
+       _spi_write *
+     _mcp_write_reg *
+       Absolute function(Fake) *
+       _cs_drive *
+       _spi_write *
+   _mcp_can_send
+     _mcp_write_reg
+   _spi_init
+
+ _INTERRUPT_InterruptManager (ROOT)
+   i1_mcp_can_send
+     i1_mcp_write_reg
+       Absolute function(Fake) *
+       i1_cs_drive *
+       i1_spi_write *
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             3F0      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITCOMMON            E      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               E      C       C       2       85.7%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+BITSFR2              0      0       0       3        0.0%
+SFR2                 0      0       0       3        0.0%
+STACK                0      0       0       3        0.0%
+BITBANK0            50      0       0       4        0.0%
+BITSFR3              0      0       0       4        0.0%
+SFR3                 0      0       0       4        0.0%
+BANK0               50     2F      37       5       68.8%
+BITSFR4              0      0       0       5        0.0%
+SFR4                 0      0       0       5        0.0%
+BITBANK1            50      0       0       6        0.0%
+BITSFR5              0      0       0       6        0.0%
+SFR5                 0      0       0       6        0.0%
+BANK1               50      0       0       7        0.0%
+BITSFR6              0      0       0       7        0.0%
+SFR6                 0      0       0       7        0.0%
+BITBANK2            50      0       0       8        0.0%
+BITSFR7              0      0       0       8        0.0%
+SFR7                 0      0       0       8        0.0%
+BANK2               50      0       0       9        0.0%
+BITSFR8              0      0       0       9        0.0%
+SFR8                 0      0       0       9        0.0%
+BITBANK3            50      0       0      10        0.0%
+BITSFR9              0      0       0      10        0.0%
+SFR9                 0      0       0      10        0.0%
+BANK3               50      0       0      11        0.0%
+BITSFR10             0      0       0      11        0.0%
+SFR10                0      0       0      11        0.0%
+BITBANK4            50      0       0      12        0.0%
+BITSFR11             0      0       0      12        0.0%
+SFR11                0      0       0      12        0.0%
+BANK4               50      0       0      13        0.0%
+BITSFR12             0      0       0      13        0.0%
+SFR12                0      0       0      13        0.0%
+BITBANK5            50      0       0      14        0.0%
+BITSFR13             0      0       0      14        0.0%
+SFR13                0      0       0      14        0.0%
+BANK5               50      0       0      15        0.0%
+BITSFR14             0      0       0      15        0.0%
+SFR14                0      0       0      15        0.0%
+BITBANK6            50      0       0      16        0.0%
+BITSFR15             0      0       0      16        0.0%
+SFR15                0      0       0      16        0.0%
+BANK6               50      0       0      17        0.0%
+BITSFR16             0      0       0      17        0.0%
+SFR16                0      0       0      17        0.0%
+BITBANK7            50      0       0      18        0.0%
+BITSFR17             0      0       0      18        0.0%
+SFR17                0      0       0      18        0.0%
+BANK7               50      0       0      19        0.0%
+BITSFR18             0      0       0      19        0.0%
+SFR18                0      0       0      19        0.0%
+BITSFR19             0      0       0      20        0.0%
+SFR19                0      0       0      20        0.0%
+ABS                  0      0      43      20        0.0%
+BITBANK8            50      0       0      21        0.0%
+BITSFR20             0      0       0      21        0.0%
+SFR20                0      0       0      21        0.0%
+BANK8               50      0       0      22        0.0%
+BITSFR21             0      0       0      22        0.0%
+SFR21                0      0       0      22        0.0%
+BITBANK9            50      0       0      23        0.0%
+BITSFR22             0      0       0      23        0.0%
+SFR22                0      0       0      23        0.0%
+BANK9               50      0       0      24        0.0%
+BITSFR23             0      0       0      24        0.0%
+SFR23                0      0       0      24        0.0%
+BITBANK10           50      0       0      25        0.0%
+BITSFR24             0      0       0      25        0.0%
+SFR24                0      0       0      25        0.0%
+BANK10              50      0       0      26        0.0%
+BITSFR25             0      0       0      26        0.0%
+SFR25                0      0       0      26        0.0%
+BITBANK11           50      0       0      27        0.0%
+BITSFR26             0      0       0      27        0.0%
+SFR26                0      0       0      27        0.0%
+BANK11              50      0       0      28        0.0%
+BITSFR27             0      0       0      28        0.0%
+SFR27                0      0       0      28        0.0%
+BITBANK12           30      0       0      29        0.0%
+BITSFR28             0      0       0      29        0.0%
+SFR28                0      0       0      29        0.0%
+BANK12              30      0       0      30        0.0%
+BITSFR29             0      0       0      30        0.0%
+SFR29                0      0       0      30        0.0%
+BITSFR30             0      0       0      31        0.0%
+SFR30                0      0       0      31        0.0%
+DATA                 0      0      43      31        0.0%
+BITSFR31             0      0       0      32        0.0%
+SFR31                0      0       0      32        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.32 build 20210201212658 
+Symbol Table                                                                                   Wed Oct 27 21:49:53 2021
+
+                                 l50 035C                                   l53 0325  
+                                 l47 0353                                   l56 032A  
+                                 l80 02EA                                   l59 0360  
+          __size_of_TIMER_Initialize 0009                  __end_ofi1_spi_write 0339  
+           __size_ofi1_mcp_write_reg 002F                                  l131 030E  
+                                l140 0315                                  l134 02D1  
+                                l143 031C                                  l160 0264  
+                                l137 02D6                                  l148 02FD  
+                                l172 00FB                                  l157 0293  
+                                l178 016E                                  l981 030F  
+                                l991 02EF                                  l983 0311  
+                                l975 02C7                                  l993 02F5  
+                                l985 0313                                  l977 02C9  
+                                l995 02F8                                  l987 031A  
+                                l979 02CB                                  u300 032A  
+                                u301 0329                                  u320 015B  
+                                u321 015A                                  u250 02D6  
+                                u330 006F                                  u251 02D5  
+                                u331 006E                                  u315 0127  
+                                u260 031A                                  u261 0319  
+                                u325 0157                                  u270 02F5  
+                                u271 02F4                                  u345 0079  
+                                u355 0092                                  u507 022B  
+                                u380 00FB                                  u381 00FA  
+                                u365 009C                                  u375 00A6  
+                                u497 021C                     ??i1_mcp_can_send 0075  
+                                wreg 0009                           i1_cs_drive 0339  
+                               l1011 02D9                                 l1021 02E6  
+                               l1013 02DB                                 l1101 00D1  
+                               l1031 0323                                 l1023 02E8  
+                               l1015 02DE                                 l1103 00D7  
+                               l1025 031D                                 l1017 02E0  
+                               l1009 02D7                                 l1033 035D  
+                               l1041 0267                                 l1105 00E0  
+                               l1027 0320                                 l1019 02E4  
+                               l1035 0354                                 l1043 0237  
+                               l1107 00E9                                 l1029 0321  
+                               l1037 0356                                 l1045 0251  
+                               l1109 00F2                                 l1061 0133  
+                               l1039 035A                                 l1047 025B  
+                               l1071 0165                                 l1063 0137  
+                               l1055 00FE                                 l1151 01E4  
+                               l1073 0347                                 l1049 0262  
+                               l1065 0145                                 l1057 0109  
+                               l1081 030B                                 l1161 01F0  
+                               l1153 01E8                                 l1091 0066  
+                               l1067 014A                                 l1059 011F  
+                               l1083 030D                                 l1075 02FE  
+                               l1171 0208                                 l1163 01F4  
+                               l1155 01EA                                 l1147 01D9  
+                               l1093 006F                                 l1085 004A  
+                               l1069 015B                                 l1077 0302  
+                               l1181 0216                                 l1173 020A  
+                               l1165 0204                                 l1157 01EB  
+                               l1149 01DF                                 l1095 00B5  
+                               l1087 0056                                 l1079 0308  
+                               l1183 0223                                 l1175 020E  
+                               l1167 0205                                 l1159 01EF  
+                               l1097 00BF                                 l1089 005D  
+                               l1185 0225                                 l1177 0210  
+                               l1169 0206                                 l1099 00C8  
+                               l1179 0214                                 _LATA 010C  
+                               _LATC 010E                                 i1l20 0037  
+                               _WPUA 020C                                 _main 01D9  
+                               fsr0h 0005                                 fsr1h 0007  
+                               indf0 0000                                 fsr0l 0004  
+                               indf1 0001                                 fsr1l 0006  
+                               btemp 007E                                 start 0039  
+     __size_of_OSCILLATOR_Initialize 000E        __end_of_OSCILLATOR_Initialize 032B  
+                              ?_main 0070                                _LATC5 0875  
+                              i1l134 0333                                i1l137 0338  
+                              i1l148 0346                                i1l157 02C2  
+                              i1l178 01D8                                i1l997 032B  
+                              i1l999 032D                                u40_20 01C7  
+                              u40_21 01C6                                u40_25 01C3  
+                              u41_20 000A                                u41_21 0009  
+                              u42_20 000F                                u42_21 000E  
+                              u43_20 0014                                u43_21 0013  
+                              u28_20 0338                                u44_20 001F  
+                              u28_21 0337                                u44_21 001E  
+                              u29_20 033E                                u29_21 033D  
+                              u39_25 0196                                _TRISA 008C  
+                              _TRISC 008E            mcp_can_init@spi_write_fcn 0032  
+                      ?_mcp_can_init 0030                        ?_mcp_can_send 0070  
+                     _WDT_Initialize 035D                      i1cs_drive@state 0070  
+                              pclath 000A                                status 0003  
+                              wtemp0 007E                        ?_mcp_read_reg 0070  
+                    __initialization 003B                          i1_spi_write 032B  
+                      main@can_setup 0048                         __end_of_main 0235  
+        ?_INTERRUPT_InterruptManager 0070                               ??_main 003B  
+                        ?i1_cs_drive 0070               __end_of_WDT_Initialize 0361  
+                     ??_mcp_can_init 0036                       ??_mcp_can_send 0030  
+             __size_of_mcp_write_reg 002F                    ??i1_mcp_write_reg 0073  
+                             _ACTCON 039B                               _APFCON 011D  
+                             _ANSELA 018C                               _ANSELC 018E  
+                             _BORCON 0116                               i1l1001 032F  
+                             i1l1003 0339                               i1l1005 033E  
+                             i1l1007 0341                               i1l1121 01A5  
+                             i1l1113 0170                               i1l1123 01B2  
+                             i1l1115 017A                               i1l1131 0006  
+                             i1l1053 0295                               i1l1125 01B6  
+                             i1l1117 018F                               i1l1141 002F  
+                             i1l1133 000A                               i1l1127 01C7  
+                             i1l1119 01A2                               i1l1143 0033  
+                             i1l1135 000F                               i1l1129 01D0  
+                             i1l1145 0036                               i1l1137 0014  
+                             i1l1139 001F                               _OSCCON 0099  
+                             _PLLRDY 04D6                               _WDTCON 0097  
+                             _TRISC5 0475                               _SSPBUF 0211  
+                     ??_mcp_read_reg 002D                     __end_of_cs_drive 02FE  
+                   _TIMER_Initialize 0354             mcp_can_init@spi_read_fcn 0030  
+                _spi_write$intlevel0 02C7                      ?_WDT_Initialize 0070  
+                   __end_of_spi_init 030F                     __end_of_spi_read 031D  
+                    mcp_can_send@msg 0035                  i1mcp_write_reg@addr 0074  
+                i1mcp_write_reg@data 0072                    _SYSTEM_Initialize 0347  
+            __end_of__initialization 0044                           ___cs_drive 004F  
+                      spi_write@data 002B                   ?_SYSTEM_Initialize 0070  
+                      _mcp_write_reg 0265                  __size_ofi1_cs_drive 000E  
+                     __pcstackCOMMON 0070                  ??_SYSTEM_Initialize 002B  
+                         ___spi_read 0053                       _OPTION_REGbits 0095  
+          __end_of_SYSTEM_Initialize 0354                           __pbssBANK0 004F  
+                     ?_mcp_write_reg 002D                           __pmaintext 01D9  
+               __end_of_mcp_can_init 00FC                 __end_of_mcp_can_send 016F  
+                         __pintentry 0004                 __end_of_mcp_read_reg 0265  
+             mcp_can_init@can_params 003A                              _OSCTUNE 0098  
+                 __size_of_spi_write 0014                            ?_cs_drive 002B  
+                            _SSPCON1 0215                              _SSPCON2 0216  
+                            _SSPSTAT 0214                     mcp_read_reg@addr 002E  
+                    i1spi_write@data 0070                         ?i1_spi_write 0070  
+                          ?_spi_init 0070                            ?_spi_read 0070  
+                    i1_mcp_write_reg 0294                              __ptext1 02FE  
+                            __ptext2 00FC                              __ptext3 0048  
+                            __ptext4 0265                              __ptext5 0235  
+                            __ptext6 02C3                              __ptext7 030F  
+                            __ptext8 02EB                              __ptext9 0347  
+                          _T1CONbits 0018                              _counter 0055  
+              _OSCILLATOR_Initialize 031D                         ??i1_cs_drive 0071  
+           ??_PIN_MANAGER_Initialize 002B                           ??_cs_drive 002C  
+         __size_of_SYSTEM_Initialize 000D                 end_of_initialization 0044  
+           __end_of_TIMER_Initialize 035D              __size_ofi1_mcp_can_send 006A  
+                    ??_mcp_write_reg 002E                    __end_of_spi_write 02D7  
+                         ??_spi_init 002B                   __end_ofi1_cs_drive 0347  
+                         ??_spi_read 002B                     ??_WDT_Initialize 002B  
+                          _TRISCbits 008E                __size_of_mcp_can_init 00B4  
+              __size_of_mcp_can_send 0073              __end_ofi1_mcp_write_reg 02C3  
+              __size_of_mcp_read_reg 0030               ?_OSCILLATOR_Initialize 0070  
+                      mcp_can_send@i 0033                  start_initialization 003B  
+    __size_of_PIN_MANAGER_Initialize 0014                         _mcp_can_init 0048  
+                       _mcp_can_send 00FC                          ___spi_write 0051  
+                       _mcp_read_reg 0235                 __size_ofi1_spi_write 000E  
+                          ___latbits 0002                        __pcstackBANK0 0020  
+                     i1_mcp_can_send 016F                    __size_of_cs_drive 0013  
+             _PIN_MANAGER_Initialize 02D7                     ?i1_mcp_write_reg 0072  
+                  __size_of_spi_init 0011                    __size_of_spi_read 000E  
+           mcp_can_init@cs_drive_fcn 0034         ??_INTERRUPT_InterruptManager 007B  
+                    mcp_read_reg@ret 002F               __end_ofi1_mcp_can_send 01D9  
+                    i1mcp_can_send@i 0078                    ?_TIMER_Initialize 0070  
+                           _PIE1bits 0091                   ??_TIMER_Initialize 002B  
+__size_of_INTERRUPT_InterruptManager 0035                             _PIR1bits 0011  
+                          _spi_write 02C3                      main@msg_LEDs_on 003D  
+                    ?i1_mcp_can_send 0070                   _cs_drive$intlevel0 02EF  
+              __end_of_mcp_write_reg 0294        INTERRUPT_InterruptManager@msg 0020  
+            ??_OSCILLATOR_Initialize 002B                           ?_spi_write 002B  
+                  i1mcp_can_send@msg 007A                             __ptext10 035D  
+                           __ptext11 0354                             __ptext12 02D7  
+                           __ptext13 031D                             __ptext15 016F  
+                           __ptext16 0294                             __ptext17 032B  
+                           __ptext18 0339                             _cs_drive 02EB  
+                      __size_of_main 005C                             _spi_init 02FE  
+                           _spi_read 030F                             int$flags 007E  
+ __end_of_INTERRUPT_InterruptManager 0039           _INTERRUPT_InterruptManager 0004  
+                  mcp_write_reg@addr 002F                    mcp_write_reg@data 002D  
+                         _INTCONbits 000B              __size_of_WDT_Initialize 0004  
+                           intlevel1 0000              ?_PIN_MANAGER_Initialize 0070  
+                      ??i1_spi_write 0071                          ??_spi_write 002C  
+                      cs_drive@state 002B       __end_of_PIN_MANAGER_Initialize 02EB  
+                         _SSPCONbits 0215  

@@ -1,0 +1,376 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"16 canlib/util/safe_ring_buffer.h
+[s S1 `*v 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S1 . memory_pool element_size max_elements rd_idx wr_idx ]
+"50
+[v _srb_is_full `(uc ~T0 @X0 0 ef1`*CS1 ]
+"14 C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\string.h
+[v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
+[; ;stdbool.h: 15: typedef unsigned char bool;
+[; ;xc8\pic\include\__size_t.h: 4: typedef unsigned size_t;
+[; ;stddef.h: 6: typedef int ptrdiff_t;
+[; ;safe_ring_buffer.h: 16: typedef struct {
+[; ;safe_ring_buffer.h: 17: void *memory_pool;
+[; ;safe_ring_buffer.h: 18: size_t element_size;
+[; ;safe_ring_buffer.h: 19: size_t max_elements;
+[; ;safe_ring_buffer.h: 20: size_t rd_idx;
+[; ;safe_ring_buffer.h: 21: size_t wr_idx;
+[; ;safe_ring_buffer.h: 22: } srb_ctx_t;
+[; ;safe_ring_buffer.h: 34: void srb_init(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 35: void *pool,
+[; ;safe_ring_buffer.h: 36: size_t pool_size,
+[; ;safe_ring_buffer.h: 37: size_t element_size);
+[; ;safe_ring_buffer.h: 44: bool srb_push(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 45: const void *element);
+[; ;safe_ring_buffer.h: 50: bool srb_is_full(const srb_ctx_t *ctx);
+[; ;safe_ring_buffer.h: 55: bool srb_is_empty(const srb_ctx_t *ctx);
+[; ;safe_ring_buffer.h: 62: bool srb_pop(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 63: void *element);
+[; ;safe_ring_buffer.h: 70: bool srb_peek(const srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 71: void *element);
+[; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
+[; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
+[; ;string.h: 16: extern void * memset(void *, int, size_t);
+[; ;string.h: 36: extern char * strcat(char *, const char *);
+[; ;string.h: 37: extern char * strcpy(char *, const char *);
+[; ;string.h: 38: extern char * strncat(char *, const char *, size_t);
+[; ;string.h: 39: extern char * strncpy(char *, const char *, size_t);
+[; ;string.h: 40: extern char * strdup(const char *);
+[; ;string.h: 41: extern char * strtok(char *, const char *);
+[; ;string.h: 44: extern int memcmp(const void *, const void *, size_t);
+[; ;string.h: 45: extern int strcmp(const char *, const char *);
+[; ;string.h: 46: extern int stricmp(const char *, const char *);
+[; ;string.h: 47: extern int strncmp(const char *, const char *, size_t);
+[; ;string.h: 48: extern int strnicmp(const char *, const char *, size_t);
+[; ;string.h: 49: extern void * memchr(const void *, int, size_t);
+[; ;string.h: 50: extern size_t strcspn(const char *, const char *);
+[; ;string.h: 51: extern char * strpbrk(const char *, const char *);
+[; ;string.h: 52: extern size_t strspn(const char *, const char *);
+[; ;string.h: 53: extern char * strstr(const char *, const char *);
+[; ;string.h: 54: extern char * stristr(const char *, const char *);
+[; ;string.h: 55: extern char * strerror(int);
+[; ;string.h: 56: extern size_t strlen(const char *);
+[; ;string.h: 57: extern char * strchr(const char *, int);
+[; ;string.h: 58: extern char * strichr(const char *, int);
+[; ;string.h: 59: extern char * strrchr(const char *, int);
+[; ;string.h: 60: extern char * strrichr(const char *, int);
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef __int24 int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 52: typedef unsigned char uint8_t;
+[; ;stdint.h: 58: typedef unsigned int uint16_t;
+[; ;stdint.h: 65: typedef __uint24 uint24_t;
+[; ;stdint.h: 72: typedef unsigned long int uint32_t;
+[; ;stdint.h: 88: typedef signed char int_least8_t;
+[; ;stdint.h: 96: typedef signed int int_least16_t;
+[; ;stdint.h: 109: typedef __int24 int_least24_t;
+[; ;stdint.h: 118: typedef signed long int int_least32_t;
+[; ;stdint.h: 136: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 143: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 154: typedef __uint24 uint_least24_t;
+[; ;stdint.h: 162: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 181: typedef signed char int_fast8_t;
+[; ;stdint.h: 188: typedef signed int int_fast16_t;
+[; ;stdint.h: 200: typedef __int24 int_fast24_t;
+[; ;stdint.h: 208: typedef signed long int int_fast32_t;
+[; ;stdint.h: 224: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 230: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 240: typedef __uint24 uint_fast24_t;
+[; ;stdint.h: 247: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 268: typedef int32_t intmax_t;
+[; ;stdint.h: 282: typedef uint32_t uintmax_t;
+[; ;stdint.h: 289: typedef int16_t intptr_t;
+[; ;stdint.h: 294: typedef uint16_t uintptr_t;
+"5 canlib/util/safe_ring_buffer.c
+[v _get_offset_bytes `(ui ~T0 @X0 1 sf2`*CS1`ui ]
+"7
+{
+[; ;safe_ring_buffer.c: 5: static size_t get_offset_bytes(const srb_ctx_t *ctx,
+[; ;safe_ring_buffer.c: 6: size_t index)
+[; ;safe_ring_buffer.c: 7: {
+[e :U _get_offset_bytes ]
+"5
+[v _ctx `*CS1 ~T0 @X0 1 r1 ]
+"6
+[v _index `ui ~T0 @X0 1 r2 ]
+"7
+[f ]
+[; ;safe_ring_buffer.c: 8: if (index >= ctx->max_elements) {
+"8
+[e $ ! >= _index . *U _ctx 2 3  ]
+{
+[; ;safe_ring_buffer.c: 9: return 0;
+"9
+[e ) -> -> 0 `i `ui ]
+[e $UE 2  ]
+"10
+}
+[e :U 3 ]
+[; ;safe_ring_buffer.c: 10: }
+[; ;safe_ring_buffer.c: 11: return index * (ctx->element_size);
+"11
+[e ) * _index . *U _ctx 1 ]
+[e $UE 2  ]
+[; ;safe_ring_buffer.c: 12: }
+"12
+[e :UE 2 ]
+}
+"14
+[v _srb_init `(v ~T0 @X0 1 ef4`*S1`*v`ui`ui ]
+"18
+{
+[; ;safe_ring_buffer.c: 14: void srb_init(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.c: 15: void *pool,
+[; ;safe_ring_buffer.c: 16: size_t pool_size,
+[; ;safe_ring_buffer.c: 17: size_t element_size)
+[; ;safe_ring_buffer.c: 18: {
+[e :U _srb_init ]
+"14
+[v _ctx `*S1 ~T0 @X0 1 r1 ]
+"15
+[v _pool `*v ~T0 @X0 1 r2 ]
+"16
+[v _pool_size `ui ~T0 @X0 1 r3 ]
+"17
+[v _element_size `ui ~T0 @X0 1 r4 ]
+"18
+[f ]
+[; ;safe_ring_buffer.c: 19: ctx->memory_pool = pool;
+"19
+[e = . *U _ctx 0 _pool ]
+[; ;safe_ring_buffer.c: 20: ctx->element_size = element_size;
+"20
+[e = . *U _ctx 1 _element_size ]
+[; ;safe_ring_buffer.c: 21: ctx->max_elements = (pool_size / (element_size));
+"21
+[e = . *U _ctx 2 / _pool_size _element_size ]
+[; ;safe_ring_buffer.c: 22: ctx->rd_idx = 0;
+"22
+[e = . *U _ctx 3 -> -> 0 `i `ui ]
+[; ;safe_ring_buffer.c: 23: ctx->wr_idx = 0;
+"23
+[e = . *U _ctx 4 -> -> 0 `i `ui ]
+[; ;safe_ring_buffer.c: 24: }
+"24
+[e :UE 4 ]
+}
+"26
+[v _srb_push `(uc ~T0 @X0 1 ef2`*S1`*Cv ]
+"28
+{
+[; ;safe_ring_buffer.c: 26: bool srb_push(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.c: 27: const void *element)
+[; ;safe_ring_buffer.c: 28: {
+[e :U _srb_push ]
+"26
+[v _ctx `*S1 ~T0 @X0 1 r1 ]
+"27
+[v _element `*Cv ~T0 @X0 1 r2 ]
+"28
+[f ]
+[; ;safe_ring_buffer.c: 29: if (srb_is_full(ctx)) {
+"29
+[e $ ! != -> ( _srb_is_full (1 -> _ctx `*CS1 `i -> -> -> 0 `i `uc `i 6  ]
+{
+[; ;safe_ring_buffer.c: 30: return 0;
+"30
+[e ) -> -> 0 `i `uc ]
+[e $UE 5  ]
+"31
+}
+[e :U 6 ]
+"32
+[v _offset `ui ~T0 @X0 1 a ]
+[; ;safe_ring_buffer.c: 31: }
+[; ;safe_ring_buffer.c: 32: size_t offset = get_offset_bytes(ctx, ctx->wr_idx);
+[e = _offset ( _get_offset_bytes (2 , -> _ctx `*CS1 . *U _ctx 4 ]
+[; ;safe_ring_buffer.c: 33: memcpy(((uint8_t *) ctx->memory_pool) + offset, element, ctx->element_size);
+"33
+[e ( _memcpy (3 , , -> + -> . *U _ctx 0 `*uc * -> _offset `ux -> -> # *U -> . *U _ctx 0 `*uc `ui `ux `*v _element . *U _ctx 1 ]
+[; ;safe_ring_buffer.c: 34: if ( ++(ctx->wr_idx) >= ctx->max_elements) {
+"34
+[e $ ! >= =+ . *U _ctx 4 -> -> 1 `i `ui . *U _ctx 2 7  ]
+{
+[; ;safe_ring_buffer.c: 35: ctx->wr_idx = 0;
+"35
+[e = . *U _ctx 4 -> -> 0 `i `ui ]
+"36
+}
+[e :U 7 ]
+[; ;safe_ring_buffer.c: 36: }
+[; ;safe_ring_buffer.c: 37: return 1;
+"37
+[e ) -> -> 1 `i `uc ]
+[e $UE 5  ]
+[; ;safe_ring_buffer.c: 38: }
+"38
+[e :UE 5 ]
+}
+"40
+[v _srb_is_full `(uc ~T0 @X0 1 ef1`*CS1 ]
+"41
+{
+[; ;safe_ring_buffer.c: 40: bool srb_is_full(const srb_ctx_t *ctx)
+[; ;safe_ring_buffer.c: 41: {
+[e :U _srb_is_full ]
+"40
+[v _ctx `*CS1 ~T0 @X0 1 r1 ]
+"41
+[f ]
+[; ;safe_ring_buffer.c: 42: if ((ctx->wr_idx + 1 == ctx->rd_idx) || (ctx->wr_idx + 1 == ctx->max_elements && ctx->rd_idx == 0)) {
+"42
+[e $ ! || == + . *U _ctx 4 -> -> 1 `i `ui . *U _ctx 3 && == + . *U _ctx 4 -> -> 1 `i `ui . *U _ctx 2 == . *U _ctx 3 -> -> 0 `i `ui 9  ]
+{
+[; ;safe_ring_buffer.c: 43: return 1;
+"43
+[e ) -> -> 1 `i `uc ]
+[e $UE 8  ]
+"44
+}
+[; ;safe_ring_buffer.c: 44: } else {
+[e $U 10  ]
+[e :U 9 ]
+{
+[; ;safe_ring_buffer.c: 45: return 0;
+"45
+[e ) -> -> 0 `i `uc ]
+[e $UE 8  ]
+"46
+}
+[e :U 10 ]
+[; ;safe_ring_buffer.c: 46: }
+[; ;safe_ring_buffer.c: 47: }
+"47
+[e :UE 8 ]
+}
+"49
+[v _srb_is_empty `(uc ~T0 @X0 1 ef1`*CS1 ]
+"50
+{
+[; ;safe_ring_buffer.c: 49: bool srb_is_empty(const srb_ctx_t *ctx)
+[; ;safe_ring_buffer.c: 50: {
+[e :U _srb_is_empty ]
+"49
+[v _ctx `*CS1 ~T0 @X0 1 r1 ]
+"50
+[f ]
+[; ;safe_ring_buffer.c: 51: if (ctx->wr_idx == ctx->rd_idx) {
+"51
+[e $ ! == . *U _ctx 4 . *U _ctx 3 12  ]
+{
+[; ;safe_ring_buffer.c: 52: return 1;
+"52
+[e ) -> -> 1 `i `uc ]
+[e $UE 11  ]
+"53
+}
+[; ;safe_ring_buffer.c: 53: } else {
+[e $U 13  ]
+[e :U 12 ]
+{
+[; ;safe_ring_buffer.c: 54: return 0;
+"54
+[e ) -> -> 0 `i `uc ]
+[e $UE 11  ]
+"55
+}
+[e :U 13 ]
+[; ;safe_ring_buffer.c: 55: }
+[; ;safe_ring_buffer.c: 56: }
+"56
+[e :UE 11 ]
+}
+"58
+[v _srb_pop `(uc ~T0 @X0 1 ef2`*S1`*v ]
+"60
+{
+[; ;safe_ring_buffer.c: 58: bool srb_pop(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.c: 59: void *element)
+[; ;safe_ring_buffer.c: 60: {
+[e :U _srb_pop ]
+"58
+[v _ctx `*S1 ~T0 @X0 1 r1 ]
+"59
+[v _element `*v ~T0 @X0 1 r2 ]
+"60
+[f ]
+[; ;safe_ring_buffer.c: 61: if (srb_is_empty(ctx)) {
+"61
+[e $ ! != -> ( _srb_is_empty (1 -> _ctx `*CS1 `i -> -> -> 0 `i `uc `i 15  ]
+{
+[; ;safe_ring_buffer.c: 62: return 0;
+"62
+[e ) -> -> 0 `i `uc ]
+[e $UE 14  ]
+"63
+}
+[e :U 15 ]
+"64
+[v _offset `ui ~T0 @X0 1 a ]
+[; ;safe_ring_buffer.c: 63: }
+[; ;safe_ring_buffer.c: 64: size_t offset = get_offset_bytes(ctx, ctx->rd_idx);
+[e = _offset ( _get_offset_bytes (2 , -> _ctx `*CS1 . *U _ctx 3 ]
+[; ;safe_ring_buffer.c: 65: memcpy(element, ((uint8_t *)ctx->memory_pool) + offset, ctx->element_size);
+"65
+[e ( _memcpy (3 , , _element -> + -> . *U _ctx 0 `*uc * -> _offset `ux -> -> # *U -> . *U _ctx 0 `*uc `ui `ux `*Cv . *U _ctx 1 ]
+[; ;safe_ring_buffer.c: 66: if ( ++(ctx->rd_idx) >= ctx->max_elements) {
+"66
+[e $ ! >= =+ . *U _ctx 3 -> -> 1 `i `ui . *U _ctx 2 16  ]
+{
+[; ;safe_ring_buffer.c: 67: ctx->rd_idx = 0;
+"67
+[e = . *U _ctx 3 -> -> 0 `i `ui ]
+"68
+}
+[e :U 16 ]
+[; ;safe_ring_buffer.c: 68: }
+[; ;safe_ring_buffer.c: 69: return 1;
+"69
+[e ) -> -> 1 `i `uc ]
+[e $UE 14  ]
+[; ;safe_ring_buffer.c: 70: }
+"70
+[e :UE 14 ]
+}
+"72
+[v _srb_peek `(uc ~T0 @X0 1 ef2`*CS1`*v ]
+"74
+{
+[; ;safe_ring_buffer.c: 72: bool srb_peek(const srb_ctx_t *ctx,
+[; ;safe_ring_buffer.c: 73: void *element)
+[; ;safe_ring_buffer.c: 74: {
+[e :U _srb_peek ]
+"72
+[v _ctx `*CS1 ~T0 @X0 1 r1 ]
+"73
+[v _element `*v ~T0 @X0 1 r2 ]
+"74
+[f ]
+[; ;safe_ring_buffer.c: 75: if (srb_is_empty(ctx)) {
+"75
+[e $ ! != -> ( _srb_is_empty (1 _ctx `i -> -> -> 0 `i `uc `i 18  ]
+{
+[; ;safe_ring_buffer.c: 76: return 0;
+"76
+[e ) -> -> 0 `i `uc ]
+[e $UE 17  ]
+"77
+}
+[e :U 18 ]
+"78
+[v _offset `ui ~T0 @X0 1 a ]
+[; ;safe_ring_buffer.c: 77: }
+[; ;safe_ring_buffer.c: 78: size_t offset = get_offset_bytes(ctx, ctx->rd_idx);
+[e = _offset ( _get_offset_bytes (2 , _ctx . *U _ctx 3 ]
+[; ;safe_ring_buffer.c: 79: memcpy(element, ctx->memory_pool + offset, ctx->element_size);
+"79
+[e ( _memcpy (3 , , _element -> + . *U _ctx 0 * -> _offset `ux -> -> # *U . *U _ctx 0 `ui `ux `*Cv . *U _ctx 1 ]
+[; ;safe_ring_buffer.c: 80: return 1;
+"80
+[e ) -> -> 1 `i `uc ]
+[e $UE 17  ]
+[; ;safe_ring_buffer.c: 81: }
+"81
+[e :UE 17 ]
+}

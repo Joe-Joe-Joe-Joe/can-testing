@@ -1,0 +1,341 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1455 ]
+[d frameptr 6 ]
+"26 C:\Users\Joe\UW Rocketry\canlib/mcp2515/mcp_2515.c
+[v _mcp_write_reg mcp_write_reg `(v  1 s 1 mcp_write_reg ]
+[v i1_mcp_write_reg mcp_write_reg `(v  1 s 1 i1_mcp_write_reg ]
+"34
+[v _mcp_read_reg mcp_read_reg `(uc  1 s 1 mcp_read_reg ]
+"43
+[v _mcp_bit_modify mcp_bit_modify `(v  1 s 1 mcp_bit_modify ]
+"52
+[v _mcp_can_init mcp_can_init `(v  1 e 1 0 ]
+"88
+[v _mcp_can_send mcp_can_send `(v  1 e 1 0 ]
+[v i1_mcp_can_send mcp_can_send `(v  1 e 1 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"43 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\main.c
+[v _main main `(v  1 e 1 0 ]
+"55 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+"50 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"59
+[v _TIMER_Initialize TIMER_Initialize `(v  1 e 1 0 ]
+"70
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+"86
+[v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
+"57 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"5 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\spi.c
+[v _spi_init spi_init `(v  1 e 1 0 ]
+"22
+[v _spi_write spi_write `(v  1 e 1 0 ]
+[v i1_spi_write spi_write `(v  1 e 1 0 ]
+"30
+[v _spi_read spi_read `(uc  1 e 1 0 ]
+"40
+[v _cs_drive cs_drive `(v  1 e 1 0 ]
+[v i1_cs_drive cs_drive `(v  1 e 1 0 ]
+"17 C:\Users\Joe\UW Rocketry\canlib/mcp2515/mcp_2515.c
+[v ___spi_read __spi_read `*.37(uc  1 s 2 __spi_read ]
+"20
+[v ___spi_write __spi_write `*.37(v  1 s 2 __spi_write ]
+"24
+[v ___cs_drive __cs_drive `*.37(v  1 s 2 __cs_drive ]
+[s S22 . 1 `uc 1 IOCIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 IOCIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"374 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC12-16F1xxx_DFP/1.2.63/xc8\pic\include\proc\pic16f1455.h
+[s S31 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 T0IE 1 0 :1:5 
+]
+[u S36 . 1 `S22 1 . 1 0 `S31 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES36  1 e 1 @11 ]
+[s S75 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 TMR1GIF 1 0 :1:7 
+]
+"541
+[u S84 . 1 `S75 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES84  1 e 1 @17 ]
+[s S155 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1CS 1 0 :2:6 
+]
+"722
+[s S162 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 TMR1CS0 1 0 :1:6 
+`uc 1 TMR1CS1 1 0 :1:7 
+]
+[u S168 . 1 `S155 1 . 1 0 `S162 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES168  1 e 1 @24 ]
+"953
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"980
+[v _TRISC TRISC `VEuc  1 e 1 @142 ]
+[s S347 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+]
+"995
+[u S354 . 1 `S347 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES354  1 e 1 @142 ]
+[s S54 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 SSP1IE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+`uc 1 TMR1GIE 1 0 :1:7 
+]
+"1047
+[u S63 . 1 `S54 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES63  1 e 1 @145 ]
+[s S220 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 TMR0SE 1 0 :1:4 
+`uc 1 TMR0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nWPUEN 1 0 :1:7 
+]
+"1162
+[s S227 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+]
+[u S234 . 1 `S220 1 . 1 0 `S227 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES234  1 e 1 @149 ]
+"1279
+[v _WDTCON WDTCON `VEuc  1 e 1 @151 ]
+"1338
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @152 ]
+"1402
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1764
+[v _LATA LATA `VEuc  1 e 1 @268 ]
+"1791
+[v _LATC LATC `VEuc  1 e 1 @270 ]
+"2125
+[v _BORCON BORCON `VEuc  1 e 1 @278 ]
+"2341
+[v _APFCON APFCON `VEuc  1 e 1 @285 ]
+"2387
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2416
+[v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
+"2929
+[v _WPUA WPUA `VEuc  1 e 1 @524 ]
+"2975
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @529 ]
+"3089
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @532 ]
+"3215
+[v _SSPCON1 SSPCON1 `VEuc  1 e 1 @533 ]
+[s S381 . 1 `uc 1 SSP1M0 1 0 :1:0 
+`uc 1 SSP1M1 1 0 :1:1 
+`uc 1 SSP1M2 1 0 :1:2 
+`uc 1 SSP1M3 1 0 :1:3 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"3314
+[s S390 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 . 1 0 :1:4 
+`uc 1 SSP1EN 1 0 :1:5 
+`uc 1 SSP1OV 1 0 :1:6 
+]
+[u S395 . 1 `S381 1 . 1 0 `S390 1 . 1 0 ]
+[v _SSPCONbits SSPCONbits `VES395  1 e 1 @533 ]
+"3454
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @534 ]
+"3928
+[v _ACTCON ACTCON `VEuc  1 e 1 @923 ]
+"6414
+[v _LATC5 LATC5 `VEb  1 e 0 @2165 ]
+"6462
+[v _PLLRDY PLLRDY `VEb  1 e 0 @1238 ]
+"6885
+[v _TRISC5 TRISC5 `VEb  1 e 0 @1141 ]
+"53 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/interrupt_manager.c
+[v _counter counter `us  1 s 2 counter ]
+"43 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+[s S96 . 11 `us 1 sid 2 0 `uc 1 data_len 1 2 `[8]uc 1 data 8 3 ]
+"73
+[v main@msg_LEDs_on msg_LEDs_on `S96  1 a 11 29 ]
+[s S265 . 7 `uc 1 brp 1 0 `uc 1 sjw 1 1 `uc 1 sam 1 2 `uc 1 seg1ph 1 3 `uc 1 seg2ph 1 4 `uc 1 prseg 1 5 `a 1 btlmode 1 6 ]
+"53
+[v main@can_setup can_setup `S265  1 a 7 40 ]
+"89
+} 0
+"5 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\spi.c
+[v _spi_init spi_init `(v  1 e 1 0 ]
+{
+"20
+} 0
+"88 C:\Users\Joe\UW Rocketry\canlib/mcp2515/mcp_2515.c
+[v _mcp_can_send mcp_can_send `(v  1 e 1 0 ]
+{
+[s S96 . 11 `us 1 sid 2 0 `uc 1 data_len 1 2 `[8]uc 1 data 8 3 ]
+[v mcp_can_send@msg msg `*.4S96  1 a 1 wreg ]
+"96
+[v mcp_can_send@i i `i  1 a 2 19 ]
+"88
+[v mcp_can_send@msg msg `*.4S96  1 a 1 wreg ]
+[v mcp_can_send@msg msg `*.4S96  1 a 1 21 ]
+"103
+} 0
+"52
+[v _mcp_can_init mcp_can_init `(v  1 e 1 0 ]
+{
+[s S265 . 7 `uc 1 brp 1 0 `uc 1 sjw 1 1 `uc 1 sam 1 2 `uc 1 seg1ph 1 3 `uc 1 seg2ph 1 4 `uc 1 prseg 1 5 `a 1 btlmode 1 6 ]
+[v mcp_can_init@can_params can_params `*.4S265  1 a 1 wreg ]
+[v mcp_can_init@can_params can_params `*.4S265  1 a 1 wreg ]
+"53
+[v mcp_can_init@spi_read_fcn spi_read_fcn `*.37(uc  1 p 2 16 ]
+"54
+[v mcp_can_init@spi_write_fcn spi_write_fcn `*.37(v  1 p 2 18 ]
+"55
+[v mcp_can_init@cs_drive_fcn cs_drive_fcn `*.37(v  1 p 2 20 ]
+"52
+[v mcp_can_init@can_params can_params `*.4S265  1 a 1 26 ]
+"86
+} 0
+"26
+[v _mcp_write_reg mcp_write_reg `(v  1 s 1 mcp_write_reg ]
+{
+[v mcp_write_reg@addr addr `uc  1 a 1 wreg ]
+[v mcp_write_reg@addr addr `uc  1 a 1 wreg ]
+[v mcp_write_reg@data data `uc  1 p 1 13 ]
+[v mcp_write_reg@addr addr `uc  1 a 1 15 ]
+"32
+} 0
+"34
+[v _mcp_read_reg mcp_read_reg `(uc  1 s 1 mcp_read_reg ]
+{
+[v mcp_read_reg@addr addr `uc  1 a 1 wreg ]
+"38
+[v mcp_read_reg@ret ret `uc  1 a 1 15 ]
+"34
+[v mcp_read_reg@addr addr `uc  1 a 1 wreg ]
+[v mcp_read_reg@addr addr `uc  1 a 1 14 ]
+"41
+} 0
+"22 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\spi.c
+[v _spi_write spi_write `(v  1 e 1 0 ]
+{
+[v spi_write@data data `uc  1 p 1 11 ]
+"28
+} 0
+"30
+[v _spi_read spi_read `(uc  1 e 1 0 ]
+{
+"38
+} 0
+"40
+[v _cs_drive cs_drive `(v  1 e 1 0 ]
+{
+[v cs_drive@state state `uc  1 p 1 11 ]
+"45
+} 0
+"50 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"57
+} 0
+"86
+[v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
+{
+"90
+} 0
+"59
+[v _TIMER_Initialize TIMER_Initialize `(v  1 e 1 0 ]
+{
+"69
+} 0
+"57 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"87
+} 0
+"70 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"84
+} 0
+"55 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+{
+[s S96 . 11 `us 1 sid 2 0 `uc 1 data_len 1 2 `[8]uc 1 data 8 3 ]
+"63
+[v INTERRUPT_InterruptManager@msg msg `S96  1 a 11 0 ]
+"82
+} 0
+"88 C:\Users\Joe\UW Rocketry\canlib/mcp2515/mcp_2515.c
+[v i1_mcp_can_send mcp_can_send `(v  1 e 1 0 ]
+{
+[s S96 . 11 `us 1 sid 2 0 `uc 1 data_len 1 2 `[8]uc 1 data 8 3 ]
+[v i1mcp_can_send@msg msg `*.4S96  1 a 1 wreg ]
+"96
+[v i1mcp_can_send@i i `i  1 a 2 8 ]
+"88
+[v i1mcp_can_send@msg msg `*.4S96  1 a 1 wreg ]
+[v i1mcp_can_send@msg msg `*.4S96  1 a 1 10 ]
+"103
+} 0
+"26
+[v i1_mcp_write_reg mcp_write_reg `(v  1 s 1 i1_mcp_write_reg ]
+{
+[v i1mcp_write_reg@addr addr `uc  1 a 1 wreg ]
+[v i1mcp_write_reg@addr addr `uc  1 a 1 wreg ]
+[v i1mcp_write_reg@data data `uc  1 p 1 2 ]
+[v i1mcp_write_reg@addr addr `uc  1 a 1 4 ]
+"32
+} 0
+"22 C:\Users\Joe\UW Rocketry\canlib\tests\mcp2515_picdev.X\spi.c
+[v i1_spi_write spi_write `(v  1 e 1 0 ]
+{
+[v i1spi_write@data data `uc  1 p 1 0 ]
+"28
+} 0
+"40
+[v i1_cs_drive cs_drive `(v  1 e 1 0 ]
+{
+[v i1cs_drive@state state `uc  1 p 1 0 ]
+"45
+} 0

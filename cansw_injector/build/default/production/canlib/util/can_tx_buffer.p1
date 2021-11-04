@@ -1,0 +1,201 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"16 canlib/util/safe_ring_buffer.h
+[s S3 `*v 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S3 . memory_pool element_size max_elements rd_idx wr_idx ]
+"37 canlib\can.h
+[s S2 `ui 1 `uc 1 `uc -> 8 `i ]
+[n S2 . sid data_len data ]
+[v F86 `(v ~T0 @X0 0 tf1`*CS2 ]
+[v F89 `(uc ~T0 @X0 0 tf ]
+"4 canlib/util/can_tx_buffer.c
+[s S4 `*F86 1 `*F89 1 ]
+[n S4 . can_send_fp can_tx_ready ]
+[v F50 `(v ~T0 @X0 0 tf1`*CS2 ]
+[v F53 `(uc ~T0 @X0 0 tf ]
+"34 canlib/util/safe_ring_buffer.h
+[v _srb_init `(v ~T0 @X0 0 ef4`*S3`*v`ui`ui ]
+"50
+[v _srb_is_full `(uc ~T0 @X0 0 ef1`*CS3 ]
+"44
+[v _srb_push `(uc ~T0 @X0 0 ef2`*S3`*Cv ]
+"55
+[v _srb_is_empty `(uc ~T0 @X0 0 ef1`*CS3 ]
+"62
+[v _srb_pop `(uc ~T0 @X0 0 ef2`*S3`*v ]
+[; ;stdbool.h: 15: typedef unsigned char bool;
+[; ;xc8\pic\include\__size_t.h: 4: typedef unsigned size_t;
+[; ;stddef.h: 6: typedef int ptrdiff_t;
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef __int24 int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 52: typedef unsigned char uint8_t;
+[; ;stdint.h: 58: typedef unsigned int uint16_t;
+[; ;stdint.h: 65: typedef __uint24 uint24_t;
+[; ;stdint.h: 72: typedef unsigned long int uint32_t;
+[; ;stdint.h: 88: typedef signed char int_least8_t;
+[; ;stdint.h: 96: typedef signed int int_least16_t;
+[; ;stdint.h: 109: typedef __int24 int_least24_t;
+[; ;stdint.h: 118: typedef signed long int int_least32_t;
+[; ;stdint.h: 136: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 143: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 154: typedef __uint24 uint_least24_t;
+[; ;stdint.h: 162: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 181: typedef signed char int_fast8_t;
+[; ;stdint.h: 188: typedef signed int int_fast16_t;
+[; ;stdint.h: 200: typedef __int24 int_fast24_t;
+[; ;stdint.h: 208: typedef signed long int int_fast32_t;
+[; ;stdint.h: 224: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 230: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 240: typedef __uint24 uint_fast24_t;
+[; ;stdint.h: 247: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 268: typedef int32_t intmax_t;
+[; ;stdint.h: 282: typedef uint32_t uintmax_t;
+[; ;stdint.h: 289: typedef int16_t intptr_t;
+[; ;stdint.h: 294: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 15: typedef unsigned char bool;
+[; ;can.h: 16: typedef struct {
+[; ;can.h: 18: uint8_t brp;
+[; ;can.h: 20: uint8_t sjw;
+[; ;can.h: 23: uint8_t sam;
+[; ;can.h: 25: uint8_t seg1ph;
+[; ;can.h: 27: uint8_t seg2ph;
+[; ;can.h: 29: uint8_t prseg;
+[; ;can.h: 33: bool btlmode;
+[; ;can.h: 34: } can_timing_t;
+[; ;can.h: 37: typedef struct {
+[; ;can.h: 39: uint16_t sid;
+[; ;can.h: 41: uint8_t data_len;
+[; ;can.h: 43: uint8_t data[8];
+[; ;can.h: 44: } can_msg_t;
+[; ;can_tx_buffer.h: 12: void txb_init(void *pool, size_t pool_size,
+[; ;can_tx_buffer.h: 13: void (*can_send_fp)(const can_msg_t *),
+[; ;can_tx_buffer.h: 14: bool (*can_tx_ready)(void));
+[; ;can_tx_buffer.h: 21: bool txb_enqueue(const can_msg_t *msg);
+[; ;can_tx_buffer.h: 28: void txb_heartbeat(void);
+[; ;stdbool.h: 15: typedef unsigned char bool;
+[; ;safe_ring_buffer.h: 16: typedef struct {
+[; ;safe_ring_buffer.h: 17: void *memory_pool;
+[; ;safe_ring_buffer.h: 18: size_t element_size;
+[; ;safe_ring_buffer.h: 19: size_t max_elements;
+[; ;safe_ring_buffer.h: 20: size_t rd_idx;
+[; ;safe_ring_buffer.h: 21: size_t wr_idx;
+[; ;safe_ring_buffer.h: 22: } srb_ctx_t;
+[; ;safe_ring_buffer.h: 34: void srb_init(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 35: void *pool,
+[; ;safe_ring_buffer.h: 36: size_t pool_size,
+[; ;safe_ring_buffer.h: 37: size_t element_size);
+[; ;safe_ring_buffer.h: 44: bool srb_push(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 45: const void *element);
+[; ;safe_ring_buffer.h: 50: bool srb_is_full(const srb_ctx_t *ctx);
+[; ;safe_ring_buffer.h: 55: bool srb_is_empty(const srb_ctx_t *ctx);
+[; ;safe_ring_buffer.h: 62: bool srb_pop(srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 63: void *element);
+[; ;safe_ring_buffer.h: 70: bool srb_peek(const srb_ctx_t *ctx,
+[; ;safe_ring_buffer.h: 71: void *element);
+[; ;can_tx_buffer.c: 4: typedef struct {
+[; ;can_tx_buffer.c: 5: void (*can_send_fp)(const can_msg_t *);
+[; ;can_tx_buffer.c: 6: bool (*can_tx_ready)(void);
+[; ;can_tx_buffer.c: 7: } cbl_ctx_t;
+"10 canlib/util/can_tx_buffer.c
+[v _buf `S3 ~T0 @X0 1 s ]
+[; ;can_tx_buffer.c: 10: static srb_ctx_t buf;
+"13
+[v _ctx `S4 ~T0 @X0 1 s ]
+[; ;can_tx_buffer.c: 13: static cbl_ctx_t ctx;
+"15
+[v _txb_init `(v ~T0 @X0 1 ef4`*v`ui`*F50`*F53 ]
+"17
+{
+[; ;can_tx_buffer.c: 15: void txb_init(void *pool, size_t pool_size,
+[; ;can_tx_buffer.c: 16: void (*can_send_fp)(const can_msg_t *),
+[; ;can_tx_buffer.c: 17: bool (*can_tx_ready)(void)) {
+[e :U _txb_init ]
+"15
+[v _pool `*v ~T0 @X0 1 r1 ]
+[v _pool_size `ui ~T0 @X0 1 r2 ]
+[v F97 `(v ~T0 @X0 0 tf1`*CS2 ]
+"16
+[v _can_send_fp `*F97 ~T0 @X0 1 r3 ]
+[v F100 `(uc ~T0 @X0 0 tf ]
+"17
+[v _can_tx_ready `*F100 ~T0 @X0 1 r4 ]
+[f ]
+[; ;can_tx_buffer.c: 18: ctx.can_send_fp = can_send_fp;
+"18
+[e = . _ctx 0 _can_send_fp ]
+[; ;can_tx_buffer.c: 19: ctx.can_tx_ready = can_tx_ready;
+"19
+[e = . _ctx 1 _can_tx_ready ]
+[; ;can_tx_buffer.c: 20: srb_init(&buf, pool, pool_size, sizeof(can_msg_t));
+"20
+[e ( _srb_init (4 , , , &U _buf _pool _pool_size -> # `S2 `ui ]
+[; ;can_tx_buffer.c: 21: }
+"21
+[e :UE 5 ]
+}
+"23
+[v _txb_enqueue `(uc ~T0 @X0 1 ef1`*CS2 ]
+{
+[; ;can_tx_buffer.c: 23: bool txb_enqueue(const can_msg_t *msg) {
+[e :U _txb_enqueue ]
+[v _msg `*CS2 ~T0 @X0 1 r1 ]
+[f ]
+[; ;can_tx_buffer.c: 24: if (srb_is_full(&buf)) {
+"24
+[e $ ! != -> ( _srb_is_full (1 -> &U _buf `*CS3 `i -> -> -> 0 `i `uc `i 7  ]
+{
+[; ;can_tx_buffer.c: 25: return 0;
+"25
+[e ) -> -> 0 `i `uc ]
+[e $UE 6  ]
+"26
+}
+[e :U 7 ]
+[; ;can_tx_buffer.c: 26: }
+[; ;can_tx_buffer.c: 27: srb_push(&buf, msg);
+"27
+[e ( _srb_push (2 , &U _buf -> _msg `*Cv ]
+[; ;can_tx_buffer.c: 28: return 1;
+"28
+[e ) -> -> 1 `i `uc ]
+[e $UE 6  ]
+[; ;can_tx_buffer.c: 29: }
+"29
+[e :UE 6 ]
+}
+"31
+[v _txb_heartbeat `(v ~T0 @X0 1 ef ]
+{
+[; ;can_tx_buffer.c: 31: void txb_heartbeat(void) {
+[e :U _txb_heartbeat ]
+[f ]
+[; ;can_tx_buffer.c: 32: if (!srb_is_empty(&buf)) {
+"32
+[e $ ! ! != -> ( _srb_is_empty (1 -> &U _buf `*CS3 `i -> -> -> 0 `i `uc `i 9  ]
+{
+[; ;can_tx_buffer.c: 33: if ((*(ctx.can_tx_ready))()) {
+"33
+[e $ ! != -> ( *U . _ctx 1 ..  `i -> -> -> 0 `i `uc `i 10  ]
+{
+"34
+[v _msg_sent `S2 ~T0 @X0 1 a ]
+[; ;can_tx_buffer.c: 34: can_msg_t msg_sent;
+[; ;can_tx_buffer.c: 35: srb_pop(&buf, &msg_sent);
+"35
+[e ( _srb_pop (2 , &U _buf -> &U _msg_sent `*v ]
+[; ;can_tx_buffer.c: 36: (*(ctx.can_send_fp))(&msg_sent);
+"36
+[e ( *U . _ctx 0 (1 -> &U _msg_sent `*CS2 ]
+"37
+}
+[e :U 10 ]
+"38
+}
+[e :U 9 ]
+[; ;can_tx_buffer.c: 37: }
+[; ;can_tx_buffer.c: 38: }
+[; ;can_tx_buffer.c: 39: }
+"39
+[e :UE 8 ]
+}
